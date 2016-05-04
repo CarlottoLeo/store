@@ -1,0 +1,44 @@
+<% if @product.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@product.errors.count, "error") %> prohibited this product from being saved:</h2>
+
+    <ul>
+    <% @product.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= form_for @product, :html => {:id => "product-form", :class => "ui form attached fluid segment"} do |f| %>
+  <div class="two fields">
+      <div class="field">
+        <%= f.label        :name %>
+        <%= f.text_field   :name %>
+      </div>
+      <div class="field">
+        <%= f.label        :value %>
+        <%= f.number_field :value %>
+      </div>
+  </div>
+
+  <%= render partial: 'layouts/animated_button', locals: {
+    name:          t('page.controllers.submit'),
+    icon_class:    "send icon",
+    clickCallback: "$('#product-form').submit();"
+  } %>
+
+  <% if @product.created_at %>
+    <%= render partial: 'layouts/animated_button', locals: {
+      name:          t('page.controllers.show'),
+      icon_class:    "open folder icon",
+      clickCallback: "window.location.href = '/products/#{@product.id}'",
+    } %>
+  <% end %>
+
+  <%= render partial: 'layouts/animated_button', locals: {
+    name:            t('page.controllers.back'),
+    icon_class:      "reply icon",
+    clickCallback:   "window.location.href = '/'",
+  } %>
+<% end %>
