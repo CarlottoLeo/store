@@ -1,11 +1,9 @@
-<p id="notice"><%= notice %></p>
-
 <h1>Listing Products</h1>
 
-<table class="ui selectable sortable inverted grey table" id="products-table">
-  <thead>
+<table class="ui selectable inverted grey table" id="products-table">
+  <thead class="inverted black">
     <tr>
-      <th class="sorted ascending">Name</th>
+      <th>Name</th>
       <th>Value</th>
       <th>Options</th>
     </tr>
@@ -19,9 +17,21 @@
         <td><%= render partial: 'toolbar',
                 locals: {
                   button_group: [
-                    {name: t('page.controllers.show'), path: product, class: "inverted white folder open icon"},
-                    {name: t('page.controllers.edit'), path: edit_product_path(product), class: "inverted white write icon"},
-                    {name: t('page.controllers.destroy'), path: product, class: "inverted white remove icon", method: :delete}
+                    {
+                      name:  t('page.controllers.show'),
+                      path:  product,
+                      class: "inverted white folder open icon"
+                    },
+                    {
+                      name:  t('page.controllers.edit'),
+                      path:  edit_product_path(product),
+                      class: "inverted white write icon"
+                    },
+                    {
+                      name:  t('page.controllers.destroy'),
+                      path:  product,
+                      class: "inverted white remove icon", method: :delete
+                    }
                   ]
                 }
             %>
