@@ -1,14 +1,31 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @order.name %>
-</p>
+<h2 class="ui header">Order #<%= @order.id %></h2>
 
-<p>
-  <strong>Value:</strong>
-  <%= @order.value %>
-</p>
+<table class="ui table selectable inverted">
+  <thead>
+    <tr>
+      <th>Product</th>
+      <th>Value</th>
+    </tr>
+  </thead>
 
-<%= link_to 'Edit', edit_order_path(@order) %> |
-<%= link_to 'Back', orders_path %>
+  <tbody>
+    <% @order.products.each do |p| %>
+      <tr>
+        <td><%= p.name %></td>
+        <td><i class="dollar icon"></i><%= p.value %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<h2 class="ui header">Total: <%= @order.total_value %></h2>
+
+<hr>
+
+<%= render partial: 'layouts/animated_button', locals: {
+  name:          t('page.controllers.back'),
+  icon_class:    "reply icon",
+  clickCallback: "window.location.href = '#{orders_path}'"
+} %>

@@ -1,59 +1,8 @@
 <h1>Listing Products</h1>
 
-<table class="ui selectable inverted grey table" id="products-table">
-  <thead class="inverted black">
-    <tr>
-      <th>Name</th>
-      <th>Value</th>
-      <th>Options</th>
-    </tr>
-  </thead>
+<%= render partial: 'list_products', locals: {products: @products} %>
 
-  <tbody>
-    <% @products.each do |product| %>
-      <tr>
-        <td><%= product.name %></td>
-        <td><%= product.value %></td>
-        <td><%= render partial: 'toolbar',
-                locals: {
-                  button_group: [
-                    {
-                      name:  t('page.controllers.show'),
-                      path:  product,
-                      class: "inverted white folder open icon"
-                    },
-                    {
-                      name:  t('page.controllers.edit'),
-                      path:  edit_product_path(product),
-                      class: "inverted white write icon"
-                    },
-                    {
-                      name:  t('page.controllers.destroy'),
-                      path:  product,
-                      class: "inverted white remove icon", method: :delete
-                    }
-                  ]
-                }
-            %>
-
-            <% if user_signed_in? -%>
-              <%= render partial: 'toolbar',
-                  locals: {
-                    button_group: [
-                      {
-                        name:  t('page.controllers.add_to_cart'),
-                        path:  product,
-                        class: "inverted white add to cart icon"
-                      }
-                    ]
-                  }
-              %>
-            <% end %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<hr>
 
 <%= render partial: 'button',
     locals:  {

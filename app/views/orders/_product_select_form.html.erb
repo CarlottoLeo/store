@@ -1,0 +1,10 @@
+<% select_options = [['Select Products', '']] %>
+<div class="ui form">
+  <div class="field">
+  <% @products.each do |p| %>
+    <% select_options.push [p.name, p.id] %>
+  <% end %>
+  </div>
+</div>
+
+<%= select_tag(:orders, options_for_select(select_options), :class => "ui selection dropdown", :multiple => '', :id => "product-selector") %>

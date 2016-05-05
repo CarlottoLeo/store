@@ -1,12 +1,14 @@
 <div class="container segments">
   <div class="container segment">
-  <h1 class='ui header'>
+  <h2 class='ui header'>
     Name: <%= @product.name %>
-  </h1>
-  <h1 class='ui header'>
-    Value: <%= @product.value %>
-  </h1>
+  </h2>
+  <h2 class='ui header'>
+    Value: <i class="dollar icon"></i><%= @product.value %>
+  </h2>
   </div>
+
+  <hr>
 
   <div class="container segment">
     <%= render partial: 'layouts/animated_button', locals: {

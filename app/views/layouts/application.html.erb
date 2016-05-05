@@ -9,12 +9,18 @@
 <body>
   <div class="ui menu">
     <%= link_to root_path, class: :item do %>
-      <i class="home icon big inverted black"></i>
+      <i class="home icon big inverted black"></i>Home
     <% end %>
     <div class="right menu">
       <% if user_signed_in? %>
         <div class="item">
-          <li><%= t('page.messages.logged_in_as') %>  <%= current_user.email %></li>
+          <p><strong><%= current_user.email %></strong></p>
+        </div>
+
+        <div class="item">
+          <%= link_to orders_path do %>
+            <div class="ui inverted blue button"><i class="add to cart icon"></i>My Orders</div>
+          <% end %>
         </div>
 
         <div class="item">

@@ -1,29 +1,35 @@
-<p id="notice"><%= notice %></p>
-
 <h1>Listing Orders</h1>
 
-<table>
+<table class="ui table selectable inverted">
   <thead>
     <tr>
-      <th>Name</th>
+      <th>Order Number</th>
       <th>Value</th>
-      <th colspan="3"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @orders.each do |order| %>
       <tr>
-        <td><%= order.name %></td>
-        <td><%= order.value %></td>
-        <td><%= link_to 'Show', order %></td>
-        <td><%= link_to 'Edit', edit_order_path(order) %></td>
-        <td><%= link_to 'Destroy', order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+          <%= link_to order do %>
+            <div><%= order.id %></div>
+          <% end %>
+        </td>
+        <td>
+          <%= link_to order do %>
+            <div><i class="dollar icon"></i><%= order.total_value %></div>
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
+<hr>
 
-<%= link_to 'New Order', new_order_path %>
+<%= render partial: 'layouts/animated_button', locals: {
+  name:          t('page.controllers.new_order'),
+  icon_class:    "add icon",
+  clickCallback: "window.location.href = '#{new_order_path}'"
+} %>
