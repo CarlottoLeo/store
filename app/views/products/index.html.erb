@@ -35,6 +35,20 @@
                   ]
                 }
             %>
+
+            <% if user_signed_in? -%>
+              <%= render partial: 'toolbar',
+                  locals: {
+                    button_group: [
+                      {
+                        name:  t('page.controllers.add_to_cart'),
+                        path:  product,
+                        class: "inverted white add to cart icon"
+                      }
+                    ]
+                  }
+              %>
+            <% end %>
         </td>
       </tr>
     <% end %>
