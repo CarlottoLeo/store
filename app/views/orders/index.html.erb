@@ -10,18 +10,20 @@
 
   <tbody>
     <% @orders.each do |order| %>
-      <tr>
-        <td>
-          <%= link_to order do %>
-            <div><%= order.id %></div>
-          <% end %>
-        </td>
-        <td>
-          <%= link_to order do %>
-            <div><i class="dollar icon"></i><%= order.total_value %></div>
-          <% end %>
-        </td>
-      </tr>
+    
+        <tr>
+          <td>
+            <%= link_to order do %>
+              <div><%= order.id %></div>
+            <% end %>
+          </td>
+          <td>
+            <%= link_to order do %>
+              <div><i class="dollar icon"></i><%= order.total_value %></div>
+            <% end %>
+          </td>
+        </tr>
+
     <% end %>
   </tbody>
 </table>

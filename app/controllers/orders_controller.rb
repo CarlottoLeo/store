@@ -1,30 +1,20 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy]
+  before_filter :authenticate_user!
 
   # GET /orders
   def index
     @orders = Order.all
-
-    @orders.each do |o|
-      o.total_value = 0
-
-      o.products.each do |p|
-        o.total_value += p.value
-      end
-    end
   end
 
   # GET /orders/1
   def show
-    # calculate total value of the cart
-    @order.products.each do |p|
-      @order.total_value = p.value
-    end
   end
 
   # GET /orders/new
   def new
     @order = Order.new
+    @user = User.new
     @products = Product.all
   end
 
@@ -34,7 +24,8 @@ class OrdersController < ApplicationController
 
   # POST /orders
   def create
-    @order = Order.new(order_params)
+    order_params[:current_user] = session["warden.user.user.key"][1][0]
+    @order = Order.new_with_products(order_params)
 
     respond_to do |format|
       if @order.save
@@ -70,10 +61,6 @@ class OrdersController < ApplicationController
     end
   end
 
-  def total_value
-    @order.get_total_value
-  end
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_order
@@ -82,6 +69,6 @@ class OrdersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
-      params.require(:orders).permit(:name, :id, :total_value, :products)
+      params.require(:order).permit(:user, :products => [])
     end
 end

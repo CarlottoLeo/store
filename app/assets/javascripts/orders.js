@@ -1,3 +1,5 @@
 $(function() {
-  $('#product-selector').dropdown();
+  var obj = $('#order_products')
+  
+  obj.dropdown();
 });
