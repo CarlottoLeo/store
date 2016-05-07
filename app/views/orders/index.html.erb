@@ -19,7 +19,7 @@
           </td>
           <td>
             <%= link_to order do %>
-              <div><i class="dollar icon"></i><%= order.total_value %></div>
+              <div><%= number_to_currency order.total_value, :unit => "R$" %></div>
             <% end %>
           </td>
         </tr>
@@ -31,7 +31,7 @@
 <hr>
 
 <%= render partial: 'layouts/animated_button', locals: {
-  name:          t('page.controllers.new_order'),
+  name:          t('page.controllers.new'),
   icon_class:    "add icon",
   clickCallback: "window.location.href = '#{new_order_path}'"
 } %>

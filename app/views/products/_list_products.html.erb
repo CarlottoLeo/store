@@ -11,7 +11,7 @@
     <% products.each do |product| %>
       <tr>
         <td><%= product.name %></td>
-        <td><%= product.value %></td>
+        <td><%= number_to_currency product.value, :unit => "R$" %></td>
         <td><%= render partial: 'products/toolbar',
                 locals: {
                   button_group: [
