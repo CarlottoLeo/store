@@ -14,7 +14,7 @@ class OrdersController < ApplicationController
   # GET /orders/new
   def new
     @order = Order.new
-    @user = User.new
+    @user = current_user
     @products = Product.all
   end
 
@@ -24,8 +24,7 @@ class OrdersController < ApplicationController
 
   # POST /orders
   def create
-    order_params[:current_user] = session["warden.user.user.key"][1][0]
-    @order = Order.new_with_products(order_params)
+    @order = Order.new_with_products(current_user, order_params)
 
     respond_to do |format|
       if @order.save
@@ -69,6 +68,6 @@ class OrdersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
-      params.require(:order).permit(:user, :products => [])
+      params.require(:order).permit!
     end
 end
