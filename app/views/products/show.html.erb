@@ -4,7 +4,7 @@
     Name: <%= @product.name %>
   </h2>
   <h2 class='ui header'>
-    Value: <%= number_to_currency @product.value, :unit => "R$" %>
+    Value: <%= convert_number_to_money @product.value %>
   </h2>
   </div>
 

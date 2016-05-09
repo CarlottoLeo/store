@@ -1,4 +1,6 @@
 <%= form_for(@order, :html => {id: "order-form"}) do |f| %>
   <%= render partial: 'product_select_form',
   locals: {products: @products} %>
+
+  <%= f.submit class: "hidden" %>
 <% end %>

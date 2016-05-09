@@ -19,7 +19,7 @@
           </td>
           <td>
             <%= link_to order do %>
-              <div><%= number_to_currency order.total_value, :unit => "R$" %></div>
+              <div><%= convert_number_to_money order.total_value %></div>
             <% end %>
           </td>
         </tr>
