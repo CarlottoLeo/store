@@ -33,7 +33,7 @@ gem 'devise'
 group :development, :test do
   # tests
   gem 'byebug'
-  gem 'rspec-rails', '~> 3.0'
+  gem 'rspec-rails'
   gem 'factory_girl_rails'
 end
 
@@ -43,10 +43,13 @@ group :development do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+end
 
-  # tests
+group :test do
+  gem 'launchy'
+  gem 'guard-rspec'
   gem 'faker'
   gem 'capybara'
-  gem 'guard-rspec'
-  gem 'launchy'
+  gem 'capybara-webkit'
+  gem 'selenium-webdriver'
 end

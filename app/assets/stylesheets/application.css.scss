@@ -14,3 +14,8 @@
  *= require_self
  *= require semantic_ui/semantic_ui
  */
+
+// hide input buttons to make space for animated buttons
+input.hidden {
+  display: none;
+}
