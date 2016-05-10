@@ -9,17 +9,21 @@ class Order < ActiveRecord::Base
       order.total_value = 0
       order.items = []
 
-      order_params[:products].each do |pid|
-        item = Item.new({prodid: pid.to_i})
-        prod = Product.find(pid)
+      if order_params && order_params[:products] && order_params[:products].size > 0
+        order_params[:products].each do |pid|
+          item = Item.new({prodid: pid.to_i})
+          prod = Product.find(pid)
 
-        unless item.nil?
-          order.items.push(item)
-          order.total_value += prod.value
+          unless item.nil?
+            order.items.push(item)
+            order.total_value += prod.value
+          end
         end
+      else
+        return nil
       end
 
-      order.save
+      return order
     end
   end
 end

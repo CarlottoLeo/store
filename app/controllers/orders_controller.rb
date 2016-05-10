@@ -26,14 +26,10 @@ class OrdersController < ApplicationController
   def create
     @order = Order.new_with_products(current_user, order_params)
 
-    respond_to do |format|
-      if @order.save
-        format.html { redirect_to @order, notice: 'Order was successfully created.' }
-        format.json { render :show, status: :created, location: @order }
-      else
-        format.html { render :new }
-        format.json { render json: @order.errors, status: :unprocessable_entity }
-      end
+    if @order && @order.save
+      redirect_to @order, notice: 'Order was successfully created.'
+    else
+      redirect_to new_order_path, alert: "Can't submit an empty cart."
     end
   end
 
@@ -68,6 +64,8 @@ class OrdersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
-      params.require(:order).permit!
+      if params[:order]
+        params.require(:order).permit(:products => [])
+      end
     end
 end

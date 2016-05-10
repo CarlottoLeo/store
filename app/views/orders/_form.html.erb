@@ -1,6 +1,16 @@
 <%= form_for(@order, :html => {id: "order-form"}) do |f| %>
-  <%= render partial: 'product_select_form',
-  locals: {products: @products} %>
+  <% if @order.errors.any? %>
+    <div class="ui red negative message">
+      <h2>Oops, there are some problems:</h2>
+      <% @order.errors.each do |msg| %>
+        <li>
+          <%= msg %>
+        </li>
+      <% end %>
+    </div>
+  <% end %>
+
+  <%= render partial: 'product_select_form' %>
 
   <%= f.submit class: "hidden" %>
 <% end %>

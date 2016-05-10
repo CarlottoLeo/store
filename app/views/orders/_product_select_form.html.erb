@@ -1,3 +1,5 @@
-<%= select_tag("order[products]",
-    options_from_collection_for_select(@products, "id", "name"),
-    {multiple: true, prompt: 'Select Products', required: true}) %>
+<%=
+    select_tag("order[products]",
+    options_from_collection_for_select(Product.all, "id", "name"),
+    {multiple: true, prompt: 'Select Products', required: true})
+%>

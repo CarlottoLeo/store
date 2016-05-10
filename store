@@ -1,0 +1,4 @@
+A maioria das validações da pagina são feitas no view/controller e não no model.
+  Na hora de testar não tinha o que testar no model, pois ja havia sido testado no view/controller.
+
+
