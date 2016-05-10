@@ -1,6 +1,6 @@
 <% if @product.errors.any? %>
   <div class="ui red negative message">
-    <h1 class="ui header"> Oops, there are some problems: </h1>
+    <h1 class="ui header"><%= t('messages.errors.header') %></h1>
 
     <ul>
       <% @product.errors.full_messages.each do |message| %>
@@ -13,13 +13,13 @@
 <%= form_for @product, :html => {:id => "product-form", :class => "ui form"} do |f| %>
   <div class="three fields">
       <div class="field">
-        <%= f.label        :name %>
+        <%= f.label        :name, t('table.headers.name') %>
         <%= f.text_field   :name %>
       </div>
   </div>
   <div class="three fields">
       <div class="field">
-        <%= f.label        :value %>
+        <%= f.label        :value, t('table.headers.value') %>
         <%= f.number_field :value, :step => "0.10", :min => "0.01" %>
       </div>
   </div>

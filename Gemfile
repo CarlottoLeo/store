@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'
 # Use sqlite3 as the database for Active Record
@@ -29,6 +28,8 @@ gem 'autoprefixer-rails'
 gem 'therubyracer'
 # devise for user authentication
 gem 'devise'
+# i18n
+gem 'rails-i18n', '~> 4.0.0'
 
 group :development, :test do
   # tests

@@ -9,7 +9,7 @@
 <body>
   <div class="ui menu">
     <%= link_to root_path, class: :item do %>
-      <i class="home icon big inverted black"></i>Home
+      <i class="home icon big inverted black"></i><%= t('page.controllers.index') %>
     <% end %>
     <div class="right menu">
       <% if user_signed_in? %>
@@ -19,25 +19,25 @@
 
         <div class="item">
           <%= link_to orders_path do %>
-            <div class="ui inverted blue button"><i class="add to cart icon"></i>My Orders</div>
+            <div class="ui inverted blue button"><i class="add to cart icon"></i><%= t('page.controllers.my_orders') %></div>
           <% end %>
         </div>
 
         <div class="item">
           <%= link_to destroy_user_session_path, method: :delete do %>
-            <div class="ui button">Log Out</div>
+            <div class="ui button"><%= t('page.controllers.log_out') %></div>
           <% end %>
         </div>
       <% else %>
         <div class="item">
           <%= link_to new_registration_path(:user) do %>
-            <div class="ui primary button">Sign Up</div>
+            <div class="ui primary button"><%= t('page.controllers.sign_up') %></div>
           <% end %>
         </div>
 
         <div class="item">
           <%= link_to user_session_path do %>
-            <div class="ui button">Log In</div>
+            <div class="ui button"><%= t('page.controllers.log_in') %></div>
           <% end %>
         </div>
       <% end %>

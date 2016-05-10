@@ -1,7 +1,7 @@
 <%= form_for(@order, :html => {id: "order-form"}) do |f| %>
   <% if @order.errors.any? %>
     <div class="ui red negative message">
-      <h2>Oops, there are some problems:</h2>
+      <h2><%= t('messages.errors.header') %></h2>
       <% @order.errors.each do |msg| %>
         <li>
           <%= msg %>

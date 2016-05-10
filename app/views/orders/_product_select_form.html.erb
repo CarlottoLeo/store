@@ -1,5 +1,5 @@
 <%=
     select_tag("order[products]",
     options_from_collection_for_select(Product.all, "id", "name"),
-    {multiple: true, prompt: 'Select Products', required: true})
+    {multiple: true, prompt: t('page.controllers.select_product'), required: true})
 %>

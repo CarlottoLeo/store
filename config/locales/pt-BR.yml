@@ -1,0 +1,39 @@
+pt-BR:
+  currency:
+    unit: "R$ "
+
+  page:
+    controllers:
+      show: "Ver"
+      edit: "Editar"
+      destroy: "Excluir"
+      add: "Adicionar"
+      index: "Principal"
+      my_orders: "Meus Pedidos"
+      log_in: "Logar"
+      log_out: "Deslogar"
+      sign_up: "Cadastrar-se"
+      back: "Voltar"
+      submit: "Enviar"
+      new: "Novo"
+      select_product: "Selecione os produtos"
+
+    headers:
+      listing_products: "Lista de Produtos"
+      editing_product: "Editando Produto"
+      listing_orders: "Listando Pedidos"
+      new_order: "Novo Pedido"
+      order: "Pedido"
+
+  table:
+    headers:
+      name: "Nome"
+      value: "Valor"
+      options: "Opções"
+      order_number: "Número do pedido"
+      product: "Produto"
+
+  messages:
+    error:
+      header: "Oops, parece que houve um problema na requisição:"
+      order_dont_belong_to_user: "Você não tem permissão para ver este pedido."
