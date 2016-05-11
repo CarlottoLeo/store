@@ -47,7 +47,8 @@ pt-BR:
       header: "Oops, parece que houve um problema na requisição:"
       order_dont_belong_to_user: "Você não tem permissão para ver este pedido."
       order_create_empty_cart: "O pedido não pode estar vazio."
-      
+      order_record_not_found: "O pedido não existe ou não pode ser encontrado."
+
     notice:
       totals: "Total:"
       min_chars: 'Mínimo de %{min} caracteres.'

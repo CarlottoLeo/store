@@ -47,6 +47,7 @@ en:
       header: "Oops, it looks like there was a problem on your request:"
       order_dont_belong_to_user: "You don't have permission to view this order."
       order_create_empty_cart: "The order selected products list can't be empty."
+      order_record_not_found: "The order doesn't exist or couldn't be found."
 
     notice:
       totals: "Total:"

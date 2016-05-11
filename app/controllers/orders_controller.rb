@@ -1,6 +1,7 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy]
   before_filter :authenticate_user!
+  around_filter :catch_not_found
 
   # GET /orders
   def index
@@ -67,5 +68,11 @@ class OrdersController < ApplicationController
       if params[:order]
         params.require(:order).permit(:products => [])
       end
+    end
+
+    def catch_not_found
+      yield
+    rescue ActiveRecord::RecordNotFound
+      redirect_to root, :flash => { :error => t('messages.error.order_record_not_found') }
     end
 end

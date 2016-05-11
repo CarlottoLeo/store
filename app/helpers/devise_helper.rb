@@ -10,7 +10,7 @@ module DeviseHelper
 
     html = <<-HTML
     <div class="ui red negative message">
-      <h2>Oops, there are some problems:</h2>
+      <h2>#{t('messages.error.header')}</h2>
       <ul>#{messages}</ul>
     </div>
     HTML
