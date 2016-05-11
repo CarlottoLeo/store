@@ -5,22 +5,22 @@
 
   <div class="three fields">
     <div class="field">
-      <%= f.label :email %><br />
+      <%= f.label :email, t('page.headers.email') %>
       <%= f.email_field :email, autofocus: true %>
     </div>
   </div>
   <div class="three fields">
     <div class="ui field">
-      <%= f.label :password %>
+      <%= f.label :password, t('page.headers.password') %>
       <%= f.password_field :password, autocomplete: "off" %>
       <% if @minimum_password_length %>
-        <em>(<%= @minimum_password_length %> characters minimum)</em>
+        <em><%= t('messages.notice.min_chars', min: @minimum_password_length) %></em>
       <% end %>
     </div>
   </div>
   <div class="three fields">
     <div class="ui field">
-      <%= f.label :password_confirmation %><br />
+      <%= f.label :password_confirmation, t('page.headers.password_confirmation') %>
       <%= f.password_field :password_confirmation, autocomplete: "off" %>
     </div>
   </div>
@@ -37,7 +37,7 @@
     </div>
 
     <%= link_to user_session_path do %>
-      <div class="ui button">Log In</div>
+      <div class="ui button"><%= t('page.controllers.log_in') %></div>
     <% end %>
   </div>
 <% end %>

@@ -1,26 +1,59 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# To learn more, please read the Rails Internationalization guide
-# available at http://guides.rubyonrails.org/i18n.html.
+# encoding: UTF-8
 
 en:
-  hello: "Hello world"
-
   currency:
     unit: "$ "
+
+  page:
+    controllers:
+      show: "View"
+      edit: "Edit"
+      destroy: "Delete"
+      add: "Add"
+      index: "Index"
+      my_orders: "My Orders"
+      create: "Create"
+      log_in: "Log In"
+      log_out: "Log Out"
+      sign_up: "Sign Up"
+      sign_in: "Sign In"
+      back: "Return"
+      submit: "Send"
+      new: "New"
+      select_product: "Select Products"
+
+    headers:
+      listing_products: "Products List"
+      editing_product: "Edit Product"
+      listing_orders: "Orders List"
+      new_order: "New Order"
+      order: "Order"
+      login: "Log In"
+      email: "Email"
+      password: "Password"
+      password_confirmation: "Password Confirmation"
+      remember_me: "Remain Logged"
+
+  table:
+    headers:
+      name: "Name"
+      value: "Value"
+      options: "Options"
+      order_number: "Order Number"
+      product: "Product"
+
+  messages:
+    error:
+      header: "Oops, it looks like there was a problem on your request:"
+      order_dont_belong_to_user: "You don't have permission to view this order."
+      order_create_empty_cart: "The order selected products list can't be empty."
+
+    notice:
+      totals: "Total:"
+      min_chars: 'Minimum of %{min} characters.'
+      product_update_success: "The product has been successfully updated."
+      product_remove_success: "The product has been successfully deleted."
+      product_create_success: "The product has been successfully created."
+      order_create_success: "The order has been successfully created."
+      order_update_success: "The order has been successfully updated."
+      order_remove_success: "The order has been successfully removed."

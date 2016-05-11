@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 pt-BR:
   currency:
     unit: "R$ "
@@ -10,9 +12,11 @@ pt-BR:
       add: "Adicionar"
       index: "Principal"
       my_orders: "Meus Pedidos"
+      create: "Criar"
       log_in: "Logar"
       log_out: "Deslogar"
       sign_up: "Cadastrar-se"
+      sign_in: "Logar"
       back: "Voltar"
       submit: "Enviar"
       new: "Novo"
@@ -24,6 +28,11 @@ pt-BR:
       listing_orders: "Listando Pedidos"
       new_order: "Novo Pedido"
       order: "Pedido"
+      login: "Login"
+      email: "Email"
+      password: "Senha"
+      password_confirmation: "Confirmação de Senha"
+      remember_me: "Permanecer Logado"
 
   table:
     headers:
@@ -37,3 +46,14 @@ pt-BR:
     error:
       header: "Oops, parece que houve um problema na requisição:"
       order_dont_belong_to_user: "Você não tem permissão para ver este pedido."
+      order_create_empty_cart: "O pedido não pode estar vazio."
+      
+    notice:
+      totals: "Total:"
+      min_chars: 'Mínimo de %{min} caracteres.'
+      product_update_success: "O produto foi atualizado com sucesso."
+      product_remove_success: "O produto foi excluído com sucesso."
+      product_create_success: "O produto foi criado com sucesso."
+      order_create_success: "Pedido criado com sucesso."
+      order_update_success: "Pedido atualizado com sucesso."
+      order_remove_success: "Pedido removido com sucesso."

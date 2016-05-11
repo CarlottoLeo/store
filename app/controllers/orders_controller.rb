@@ -27,9 +27,9 @@ class OrdersController < ApplicationController
     @order = Order.new_with_products(current_user, order_params)
 
     if @order && @order.save
-      redirect_to @order, notice: 'Order was successfully created.'
+      redirect_to @order, notice: t('messages.notice.order_create_success')
     else
-      redirect_to new_order_path, alert: "Can't submit an empty cart."
+      redirect_to new_order_path, alert: t('messages.error.order_create_empty_cart')
     end
   end
 
@@ -37,7 +37,7 @@ class OrdersController < ApplicationController
   def update
     respond_to do |format|
       if @order.update(order_params)
-        format.html { redirect_to @order, notice: 'Order was successfully updated.' }
+        format.html { redirect_to @order, notice: t('messages.notice.order_update_success') }
         format.json { render :show, status: :ok, location: @order }
       else
         format.html { render :edit }
@@ -51,7 +51,7 @@ class OrdersController < ApplicationController
     @order.destroy
 
     respond_to do |format|
-      format.html { redirect_to orders_url, notice: 'Order was successfully destroyed.' }
+      format.html { redirect_to orders_url, notice: t('messages.notice.order_remove_success') }
       format.json { head :no_content }
     end
   end

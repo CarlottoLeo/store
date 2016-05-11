@@ -20,7 +20,7 @@
     </tbody>
   </table>
 
-  <h2 class="ui header">Total: <%= convert_number_to_money @order.total_value %></h2>
+  <h2 class="ui header"><%= t('messages.notice.totals') %> <%= convert_number_to_money @order.total_value %></h2>
 
   <hr>
 
