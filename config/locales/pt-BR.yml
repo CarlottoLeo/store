@@ -33,6 +33,8 @@ pt-BR:
       password: "Senha"
       password_confirmation: "Confirmação de Senha"
       remember_me: "Permanecer Logado"
+      amount: "Quantidade"
+      product: "Produto"
 
   table:
     headers:

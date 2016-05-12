@@ -5,7 +5,7 @@ class OrdersController < ApplicationController
 
   # GET /orders
   def index
-    @orders = Order.all
+    @orders = Order.filter_by_user(current_user.id)
   end
 
   # GET /orders/1
@@ -14,9 +14,9 @@ class OrdersController < ApplicationController
 
   # GET /orders/new
   def new
-    @order = Order.new
-    @user = current_user
-    @products = Product.all
+    @order    = Order.new
+    @user     = current_user
+    @products = Product.get_all_by_name_asc
   end
 
   # GET /orders/1/edit
@@ -66,7 +66,7 @@ class OrdersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
       if params[:order]
-        params.require(:order).permit(:products => [])
+        params.require(:order).permit(:items => [])
       end
     end
 

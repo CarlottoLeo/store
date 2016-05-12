@@ -2,6 +2,8 @@ class Order < ActiveRecord::Base
   has_many :items
   belongs_to :user
 
+  scope :filter_by_user, ->(id) {where('user_id == ?', id)}
+
   def self.new_with_products(user, order_params)
     Order.create do |order|
       order.user = user

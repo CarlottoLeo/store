@@ -1,5 +1,5 @@
 $(function() {
-  var obj = $('#order_products')
-  
+  var obj = $('#item_id')
+
   obj.dropdown();
 });

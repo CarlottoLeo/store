@@ -10,20 +10,19 @@
 
   <tbody>
     <% @orders.each do |order| %>
-      <% if order.user_id == current_user.id %>
-        <tr>
-          <td>
-            <%= link_to order do %>
-              <div><%= order.id %></div>
-            <% end %>
-          </td>
-          <td>
-            <%= link_to order do %>
-              <div><%= convert_number_to_money order.total_value %></div>
-            <% end %>
-          </td>
-        </tr>
-      <% end %>
+      <tr>
+        <td>
+          <%= link_to order do %>
+            <div><%= order.id %></div>
+          <% end %>
+        </td>
+
+        <td>
+          <%= link_to order do %>
+            <div><%= convert_number_to_money order.total_value %></div>
+          <% end %>
+        </td>
+      </tr>
     <% end %>
   </tbody>
 </table>

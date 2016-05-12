@@ -1,5 +1,27 @@
-<%=
-    select_tag("order[products]",
-    options_from_collection_for_select(Product.all, "id", "name"),
-    {multiple: true, prompt: t('page.controllers.select_product'), required: true})
-%>
+<div class="four fields">
+  <div class="field">
+    <label><%= t('page.headers.product') %></label>
+    <%= select("items[#{id}]", "id", options_from_collection_for_select(Product.get_all_by_name_asc, "id", "name")) %>
+  </div>
+
+  <div class="field">
+    <label><%= t('page.headers.amount') %></label>
+    <input type="number" name="items[<%= id %>][amount]" id="items_<%= id %>_amount" min="1">
+  </div>
+
+  <div class="field">
+    <label><%= t('messages.notice.totals') %></label>
+    <input type='text' name="total_value" id="<%= id %>" product-value="<%= id %>" disabled>
+  </div>
+
+  <div class="field">
+    <!-- hack zone start -->
+    <label class='hidden'>&nbsp</label>
+    <!-- hack zone end -->
+    <%= render partial: 'layouts/animated_button', locals: {
+      name:          t('page.controllers.add'),
+      icon_class:    "add icon",
+      clickCallback: ""
+    } %>
+  </div>
+</div>

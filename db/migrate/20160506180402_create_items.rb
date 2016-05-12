@@ -3,7 +3,8 @@ class CreateItems < ActiveRecord::Migration
     create_table :items do |t|
       t.integer :prodid
       t.integer :order_id
-      
+      t.integer :amount
+
       t.timestamps null: false
     end
   end
