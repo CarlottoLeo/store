@@ -20,7 +20,7 @@ en:
       back: "Return"
       submit: "Send"
       new: "New"
-      select_product: "Select Products"
+      select_product: "Select a product"
 
     headers:
       listing_products: "Products List"

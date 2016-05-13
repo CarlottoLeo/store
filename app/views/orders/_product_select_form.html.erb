@@ -1,17 +1,22 @@
 <div class="four fields">
-  <div class="field">
+  <div class="field" id="item_info">
     <label><%= t('page.headers.product') %></label>
-    <%= select("items[#{id}]", "id", options_from_collection_for_select(Product.get_all_by_name_asc, "id", "name")) %>
+    <%= select("item", "id", Product.get_collection_for_select_tag, prompt: t('page.controllers.select_product'), required: true) %>
   </div>
 
   <div class="field">
     <label><%= t('page.headers.amount') %></label>
-    <input type="number" name="items[<%= id %>][amount]" id="items_<%= id %>_amount" min="1">
+    <input type="number" name="item[amount]" id="item_amount" min="1">
+  </div>
+
+  <div class="field">
+    <label><%= t('messages.notice.total_unit') %></label>
+    <input type='text' name="item[value]" id="item_value" disabled>
   </div>
 
   <div class="field">
     <label><%= t('messages.notice.totals') %></label>
-    <input type='text' name="total_value" id="<%= id %>" product-value="<%= id %>" disabled>
+    <input type='text' name="item[total]" id="item_total" disabled>
   </div>
 
   <div class="field">
@@ -21,7 +26,7 @@
     <%= render partial: 'layouts/animated_button', locals: {
       name:          t('page.controllers.add'),
       icon_class:    "add icon",
-      clickCallback: ""
+      clickCallback: "$('tbody').add_to_cart();"
     } %>
   </div>
 </div>

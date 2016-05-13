@@ -63,6 +63,19 @@ class ProductsController < ApplicationController
     end
   end
 
+  def get_collection_for_select_tag
+    prods = Product.get_all_by_name_asc
+    result = ""
+
+    unless prods.nil?
+      prods.each do |product|
+        result += "<option value=\"{id: #{product.id}, value: #{product.value}}\">#{product.name}</option>\n"
+      end
+    end
+
+    return result
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_product

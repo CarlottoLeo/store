@@ -1,5 +1,3 @@
-<% form_number = 1 %>
-
 <%= form_for(@order, :html => {id: "order-form", class: "ui form"}) do |f| %>
   <% if @order.errors.any? %>
     <div class="ui red negative message">
@@ -12,7 +10,19 @@
     </div>
   <% end %>
 
-  <%= render partial: 'product_select_form', locals: {id: form_number} %>
+  <%= render partial: 'product_select_form' %>
 
-  <%= f.submit class: "hidden" %>
+  <table class="ui selectable inverted grey table" id="products-table">
+    <thead class="inverted black">
+      <tr>
+        <th><%= t('table.headers.name') %></th>
+        <th><%= t('table.headers.value') %></th>
+        <th><%= t('page.headers.amount') %></th>
+        <th><%= t('messages.notice.totals') %></th>
+      </tr>
+    </thead>
+
+    <tbody>
+    </tbody>
+  </table>
 <% end %>

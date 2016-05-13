@@ -20,7 +20,7 @@ pt-BR:
       back: "Voltar"
       submit: "Enviar"
       new: "Novo"
-      select_product: "Selecione os produtos"
+      select_product: "Selecione um produto"
 
     headers:
       listing_products: "Lista de Produtos"
@@ -53,6 +53,7 @@ pt-BR:
 
     notice:
       totals: "Total:"
+      total_unit: "Valor unitário:"
       min_chars: 'Mínimo de %{min} caracteres.'
       product_update_success: "O produto foi atualizado com sucesso."
       product_remove_success: "O produto foi excluído com sucesso."

@@ -1,5 +1,3 @@
 $(function() {
-  var obj = $('#item_id')
-
-  obj.dropdown();
+  var obj = $('select').dropdown();
 });
