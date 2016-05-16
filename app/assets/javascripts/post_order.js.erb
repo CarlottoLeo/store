@@ -24,9 +24,7 @@ jQuery.fn.extend({
       },
 
       error: function(received_data) {
-        if (received_data.status == 200) {
-          location.reload(true);
-        }
+        location.reload(true);
       }
     });
 

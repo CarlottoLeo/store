@@ -30,7 +30,7 @@ class OrdersController < ApplicationController
         format.html { redirect_to @order, notice: t('messages.notice.order_create_success') }
         format.js   { redirect_to @order, notice: t('messages.notice.order_create_success') }
       else
-        format.html { redirect_to new_order_path, alert: t('messages.error.order_create_empty_cart')} 
+        format.html { redirect_to new_order_path, alert: t('messages.error.order_create_empty_cart')}
         format.js   { redirect_to new_order_path, alert: t('messages.error.order_create_empty_cart')}
       end
     end
@@ -68,7 +68,7 @@ class OrdersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
       if params[:order]
-        params.require(:order).permit!#(:items => [])
+        params.require(:order).permit(:items => [:name, :amount, :value])
       end
     end
 end
