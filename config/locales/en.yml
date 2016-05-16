@@ -41,7 +41,8 @@ en:
       options: "Options"
       order_number: "Order Number"
       product: "Product"
-
+      total: "Total"
+      
   messages:
     error:
       header: "Oops, it looks like there was a problem on your request:"

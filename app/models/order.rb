@@ -7,18 +7,18 @@ class Order < ActiveRecord::Base
   def self.new_with_products(user, order_params)
     Order.create do |order|
       order.user = user
-      order.name = "order#{order.id}"
+      order.name = "Order #{order.id}"
       order.total_value = 0
-      order.items = []
 
-      if order_params && order_params[:products] && order_params[:products].size > 0
-        order_params[:products].each do |pid|
-          item = Item.new({prodid: pid.to_i})
-          prod = Product.find(pid)
+      if order_params && order_params[:items]
+        order_params[:items].each do |_, product|
+          prod = Product.find_by_name(product['name'])
 
-          unless item.nil?
+          unless (prod.nil?)
+            item = Item.new({prodid: prod.id, amount: product['amount'].to_i})
+
             order.items.push(item)
-            order.total_value += prod.value
+            order.total_value += prod.value * item.amount
           end
         end
       else

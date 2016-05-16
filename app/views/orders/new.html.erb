@@ -3,10 +3,19 @@
 <%= render 'form' %>
 
 <hr>
+<form class="ui form">
+  <div class="ui four fields">
+    <div class="field">
+      <label><%= t('messages.notice.totals') %></label>
+      <input type='text' id="cart_total" disabled>
+    </div>
+  </div>
+</form>
+<hr>
 <%= render partial: 'layouts/animated_button', locals: {
   name:          t('page.controllers.submit'),
   icon_class:    "send icon",
-  clickCallback: "$('#order-form').submit();"
+  clickCallback: "$(document).post_order();"
 } %>
 <%= render partial: 'layouts/animated_button', locals: {
   name:          t('page.controllers.back'),

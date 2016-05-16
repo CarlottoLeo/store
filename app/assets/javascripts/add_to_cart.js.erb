@@ -5,6 +5,7 @@ jQuery.fn.extend({
     // makes sure it picks the item name
     // instead of 'Select Product' in semantic framework
     var itemName   = $('div.selected').text();
+
     var itemValue  = $('#item_value').val();
     var itemAmount = $('#item_amount').val();
     var itemTotal  = $('#item_total').val();
@@ -30,9 +31,14 @@ jQuery.fn.extend({
       });
 
       if (!duplicated) {
-        $(this).append("<tr><td>" + itemName + "</td>\n<td>" + itemValue +
-        "</td>\n<td amount-for="+itemName+">" + itemAmount +
-        "</td>\n<td total-for="+itemName+">"+itemTotal + "</td></tr>\n");
+        $(this).append(
+"          <tr>"+
+"            <td name='item[name]' name-for="+itemName+">"+itemName+"</td>\n" +
+"            <td name='item[value]' value-for="+itemName+">"+itemValue+"</td>\n" +
+"            <td name='item[amount]' amount-for="+itemName+">"+itemAmount+"</td>\n" +
+"            <td name='item[total]' total-for="+itemName+">"+itemTotal+"</td>\n" +
+"          </tr>\n"
+        );
       } else {
         var amountColumn  = $('td[amount-for="'+itemName+'"]');
         var totalColumn   = $('td[total-for="'+itemName+'"]');
@@ -42,9 +48,21 @@ jQuery.fn.extend({
         totalColumn.text((newAmount * parseFloat(itemValue)).toFixed(2));
 
         if (DEBUG) {
-          console.log('duplicated');
+          console.log('found duplicated');
         }
       }
     }
+
+    var cart_total = 0.0;
+
+    $('td[total-for]').each(function() {
+      if (DEBUG) {
+        console.log(this);
+      }
+
+      cart_total += parseFloat($(this).text());
+    });
+
+    $('#cart_total').val(cart_total.toFixed(2));
   }
 });

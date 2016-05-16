@@ -43,6 +43,7 @@ pt-BR:
       options: "Opções"
       order_number: "Número do pedido"
       product: "Produto"
+      total: "Total"
 
   messages:
     error:

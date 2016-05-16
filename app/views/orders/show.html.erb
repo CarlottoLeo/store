@@ -6,6 +6,7 @@
       <tr>
         <th><%= t('table.headers.product') %></th>
         <th><%= t('table.headers.value') %></th>
+        <th><%= t('table.headers.total') %></th>
       </tr>
     </thead>
 
@@ -14,7 +15,8 @@
         <% prod = Product.find(v.prodid) %>
         <tr>
           <td><%= prod.name %></td>
-          <td><i class="dollar icon"></i><%= prod.value %></td>
+          <td><%= convert_number_to_money prod.value %></td>
+          <td><%= convert_number_to_money prod.value * v.amount %></td>
         </tr>
       <% end %>
     </tbody>
