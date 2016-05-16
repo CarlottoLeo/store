@@ -33,6 +33,21 @@
     icon_class:    "reply icon",
     clickCallback: "window.location.href = '#{orders_path}'"
   } %>
+
+  <%= render partial: 'layouts/animated_button', locals: {
+    name:          t('page.controllers.destroy'),
+    icon_class:    "delete icon",
+    clickCallback: "$.ajax({
+      type: 'DELETE',
+      url: window.location.href,
+      success: function() {
+        window.location.href = '#{orders_path}';
+      },
+      error: function() {
+        window.location.href = '#{orders_path}';
+      }
+    })"
+  } %>
 <% else %>
   <div class="ui red negative message">
     <h2><%= t('messages.error.header') %></h2>
