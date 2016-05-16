@@ -7,7 +7,7 @@ RSpec.feature User, :type => :feature do
   scenario "sign up successfully and redirects to root", js: true do
     User.destroy_all
 
-    visit "/users/sign_up"
+    visit "/en/users/sign_up"
 
     fill_in "Email",    :with => "teste@rspec.com"
     fill_in "Password", :with => "123456"
@@ -24,7 +24,7 @@ RSpec.feature User, :type => :feature do
 
     puts(User.all)
 
-    visit "/users/sign_in"
+    visit "/en/users/sign_in"
 
     fill_in "Email",    :with => "teste@rspec.com"
     fill_in "Password", :with => "123456"
