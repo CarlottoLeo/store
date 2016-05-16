@@ -6,6 +6,7 @@
       <tr>
         <th><%= t('table.headers.product') %></th>
         <th><%= t('table.headers.value') %></th>
+        <th><%= t('table.headers.amount') %></th>
         <th><%= t('table.headers.total') %></th>
       </tr>
     </thead>
@@ -16,6 +17,7 @@
         <tr>
           <td><%= prod.name %></td>
           <td><%= convert_number_to_money prod.value %></td>
+          <td><%= number_with_delimiter v.amount, :delimiter => "," %></td>
           <td><%= convert_number_to_money prod.value * v.amount %></td>
         </tr>
       <% end %>

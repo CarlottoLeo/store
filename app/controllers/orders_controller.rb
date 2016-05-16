@@ -28,10 +28,10 @@ class OrdersController < ApplicationController
     respond_to do |format|
       if @order && @order.save
         format.html { redirect_to @order, notice: t('messages.notice.order_create_success') }
-        format.json { render :show, status: :ok, location: @order }
-        format.js   { render :show, status: :ok, location: @order }
+        format.js   { redirect_to @order, notice: t('messages.notice.order_create_success') }
       else
-        format.html { redirect_to new_order_path, alert: t('messages.error.order_create_empty_cart') }
+        format.html { redirect_to new_order_path, alert: t('messages.error.order_create_empty_cart')} 
+        format.js   { redirect_to new_order_path, alert: t('messages.error.order_create_empty_cart')}
       end
     end
   end

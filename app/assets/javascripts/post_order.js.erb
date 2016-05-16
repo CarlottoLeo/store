@@ -1,0 +1,35 @@
+jQuery.fn.extend({
+    post_order: function() {
+    // filling data
+    var items = [];
+
+    $('tbody > tr').each(function() {
+      var entry = {};
+
+      entry['name']   = $(this).find('td[name="item[name]"]').text();
+      entry['amount'] = $(this).find('td[name="item[amount]"]').text();
+      entry['value']  = $(this).find('td[name="item[value]"]').text();
+
+      items.push(entry);
+    });
+
+    // sending data
+    $.ajax({
+      type: "POST",
+      url: $("#order-form").attr('action'), // 'pt-BR/orders'
+      data: {order: {items: items}},        // tabela com os valores
+      dataType: "JSON",
+      success: function(sent_data) {
+        window.location.href = '/orders/' + sent_data.id + '/';
+      },
+
+      error: function(received_data) {
+        if (received_data.status == 200) {
+          location.reload(true);
+        }
+      }
+    });
+
+    return false;
+  }
+})

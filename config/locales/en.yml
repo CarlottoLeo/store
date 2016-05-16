@@ -34,6 +34,8 @@ en:
       password_confirmation: "Password Confirmation"
       remember_me: "Remain Logged"
       amount: "Amount"
+      product: "Product"
+
   table:
     headers:
       name: "Name"
@@ -42,7 +44,9 @@ en:
       order_number: "Order Number"
       product: "Product"
       total: "Total"
-      
+      amount: "Quantity"
+      total_unit: "Unit Value"
+
   messages:
     error:
       header: "Oops, it looks like there was a problem on your request:"
