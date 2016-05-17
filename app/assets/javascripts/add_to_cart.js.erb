@@ -1,7 +1,7 @@
 jQuery.fn.extend({
   add_to_cart: function () {
     var DEBUG = false;
-    
+
     var itemName   = $('#select2-items_id-container').text();
     var itemValue  = $('#item_value').val();
     var itemAmount = $('#item_amount').val();
@@ -31,8 +31,8 @@ jQuery.fn.extend({
         $(this).append(
 "          <tr>"+
 "            <td name='item[name]' name-for="+itemName+">"+itemName+"</td>\n" +
-"            <td name='item[value]' value-for="+itemName+">"+itemValue+"</td>\n" +
 "            <td name='item[amount]' amount-for="+itemName+">"+itemAmount+"</td>\n" +
+"            <td name='item[value]' value-for="+itemName+">"+itemValue+"</td>\n" +
 "            <td name='item[total]' total-for="+itemName+">"+itemTotal+"</td>\n" +
 "          </tr>\n"
         );
