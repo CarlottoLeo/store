@@ -25,6 +25,8 @@ class OrdersController < ApplicationController
   def create
     @order = Order.new_with_products(current_user, order_params)
 
+    authorize @order
+
     respond_to do |format|
       if @order && @order.save
         format.html { redirect_to @order, notice: t('messages.notice.order_create_success') }
@@ -32,28 +34,32 @@ class OrdersController < ApplicationController
       else
         format.html { redirect_to new_order_path, alert: t('messages.error.order_create_empty_cart')}
         format.js   { redirect_to new_order_path, alert: t('messages.error.order_create_empty_cart')}
+        format.json { render json: @order.errors, status: :unprocessable_entity}
       end
     end
   end
 
   # PATCH/PUT /orders/1
-  def update
-    respond_to do |format|
-      if @order.update(order_params)
-        format.html { redirect_to @order, notice: t('messages.notice.order_update_success') }
-        format.json { render json: @order.to_json, status: :ok, location: @order }
-      else
-        format.html { render :edit }
-        format.json { render json: @order.errors, status: :unprocessable_entity }
-      end
-    end
-  end
+  #def update
+  #  respond_to do |format|
+  #    if @order.update(order_params)
+  #      format.html { redirect_to @order, notice: t('messages.notice.order_update_success') }
+  #      format.json { render json: @order.to_json, status: :ok, location: @order }
+  #    else
+  #      format.html { render :edit }
+  #      format.json { render json: @order.errors, status: :unprocessable_entity }
+  #    end
+  #  end
+  #end
 
   # DELETE /orders/1
   def destroy
     @order.destroy
 
+    authorize @order
+
     respond_to do |format|
+      format.js   { redirect_to orders_url, notice: t('messages.notice.order_remove_success') }
       format.html { redirect_to orders_url, notice: t('messages.notice.order_remove_success') }
       format.json { head :no_content }
     end

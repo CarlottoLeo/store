@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   LOCALES = /en|pt\-BR/
 
   scope "(:locale)" , locale: LOCALES do
-      resources  :orders
+      resources  :orders, except: :edit
 
       resources :products do
         collection do
