@@ -23,6 +23,7 @@ en:
       select_product: "Select a product"
 
     headers:
+      new_product: "New Product"
       listing_products: "Products List"
       editing_product: "Edit Product"
       listing_orders: "Orders List"

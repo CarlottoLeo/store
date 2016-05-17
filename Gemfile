@@ -32,7 +32,7 @@ gem "select2-rails"
 # ransack: improved search bar
 gem 'ransack'
 # audited to store history changes
-gem "audited", "~> 4.0"
+gem "audited-activerecord", "~> 4.0"
 # cocoon nested forms
 gem "cocoon"
 # paranoia: to destroy or not, relies the question

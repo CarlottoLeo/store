@@ -5,7 +5,8 @@ class ProductsController < ApplicationController
   # GET /products
   # GET /products.json
   def index
-    @products = Product.get_all_by_name_asc
+    @q = Product.ransack(params[:q])
+    @products = @q.result(distinct: true)
   end
 
   # GET /products/1
@@ -74,6 +75,11 @@ class ProductsController < ApplicationController
     end
 
     return result
+  end
+
+  def search
+    index
+    render :index
   end
 
   private

@@ -3,7 +3,13 @@ Rails.application.routes.draw do
 
   scope "(:locale)" , locale: LOCALES do
       resources  :orders
-      resources  :products
+
+      resources :products do
+        collection do
+          match 'search' => "products#search" , via: [:get, :post], as: :search
+        end
+      end
+
       devise_for :users
   end
 

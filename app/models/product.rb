@@ -8,6 +8,10 @@ class Product < ActiveRecord::Base
 
   scope :get_all_by_name_asc, -> {order(name: :asc)}
 
+  audited
+
+  acts_as_paranoid
+
   def self.get_collection_for_select_tag
     prods = Product.get_all_by_name_asc
     result = ""

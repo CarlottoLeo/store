@@ -4,6 +4,10 @@ class Order < ActiveRecord::Base
 
   scope :filter_by_user, ->(id) {where('user_id == ?', id)}
 
+  audited
+
+  acts_as_paranoid
+
   def self.new_with_products(user, order_params)
     Order.create do |order|
       order.user = user

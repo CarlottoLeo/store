@@ -1,46 +1,48 @@
-<table class="ui selectable inverted grey table" id="products-table">
-  <thead class="inverted black">
-    <tr>
-      <th><%= t('table.headers.name') %></th>
-      <th><%= t('table.headers.value') %></th>
-      <th><%= t('table.headers.options') %></th>
-    </tr>
-  </thead>
+<%= search_form_for @q do |f| -%>
+  <div class="ui icon input">
+    <%= f.search_field :name_cont, placeholder: "Search" -%>
+    <i class="search icon"></i>
+    <%= f.submit class: 'hidden' -%>
+  </div>
 
-  <tbody>
-    <% products.each do |product| %>
+  <table class="ui selectable inverted grey table" id="products-table">
+    <thead class="inverted black">
       <tr>
-        <td><%= product.name %></td>
-        <td><%= convert_number_to_money product.value %></td>
-        <td><%= render partial: 'products/toolbar',
-                locals: {
-                  button_group: [
-                    {
-                      name:  t('page.controllers.show'),
-                      path:  product,
-                      class: "inverted white folder open icon"
-                    },
-                    {
-                      name:  t('page.controllers.edit'),
-                      path:  edit_product_path(product),
-                      class: "inverted white write icon"
-                    },
-                    {
-                      name:  t('page.controllers.destroy'),
-                      path:  product,
-                      class: "inverted white remove icon", method: :delete
-                    }
-                  ]
-                }
-            %>
-
-            <% if user_signed_in? && controller_name != 'products' %>
-              <%= link_to '#!' do %>
-                <button class="ui button"><i class="add to cart icon"></i>Add to Cart</button>
-              <% end %>
-            <% end %>
-        </td>
+        <th><%= t('table.headers.name') -%></th>
+        <th><%= t('table.headers.value') -%></th>
+        <th><%= t('table.headers.options') -%></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+
+    <tbody>
+      <% products.each do |product| %>
+        <tr>
+          <td><%= product.name %></td>
+          <td><%= convert_number_to_money product.value %></td>
+          <td><%= render partial: 'products/toolbar',
+                  locals: {
+                    button_group: [
+                      {
+                        name:  t('page.controllers.show'),
+                        path:  product,
+                        class: "inverted white folder open icon"
+                      },
+                      {
+                        name:  t('page.controllers.edit'),
+                        path:  edit_product_path(product),
+                        class: "inverted white write icon"
+                      },
+                      {
+                        name:  t('page.controllers.destroy'),
+                        path:  product,
+                        class: "inverted white remove icon", method: :delete
+                      }
+                    ]
+                  }
+              %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end -%>

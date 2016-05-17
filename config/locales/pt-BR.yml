@@ -23,6 +23,7 @@ pt-BR:
       select_product: "Selecione um produto"
 
     headers:
+      new_product: "Novo Produto"
       listing_products: "Lista de Produtos"
       editing_product: "Editando Produto"
       listing_orders: "Listando Pedidos"
