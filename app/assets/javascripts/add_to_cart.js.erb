@@ -1,11 +1,8 @@
 jQuery.fn.extend({
   add_to_cart: function () {
     var DEBUG = false;
-
-    // makes sure it picks the item name
-    // instead of 'Select Product' in semantic framework
-    var itemName   = $('div.selected').text();
-
+    
+    var itemName   = $('#select2-items_id-container').text();
     var itemValue  = $('#item_value').val();
     var itemAmount = $('#item_amount').val();
     var itemTotal  = $('#item_total').val();

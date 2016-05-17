@@ -27,6 +27,18 @@ gem 'therubyracer'
 gem 'devise'
 # i18n
 gem 'rails-i18n', '~> 4.0.0'
+# select2: search inside select
+gem "select2-rails"
+# ransack: improved search bar
+gem 'ransack'
+# audited to store history changes
+gem "audited", "~> 4.0"
+# cocoon nested forms
+gem "cocoon"
+# paranoia: to destroy or not, relies the question
+gem "paranoia", "~> 2.0"
+# pundit generates authorization for users actions
+gem "pundit"
 
 #testing stuff
 group :development, :test do

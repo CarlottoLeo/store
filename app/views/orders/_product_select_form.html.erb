@@ -1,7 +1,7 @@
 <div class="four fields">
   <div class="field" id="item_info">
     <label><%= t('page.headers.product') %></label>
-    <%= select(:items, :id, Product.get_collection_for_select_tag, prompt: t('page.controllers.select_product'), required: true) %>
+    <%= select(:items, :id, Product.get_collection_for_select_tag, required: true) %>
   </div>
 
   <div class="field">
