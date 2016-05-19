@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   scope "(:locale)" , locale: LOCALES do
       resources  :orders, except: :edit
+      resources  :items
 
       resources :products do
         collection do

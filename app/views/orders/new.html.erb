@@ -7,7 +7,7 @@
   <div class="ui four fields">
     <div class="field">
       <label><%= t('messages.notice.totals') %></label>
-      <input type='text' id="cart_total" disabled>
+      <input type='text' id="cart_total" disabled value="0.00">
     </div>
   </div>
 </form>
@@ -15,7 +15,7 @@
 <%= render partial: 'layouts/animated_button', locals: {
   name:          t('page.controllers.submit'),
   icon_class:    "send icon",
-  clickCallback: "$(document).post_order();"
+  clickCallback: "$('#order-submit').submit_order();"
 } %>
 <%= render partial: 'layouts/animated_button', locals: {
   name:          t('page.controllers.back'),

@@ -16,3 +16,4 @@
 //= require_tree .
 //= require semantic_ui/semantic_ui
 //= require select2
+//= require cocoon

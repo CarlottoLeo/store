@@ -1,0 +1,34 @@
+<div class="four fields nested-fields">
+  <div class="field">
+    <label><%= t('page.headers.product') %></label>
+    <%= f.select(:id, Product.get_collection_for_select_tag, required: true, include_blank: true) %>
+  </div>
+
+  <div class="field">
+    <%= f.label t('page.headers.amount') %>
+    <%= f.number_field :amount %>
+  </div>
+
+  <div class="field">
+    <%= f.label t('table.headers.total_unit') %>
+    <%= f.text_field :value, disabled: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label t('messages.notice.totals') %>
+    <%= f.text_field :total, disabled: true %>
+  </div>
+
+  <div class="field">
+    <!-- hack zone start -->
+    <label class='hidden'>&nbsp</label>
+    <!-- hack zone end -->
+
+    <%= link_to_remove_association f do %>
+      <div class="ui vertical animated red button">
+        <div class="visible content"><i class="delete icon"></i></div>
+        <div class="hidden content"><%= t('page.controllers.destroy') %></div>
+      </div>
+    <% end %>
+  </div>
+</div>

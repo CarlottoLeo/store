@@ -1,28 +1,22 @@
-<%= form_for(@order, :html => {id: "order-form", class: "ui form"}, :remote => true) do |f| %>
-  <% if @order.errors.any? %>
+<%= form_for @order, html: {class: "ui form", id: "order-submit"} do |f| -%>
+  <% if @order.errors.any? -%>
     <div class="ui red negative message">
-      <h2><%= t('messages.errors.header') %></h2>
-      <% @order.errors.each do |msg| %>
+      <h2><%= t('messages.errors.header') -%></h2>
+      <% @order.errors.each do |msg| -%>
         <li>
           <%= msg %>
         </li>
-      <% end %>
+      <% end -%>
     </div>
-  <% end %>
+  <% end -%>
 
-  <%= render partial: 'product_select_form' %>
-
-  <table class="ui selectable inverted grey table" id="products-table">
-    <thead class="inverted black">
-      <tr>
-        <th><%= t('table.headers.name') %></th>
-        <th><%= t('table.headers.amount') %></th>
-        <th><%= t('table.headers.total_unit') %></th>
-        <th><%= t('messages.notice.totals') %></th>
-      </tr>
-    </thead>
-
-    <tbody>
-    </tbody>
-  </table>
-<% end %>
+  <%= f.fields_for :items, html: {class: "ui form"} do |item| -%>
+    <%= render partial: 'item_fields', locals: {f: item} %>
+  <% end -%>
+  <%= link_to_add_association f, :items do -%>
+    <div class="ui vertical animated green button" style="margin-top: 10px;">
+      <div class="visible content"><i class="add icon"></i></div>
+      <div class="hidden content"><%= t('page.controllers.add') -%></div>
+    </div>
+  <% end -%>
+<% end -%>

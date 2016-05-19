@@ -13,8 +13,8 @@ class OrdersController < ApplicationController
 
   # GET /orders/new
   def new
-    @order    = Order.new
-    @user     = current_user
+    @order = Order.new
+    @user  = current_user
   end
 
   # GET /orders/1/edit
@@ -73,8 +73,6 @@ class OrdersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
-      if params[:order]
-        params.require(:order).permit(:items => [:name, :amount, :value])
-      end
+      params.require(:order).permit(:items_attributes => [:id, :name, :amount, :value, :total, :done, :_destroy])
     end
 end
