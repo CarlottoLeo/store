@@ -1,6 +1,6 @@
 <% if @product.errors.any? %>
   <div class="ui red negative message">
-    <h1 class="ui header"><%= t('messages.errors.header') %></h1>
+    <h1 class="ui header"><%= t('messages.error.header') %></h1>
 
     <ul>
       <% @product.errors.full_messages.each do |message| %>

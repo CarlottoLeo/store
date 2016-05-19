@@ -1,57 +1,49 @@
-<% if current_user == @order.user %>
-  <h2 class="ui header"><%= t('page.headers.order') %> #<%= @order.id %></h2>
+<h2 class="ui header"><%= t('page.headers.order') %> #<%= @order.id %></h2>
 
-  <table class="ui table selectable inverted">
-    <thead>
+<table class="ui table selectable inverted">
+  <thead>
+    <tr>
+      <th><%= t('table.headers.product') %></th>
+      <th><%= t('table.headers.value') %></th>
+      <th><%= t('table.headers.amount') %></th>
+      <th><%= t('table.headers.total') %></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @order.items.each do |v| %>
+      <% prod = Product.find(v.prodid) %>
       <tr>
-        <th><%= t('table.headers.product') %></th>
-        <th><%= t('table.headers.value') %></th>
-        <th><%= t('table.headers.amount') %></th>
-        <th><%= t('table.headers.total') %></th>
+        <td><%= prod.name %></td>
+        <td><%= convert_number_to_money prod.value %></td>
+        <td><%= number_with_delimiter v.amount, :delimiter => "," %></td>
+        <td><%= convert_number_to_money prod.value * v.amount %></td>
       </tr>
-    </thead>
+    <% end %>
+  </tbody>
+</table>
 
-    <tbody>
-      <% @order.items.each do |v| %>
-        <% prod = Product.find(v.prodid) %>
-        <tr>
-          <td><%= prod.name %></td>
-          <td><%= convert_number_to_money prod.value %></td>
-          <td><%= number_with_delimiter v.amount, :delimiter => "," %></td>
-          <td><%= convert_number_to_money prod.value * v.amount %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+<h2 class="ui header"><%= t('messages.notice.totals') %> <%= convert_number_to_money @order.total_value %></h2>
 
-  <h2 class="ui header"><%= t('messages.notice.totals') %> <%= convert_number_to_money @order.total_value %></h2>
+<hr>
 
-  <hr>
+<%= render partial: 'layouts/animated_button', locals: {
+  name:          t('page.controllers.back'),
+  icon_class:    "reply icon",
+  clickCallback: "window.location.href = '#{orders_path}'"
+} %>
 
-  <%= render partial: 'layouts/animated_button', locals: {
-    name:          t('page.controllers.back'),
-    icon_class:    "reply icon",
-    clickCallback: "window.location.href = '#{orders_path}'"
-  } %>
-
-  <%= render partial: 'layouts/animated_button', locals: {
-    name:          t('page.controllers.destroy'),
-    icon_class:    "delete icon",
-    clickCallback: "$.ajax({
-      type: 'DELETE',
-      url: window.location,
-      success: function() {
-        window.location.href = '#{orders_path}';
-      },
-      error: function() {
-        window.location.href = '#{orders_path}';
-      }
-    })"
-  } %>
-<% else %>
-  <div class="ui red negative message">
-    <h2><%= t('messages.error.header') %></h2>
-    <ul>
-      <li><%= t('messages.error.order_dont_belong_to_user') %></li>
-    </ul>
-<% end %>
+<%= render partial: 'layouts/animated_button', locals: {
+  name:          t('page.controllers.destroy'),
+  icon_class:    "delete icon",
+  clickCallback: "$.ajax({
+    type: 'DELETE',
+    url: window.location,
+    success: function() {
+      window.location.href = '#{orders_path}';
+    },
+    error: function() {
+      window.location.href = '#{orders_path}';
+    }
+  })"
+} %>

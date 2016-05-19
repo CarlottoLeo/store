@@ -9,7 +9,7 @@ class OrderPolicy < ApplicationPolicy
   end
 
   def destroy?
-    (create? && user.id == @order.user_id) || user.is_admin?
+    (create? && user.id == @order.user_id)
   end
 
   def show?

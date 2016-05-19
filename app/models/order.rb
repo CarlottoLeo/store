@@ -27,9 +27,15 @@ class Order < ActiveRecord::Base
               total:  prod.value * product[:amount].to_i
             })
 
-            p item
+            pos = order.items.find_index { |i| i.prodid == item.prodid }
 
-            order.items.push(item)
+            if pos.nil?
+              order.items.push item
+            else
+              order.items[pos][:amount] += item.amount
+              order.items[pos][:total]  = order.items[pos][:amount] * item.value
+            end
+
             order.total_value += item.total
           end
         end

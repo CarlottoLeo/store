@@ -9,6 +9,7 @@ class OrdersController < ApplicationController
 
   # GET /orders/1
   def show
+    authorize @order
   end
 
   # GET /orders/new
