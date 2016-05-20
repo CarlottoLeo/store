@@ -36,6 +36,7 @@ pt-BR:
       remember_me: "Permanecer Logado"
       amount: "Quantidade"
       product: "Produto"
+      product_changelog: "Histórico de Alterações"
 
   table:
     headers:
@@ -65,3 +66,5 @@ pt-BR:
       order_create_success: "Pedido criado com sucesso."
       order_update_success: "Pedido atualizado com sucesso."
       order_remove_success: "Pedido removido com sucesso."
+      audited_value_change: 'Alterado valor de %{from} para %{to}.'
+      audited_name_change:  'Alterado nome de "%{from}" para "%{to}".'

@@ -1,14 +1,8 @@
 class Item < ActiveRecord::Base
   belongs_to :order
+  before_save :calcula_total
 
-  def new(params)
-    Item.create do |item|
-      item.prodid = params[:prodid]
-      item.amount = params[:amount]
-      item.value  = params[:value]
-      item.total  = item.value * item.amount
-
-      item.save
-    end
+  def calcula_total
+    self.total = self.value * self.amount
   end
 end

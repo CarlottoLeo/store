@@ -36,6 +36,7 @@ en:
       remember_me: "Remain Logged"
       amount: "Amount"
       product: "Product"
+      product_changelog: "Changes History"
 
   table:
     headers:
@@ -64,3 +65,5 @@ en:
       order_create_success: "The order has been successfully created."
       order_update_success: "The order has been successfully updated."
       order_remove_success: "The order has been successfully removed."
+      audited_value_change: 'Value changed from %{from} to %{to}.'
+      audited_name_change:  'Name changed from "%{from}" to "%{to}".'

@@ -13,7 +13,7 @@
   <%= f.fields_for :items, html: {class: "ui form"} do |item| -%>
     <%= render partial: 'item_fields', locals: {f: item} %>
   <% end -%>
-  <%= link_to_add_association f, :items do -%>
+  <%= link_to_add_association f, :items, id: "add-nested-field" do -%>
     <div class="ui vertical animated green button" style="margin-top: 10px;">
       <div class="visible content"><i class="add icon"></i></div>
       <div class="hidden content"><%= t('page.controllers.add') -%></div>

@@ -2,7 +2,7 @@ class Order < ActiveRecord::Base
   has_many :items
   belongs_to :user
 
-  scope :filter_by_user, ->(id) {where('user_id == ?', id)}
+  scope :filter_by_user, ->(id) {where(:user_id == :id)}
 
   audited
 
@@ -20,11 +20,11 @@ class Order < ActiveRecord::Base
           prod = Product.find_by_id(product[:id].to_i)
 
           unless (prod.nil?)
-            item = Item.new({
+            item = Item.create({
               prodid: prod.id,
               amount: product[:amount],
-              value:  prod.value,
-              total:  prod.value * product[:amount].to_i
+              value:  prod.value
+              #total:  prod.value * product[:amount].to_i
             })
 
             pos = order.items.find_index { |i| i.prodid == item.prodid }

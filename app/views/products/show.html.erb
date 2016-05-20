@@ -1,14 +1,47 @@
 <div class="container segments">
   <div class="container segment">
-  <h2 class='ui header'>
-    <%= t('table.headers.name') %>: <%= @product.name %>
-  </h2>
-  <h2 class='ui header'>
-    <%= t('table.headers.value') %>: <%= convert_number_to_money @product.value %>
-  </h2>
+    <form class="ui form">
+      <div class="four fields">
+        <div class="field">
+          <label><%= t('table.headers.name') %></label>
+          <input value="<%= @product.name %>" disabled>
+        </div>
+
+        <div class="field">
+          <label><%= t('table.headers.value') %></label>
+          <input value="<%= convert_number_to_money @product.value %>" disabled>
+        </div>
+      </div>
+    </form>
   </div>
 
   <hr>
+
+  <% if @product.audits.count > 1 -%>
+    <div class="container segment">
+      <h5><i class="icon edit"></i><%= t('page.headers.product_changelog') %></h5>
+
+      <div class="ui celled list">
+        <% @product.audits.each do |v| -%>
+          <% if v.action == 'update' %>
+            <% v.audited_changes.each do |key, val| %>
+              <div class="item">
+                [<%= v.created_at %>]
+
+                <% if key == 'value' %>
+                  <%= t('messages.notice.audited_value_change', from: convert_number_to_money(val[0]), to: convert_number_to_money(val[1])) %>
+                <% elsif key == 'name' %>
+                  <%= t('messages.notice.audited_name_change', from: val[0], to: val[1]) %>
+                <% end %>
+              </div>
+            <% end %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+
+    <hr>
+  <% end -%>
 
   <div class="container segment">
     <%= render partial: 'layouts/animated_button', locals: {
