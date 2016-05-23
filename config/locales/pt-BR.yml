@@ -1,6 +1,11 @@
 # encoding: UTF-8
 
 pt-BR:
+  activerecord:
+    attributes:
+      product:
+        name: "Nome"
+        value: "Valor"
   currency:
     unit: "R$ "
 

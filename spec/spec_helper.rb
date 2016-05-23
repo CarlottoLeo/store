@@ -17,8 +17,11 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 require "capybara/rspec"
+require "capybara/poltergeist"
 
-Capybara.default_driver = :webkit
+running_partial_tests = true
+
+Capybara.javascript_driver = :poltergeist
 
 RSpec.configure do |config|
   config.include Capybara::DSL
@@ -47,6 +50,41 @@ RSpec.configure do |config|
     # a real object. This is generally recommended, and will default to
     # `true` in RSpec 4.
     mocks.verify_partial_doubles = true
+
+    config.before(:suite) do
+      unless running_partial_tests
+        DatabaseCleaner.clean_with(:deletion)
+
+        begin
+          DatabaseCleaner.start
+
+          FactoryGirl.lint
+        ensure
+          DatabaseCleaner.clean
+        end
+      end
+    end
+  end
+
+  config.before(:each) do |example|
+    # Aqui o ideal seria termos dois blocos de config, um passando js: true e outro js: false.
+    # Porém, ao passar js: false, este nunca é executado. Então precisamos acessar diretamente
+    # o metadata do exemplo corrente.
+    # Definimos estratégia :deletion em testes JS pois nestes casos os testes (client) rodam
+    # em uma conexão de banco diferente de onde roda o servidor, sendo necessário acessar dados
+    # commitados.
+    if example.metadata[:js]
+      DatabaseCleaner.strategy = :truncation
+    else
+      DatabaseCleaner.strategy = :transaction
+    end
+
+    DatabaseCleaner.start
+  end
+
+  config.after(:each) do |example|
+    #wait_for_ajax if example.metadata[:type] == :feature && example.metadata[:js]
+    DatabaseCleaner.clean
   end
 
 # The settings below are suggested to provide a good initial experience
