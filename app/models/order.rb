@@ -2,7 +2,7 @@ class Order < ActiveRecord::Base
   has_many :items
   belongs_to :user
 
-  scope :filter_by_user, ->(id) {where(:user_id == :id)}
+  scope :filter_by_user, ->(id) {where('user_id = ?', id)}
 
   audited
 
