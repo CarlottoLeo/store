@@ -9,9 +9,9 @@ module DeviseHelper
                       :resource => resource.class.model_name.human.downcase)
 
     html = <<-HTML
-    <div class="ui red negative message">
-      <h2>#{t('messages.error.header')}</h2>
-      <ul>#{messages}</ul>
+    <div class="alert alert-danger" role="alert">
+      <h4>#{t('messages.error.header')}</h4>
+      <p>#{messages}</p>
     </div>
     HTML
 

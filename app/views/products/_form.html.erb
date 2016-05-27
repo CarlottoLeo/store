@@ -1,48 +1,34 @@
-<% if @product.errors.any? %>
-  <div class="ui red negative message">
-    <h1 class="ui header"><%= t('messages.error.header') %></h1>
+<div class="col-md-4 col-md-offset-4">
+  <% if @product.errors.any? %>
+    <div class="alert alert-danger">
+      <h1 class="ui header"><%= t('messages.error.header') %></h1>
 
-    <ul>
-      <% @product.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-    </ul>
-  </div>
-<% end %>
-
-<%= form_for @product, :html => {:id => "product-form", :class => "ui form"} do |f| %>
-  <div class="three fields">
-      <div class="field">
-        <%= f.label        :name, t('table.headers.name') %>
-        <%= f.text_field   :name %>
-      </div>
-  </div>
-  <div class="three fields">
-      <div class="field">
-        <%= f.label        :value, t('table.headers.value') %>
-        <%= f.number_field :value, :step => "0.10", :min => "0.01" %>
-      </div>
-  </div>
-
-  <%= f.submit :class => "hidden" %>
-
-  <%= render partial: 'layouts/animated_button', locals: {
-    name:          t('page.controllers.submit'),
-    icon_class:    "send icon",
-    clickCallback: "$('#product-form').submit();"
-  } %>
-
-  <% if @product.created_at %>
-    <%= render partial: 'layouts/animated_button', locals: {
-      name:          t('page.controllers.show'),
-      icon_class:    "open folder icon",
-      clickCallback: "window.location.href = '/products/#{@product.id}'",
-    } %>
+      <ul>
+        <% @product.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
   <% end %>
 
-  <%= render partial: 'layouts/animated_button', locals: {
-    name:            t('page.controllers.back'),
-    icon_class:      "reply icon",
-    clickCallback:   "window.location.href = '/'",
-  } %>
-<% end %>
+  <%= form_for @product do |f| %>
+    <div class="form-field">
+      <%= f.label        :name, t('table.headers.name') %>
+      <%= f.text_field   :name, class: "form-control" %>
+    </div>
+    <div class="form-field">
+      <%= f.label        :value, t('table.headers.value') %>
+      <%= f.number_field :value, :step => "0.10", :min => "0.01", class: "form-control" %>
+    </div>
+
+    <div class="form-field" style="margin-top: 10px">
+      <%= f.submit class: "btn btn-primary" -%>
+
+      <% if @product.created_at %>
+        <%= link_to t('page.controllers.show'), product_path(@product), class: "btn btn-default" -%>
+      <% end %>
+
+      <%= link_to t('page.controllers.back'), root_path, class: "btn btn-default" %>
+    </div>
+  <% end %>
+</div>

@@ -18,9 +18,10 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
-# Semantic UI assets
-gem 'less-rails-semantic_ui'
-gem 'autoprefixer-rails'
+# less
+gem 'less-rails'
+# bootstrap 
+gem "twitter-bootstrap-rails"
 # less for stylesheets
 gem 'therubyracer'
 # devise for user authentication

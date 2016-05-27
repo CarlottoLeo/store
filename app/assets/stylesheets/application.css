@@ -1,0 +1,30 @@
+/*
+ * This is a manifest file that'll automatically include all the stylesheets available in this directory
+ * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
+ * the top of the compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require_self
+ *= require_tree .
+ *= require select2
+*/
+
+/* hide input buttons to make space for animated buttons */
+input.hidden {
+  display: none !important;
+}
+
+.select2-selection, .select2-selection--single, .select2-selection__rendered {
+  height: 37px !important;
+}
+
+.select2-container--default, .select2-selection--single, .select2-selection__rendered {
+  line-height: 35px !important;
+}
+
+.select2-selection__arrow  {
+  height: 35px !important;
+}
+
+#application-container {
+  margin-top: 150px;
+}

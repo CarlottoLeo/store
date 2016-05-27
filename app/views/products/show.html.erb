@@ -1,59 +1,42 @@
-<div class="container segments">
-  <div class="container segment">
-    <form class="ui form">
-      <div class="four fields">
-        <div class="field">
-          <label><%= t('table.headers.name') %></label>
-          <input value="<%= @product.name %>" disabled>
-        </div>
+<div class="cold-md-offset-4 col-md-4">
+  <form>
+    <div class="form-field">
+      <label><%= t('table.headers.name') %></label>
+      <input value="<%= @product.name %>" disabled class="form-control">
+    </div>
 
-        <div class="field">
-          <label><%= t('table.headers.value') %></label>
-          <input value="<%= convert_number_to_money @product.value %>" disabled>
-        </div>
-      </div>
-    </form>
-  </div>
+    <div class="form-field">
+      <label><%= t('table.headers.value') %></label>
+      <input value="<%= convert_number_to_money @product.value %>" disabled class="form-control">
+    </div>
+  </form>
 
   <hr>
 
   <% if @product.audits.count > 1 -%>
-    <div class="container segment">
-      <h5><i class="icon edit"></i><%= t('page.headers.product_changelog') %></h5>
+    <h5><i class="fa fa-pencil-square-o"></i><%= t('page.headers.product_changelog') %></h5>
 
-      <div class="ui celled list">
-        <% @product.audits.each do |v| -%>
-          <% if v.action == 'update' %>
-            <% v.audited_changes.each do |key, val| %>
-              <div class="item">
-                [<%= v.created_at %>]
+    <% @product.audits.each do |v| %>
+      <% if v.action == 'update' %>
+        <% v.audited_changes.each do |key, val| %>
+          <div class="row">
+            [<%= v.created_at %>]
 
-                <% if key == 'value' %>
-                  <%= t('messages.notice.audited_value_change', from: convert_number_to_money(val[0]), to: convert_number_to_money(val[1])) %>
-                <% elsif key == 'name' %>
-                  <%= t('messages.notice.audited_name_change', from: val[0], to: val[1]) %>
-                <% end %>
-              </div>
+            <% if key == 'value' %>
+              <%= t('messages.notice.audited_value_change', from: convert_number_to_money(val[0]), to: convert_number_to_money(val[1])) %>
+            <% elsif key == 'name' %>
+              <%= t('messages.notice.audited_name_change', from: val[0], to: val[1]) %>
             <% end %>
-          <% end %>
+          </div>
         <% end %>
-      </div>
-    </div>
+      <% end %>
+    <% end %>
 
     <hr>
   <% end -%>
 
-  <div class="container segment">
-    <%= render partial: 'layouts/animated_button', locals: {
-      name:          t('page.controllers.edit'),
-      icon_class:    "write icon",
-      clickCallback: "window.location.href = '/products/#{@product.id}/edit'"
-    } %>
-
-    <%= render partial: 'layouts/animated_button', locals: {
-      name:          t('page.controllers.back'),
-      icon_class:    "reply icon",
-      clickCallback: "window.location.href = '/'"
-    } %>
+  <div class="form-field">
+    <%= link_to t('page.controllers.edit'), edit_product_path(@product), class: "btn btn-default" %>
+    <%= link_to t('page.controllers.back'), root_path, class: "btn btn-default" %>
   </div>
 </div>

@@ -1,14 +1,9 @@
-<h1><%= t('page.headers.listing_products') %></h1>
+<div class="col-md-offset-2 col-md-8">
+  <h1><%= t('page.headers.listing_products') %></h1>
 
-<%= render partial: 'list_products', locals: {products: @products} %>
+  <%= render partial: 'list_products', locals: {products: @products} %>
 
-<hr>
+  <hr>
 
-<%= render partial: 'button',
-    locals:  {
-      name: t('page.controllers.new'),
-      button_path: new_product_path,
-      icon_class: "inverted white plus icon",
-      method: :get
-    }
-%>
+  <%= button_to t('page.controllers.new'), new_product_path, class: "btn btn-primary" %>
+</div>
