@@ -26,6 +26,7 @@ en:
       new_product: "New Product"
       listing_products: "Products List"
       editing_product: "Edit Product"
+      showing_product: "Showing Product"
       listing_orders: "Orders List"
       new_order: "New Order"
       order: "Order"
@@ -67,3 +68,7 @@ en:
       order_remove_success: "The order has been successfully removed."
       audited_value_change: 'Value changed from %{from} to %{to}.'
       audited_name_change:  'Name changed from "%{from}" to "%{to}".'
+
+  cocoon:
+    defaults:
+      remove: "x"

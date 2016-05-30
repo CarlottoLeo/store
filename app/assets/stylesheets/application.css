@@ -9,16 +9,17 @@
 */
 
 /* hide input buttons to make space for animated buttons */
-input.hidden {
+.hidden {
   display: none !important;
 }
 
 .select2-selection, .select2-selection--single, .select2-selection__rendered {
-  height: 37px !important;
+  height: 35px !important;
 }
 
 .select2-container--default, .select2-selection--single, .select2-selection__rendered {
   line-height: 35px !important;
+  width: inherit !important;
 }
 
 .select2-selection__arrow  {
@@ -27,4 +28,19 @@ input.hidden {
 
 #application-container {
   margin-top: 150px;
+}
+
+#nested-forms-box {
+  overflow: auto;
+  overflow-x: hidden;
+  max-height: 175px;
+  height: 175px;
+}
+
+#nested-field-div:hover {
+  /*background-color: #e6e6e6;*/
+}
+
+td > a {
+  text-decoration: none !important;
 }

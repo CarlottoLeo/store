@@ -1,24 +1,42 @@
 <h1><%= t('page.headers.new_order') %></h1>
 
-<%= render 'form' %>
+<%= form_for @order, html: {class: "form-inline", id: "order-form"} do |f| -%>
+  <% if @order.errors.any? -%>
+    <div class="alert alert-danger">
+      <h2><%= t('messages.errors.header') -%></h2>
+      <% @order.errors.each do |msg| -%>
+        <li>
+          <%= msg %>
+        </li>
+      <% end -%>
+    </div>
+  <% end -%>
 
-<hr>
-<form class="ui form">
-  <div class="ui four fields">
-    <div class="field">
-      <label><%= t('messages.notice.totals') %></label>
-      <input type='text' id="cart_total" disabled value="0.00">
+  <div id="nested-forms-box">
+    <%= f.fields_for :items do |item| -%>
+      <%= render 'item_fields', locals: {f: item} %>
+    <% end -%>
+  </div>
+
+  <%= link_to_add_association f, :items, id: "add-nested-field" do -%>
+    <button class="btn btn-success" style="margin-top: 20px"><%= t('page.controllers.add') %></button>
+  <% end -%>
+
+  <hr>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <label><%= t('messages.notice.totals') %></label>
+        <input type='text' id="cart_total" disabled value="0.00", class="form-control">
+      </div>
     </div>
   </div>
-</form>
-<hr>
-<%= render partial: 'layouts/animated_button', locals: {
-  name:          t('page.controllers.submit'),
-  icon_class:    "send icon",
-  clickCallback: "$('#order-submit').submit_order();"
-} %>
-<%= render partial: 'layouts/animated_button', locals: {
-  name:          t('page.controllers.back'),
-  icon_class:    "reply icon",
-  clickCallback: "window.location.href = '#{orders_path}'"
-} %>
+
+  <div class="row">
+    <div class="col-md-4" style="margin-top: 10px">
+      <button class="btn btn-primary" onclick="$('#order-form').submit_order();"><%= t('page.controllers.submit') %></button>
+      <%= link_to t('page.controllers.back'), orders_path, class: "btn btn-default" %>
+    </div>
+  </div>
+  <hr>
+<% end -%>

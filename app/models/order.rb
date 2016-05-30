@@ -15,6 +15,8 @@ class Order < ActiveRecord::Base
       order.name = "Order #{order.id}"
       order.total_value = 0
 
+      p order_params
+
       if order_params[:items_attributes]
         order_params[:items_attributes].each do |_, product|
           prod = Product.find_by_id(product[:id].to_i)
@@ -24,7 +26,6 @@ class Order < ActiveRecord::Base
               prodid: prod.id,
               amount: product[:amount],
               value:  prod.value
-              #total:  prod.value * product[:amount].to_i
             })
 
             pos = order.items.find_index { |i| i.prodid == item.prodid }

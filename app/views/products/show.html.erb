@@ -1,4 +1,6 @@
-<div class="cold-md-offset-4 col-md-4">
+<div class="col-md-offset-4 col-md-4">
+  <h1><%= t('page.headers.showing_product') %></h2>
+
   <form>
     <div class="form-field">
       <label><%= t('table.headers.name') %></label>
@@ -14,20 +16,18 @@
   <hr>
 
   <% if @product.audits.count > 1 -%>
-    <h5><i class="fa fa-pencil-square-o"></i><%= t('page.headers.product_changelog') %></h5>
+    <h5><i class="fa fa-pencil-square-o"></i> <%= t('page.headers.product_changelog') %></h5>
 
     <% @product.audits.each do |v| %>
       <% if v.action == 'update' %>
         <% v.audited_changes.each do |key, val| %>
-          <div class="row">
-            [<%= v.created_at %>]
+          [<%= v.created_at.to_formatted_s(:short) %>]
 
-            <% if key == 'value' %>
-              <%= t('messages.notice.audited_value_change', from: convert_number_to_money(val[0]), to: convert_number_to_money(val[1])) %>
-            <% elsif key == 'name' %>
-              <%= t('messages.notice.audited_name_change', from: val[0], to: val[1]) %>
-            <% end %>
-          </div>
+          <% if key == 'value' %>
+            <%= t('messages.notice.audited_value_change', from: convert_number_to_money(val[0]), to: convert_number_to_money(val[1])) %>
+          <% elsif key == 'name' %>
+            <%= t('messages.notice.audited_name_change', from: val[0], to: val[1]) %>
+          <% end %></br>
         <% end %>
       <% end %>
     <% end %>
@@ -36,7 +36,7 @@
   <% end -%>
 
   <div class="form-field">
-    <%= link_to t('page.controllers.edit'), edit_product_path(@product), class: "btn btn-default" %>
+    <%= link_to t('page.controllers.edit'), edit_product_path(@product), class: "btn btn-warning" %>
     <%= link_to t('page.controllers.back'), root_path, class: "btn btn-default" %>
   </div>
 </div>

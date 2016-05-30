@@ -29,8 +29,4 @@
 
 <hr>
 
-<%= render partial: 'layouts/animated_button', locals: {
-  name:          t('page.controllers.new'),
-  icon_class:    "add icon",
-  clickCallback: "window.location.href = '#{new_order_path}'"
-} %>
+<%= link_to t('page.controllers.add'), new_order_path, method: :get, class: "btn btn-primary" %>
