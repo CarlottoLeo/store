@@ -29,5 +29,5 @@
   <hr>
 
   <%= link_to t('page.controllers.back'), orders_path, class: "btn btn-default" %>
-  <%= link_to t('page.controllers.destroy'), order_path(:order), method: :delete, class: "btn btn-danger" %>
+  <%= link_to t('page.controllers.destroy'), order_path(@order), method: :delete, class: "btn btn-danger" %>
 </div>

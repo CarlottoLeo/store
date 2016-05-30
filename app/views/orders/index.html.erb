@@ -1,32 +1,34 @@
-<h1><%= t('page.headers.listing_orders') %></h1>
+<div class="col-md-offset-2 col-md-8">
+  <h1><%= t('page.headers.listing_orders') %></h1>
 
-<table class="ui table selectable inverted">
-  <thead>
-    <tr>
-      <th><%= t('table.headers.order_number') %></th>
-      <th><%= t('table.headers.value') %></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @orders.each do |order| %>
+  <table class="ui table selectable inverted">
+    <thead>
       <tr>
-        <td>
-          <%= link_to order do %>
-            <div><%= order.id %></div>
-          <% end %>
-        </td>
-
-        <td>
-          <%= link_to order do %>
-            <div><%= convert_number_to_money order.total_value %></div>
-          <% end %>
-        </td>
+        <th><%= t('table.headers.order_number') %></th>
+        <th><%= t('table.headers.value') %></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
-<hr>
+    <tbody>
+      <% @orders.each do |order| %>
+        <tr>
+          <td>
+            <%= link_to order do %>
+              <div><%= order.id %></div>
+            <% end %>
+          </td>
 
-<%= link_to t('page.controllers.add'), new_order_path, method: :get, class: "btn btn-primary" %>
+          <td>
+            <%= link_to order do %>
+              <div><%= convert_number_to_money order.total_value %></div>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <hr>
+
+  <%= link_to t('page.controllers.add'), new_order_path, method: :get, class: "btn btn-primary" %>
+</div>
