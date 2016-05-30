@@ -1,6 +1,23 @@
 # encoding: UTF-8
 
 en:
+  ransack:
+    search: "Pesquisar"
+
+  activerecord:
+    attributes:
+      product:
+        model_name: "Product"
+        name: "Name"
+        value: "Value"
+    models:
+      product:
+        one: "Product"
+        other: "Products"
+      order:
+        one: "Order"
+        other: "Orders"
+
   currency:
     unit: "$ "
 
@@ -59,6 +76,7 @@ en:
 
     notice:
       totals: "Total:"
+      total_unit: "Unit Value:"
       min_chars: 'Minimum of %{min} characters.'
       product_update_success: "The product has been successfully updated."
       product_remove_success: "The product has been successfully deleted."

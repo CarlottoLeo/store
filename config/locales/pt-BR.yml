@@ -1,11 +1,23 @@
 # encoding: UTF-8
 
 pt-BR:
+  ransack:
+    search: "Pesquisar"
+
   activerecord:
     attributes:
       product:
+        model_name: "Produto"
         name: "Nome"
         value: "Valor"
+    models:
+      product:
+        one: "Produto"
+        other: "Produtos"
+      order:
+        one: "Pedido"
+        other: "Pedidos"
+
   currency:
     unit: "R$ "
 
