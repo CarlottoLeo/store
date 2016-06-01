@@ -10,6 +10,10 @@ pt-BR:
         model_name: "Produto"
         name: "Nome"
         value: "Valor"
+      person:
+        model_name: "Cliente"
+        name: "Nome"
+        cpf: "CPF"
     models:
       product:
         one: "Produto"
@@ -17,6 +21,9 @@ pt-BR:
       order:
         one: "Pedido"
         other: "Pedidos"
+      person:
+        one: "Cliente"
+        other: "Clientes"
 
   currency:
     unit: "R$ "
@@ -37,7 +44,8 @@ pt-BR:
       submit: "Enviar"
       new: "Novo"
       select_product: "Selecione um produto"
-
+      create_order: "Criar Pedido"
+      
     headers:
       order_client: "Cliente"
       people: "Clientes"
@@ -58,6 +66,7 @@ pt-BR:
       amount: "Quantidade"
       product: "Produto"
       product_changelog: "Histórico de Alterações"
+      new_people: "Novo Cliente"
       edit_people: "Editar Cliente"
       show_people: "Visualizar Cliente"
   table:
@@ -74,7 +83,7 @@ pt-BR:
 
   messages:
     error:
-      header: "Oops, parece que houve um problema na requisição:"
+      header: "Oops, parece que houve algum problema."
       order_dont_belong_to_user: "Você não tem permissão para ver este pedido."
       order_create_empty_cart: "O pedido não pode estar vazio."
       order_record_not_found: "O pedido não existe ou não pode ser encontrado."
@@ -91,6 +100,10 @@ pt-BR:
       order_remove_success: "Pedido removido com sucesso."
       audited_value_change: 'Alterado valor de %{from} para %{to}.'
       audited_name_change:  'Alterado nome de "%{from}" para "%{to}".'
+    searchbox:
+      search_people: "Procurar clientes..."
+      search_products: "Procurar produtos..."
+      search_orders: "Procurar pedidos..."
 
   cocoon:
     defaults:

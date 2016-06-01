@@ -1,39 +1,44 @@
 <%= form_for @person, :html => { :class => "form-horizontal person" } do |f| %>
 
   <% if @person.errors.any? %>
-    <div id="error_expl" class="panel panel-danger">
-      <div class="panel-heading">
-        <h3 class="panel-title"><%= t("messages.error.header") %></h3>
-      </div>
-      <div class="panel-body">
-        <ul>
-        <% @person.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-        </ul>
-      </div>
-    </div>
+  <div class="alert alert-danger">
+    <h4 class="ui header"><%= t("messages.error.header") %></h4>
+
+    <ul>
+      <% @person.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
   <% end %>
 
   <div class="form-group">
     <%= f.label :name, :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
-      <%= f.text_field :name, :class => 'form-control' %>
+      <% if params[:action] == 'show' %>
+        <%= f.text_field :name, :class => 'form-control', disabled: true %>
+      <% else %>
+        <%= f.text_field :name, :class => 'form-control' %>
+      <% end %>
     </div>
   </div>
   <div class="form-group">
-    <%= f.label :cpf, :class => 'control-label col-lg-2' %>
+    <label class='control-label col-lg-2'>CPF</label>
     <div class="col-lg-10">
-      <%= f.text_field :cpf, :class => 'form-control' %>
+      <% if params[:action] == 'show' %>
+        <%= f.text_field :cpf, :class => 'form-control', disabled: true %>
+      <% else %>
+        <%= f.text_field :cpf, :class => 'form-control' %>
+      <% end %>
     </div>
   </div>
 
-  <div class="form-group">
-    <div class="col-lg-offset-2 col-lg-10">
-      <%= f.submit nil, :class => 'btn btn-primary' %>
-      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                people_path, :class => 'btn btn-default' %>
+  <% if params[:action] != 'show' %>
+    <div class="form-group">
+      <div class="col-lg-offset-2 col-lg-10">
+        <%= f.submit nil, :class => 'btn btn-primary' %>
+        <%= link_to t('.cancel', :default => t("helpers.links.cancel")), people_path, :class => 'btn btn-default' %>
+      </div>
     </div>
-  </div>
-
+  <% end %>
 <% end %>

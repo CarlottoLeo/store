@@ -1,7 +1,7 @@
 <div class="col-md-offset-2 col-md-8">
   <%= search_form_for @q do |f| -%>
     <div class="form-group form-inline">
-      <%= f.search_field :person_name_or_person_cpf_cont, class: "form-control", placeholder: "Search by Client or CPF" -%>
+      <%= f.search_field :person_name_or_person_cpf_cont, {class: "form-control", placeholder: t('messages.searchbox.search_orders')} -%>
       <%= f.submit class: "btn btn-default" -%>
     </div>
   <% end %>
@@ -11,8 +11,9 @@
     <thead>
       <tr>
         <th width="20%"><%= t('table.headers.order_number') %></th>
-        <th width="40%"><%= t('table.headers.order_client') %></th>
-        <th><%= t('table.headers.value') %></th>
+        <th width="25%"><%= t('table.headers.order_client') %></th>
+        <th width="25%"><%= t('table.headers.value') %></th>
+        <th width="30%"><%= t('table.headers.options') %></th>
       </tr>
     </thead>
   </table>
@@ -28,16 +29,20 @@
               <% end %>
             </td>
 
-            <td width="40%">
+            <td width="25%">
               <%= link_to order do %>
                 <div><%= order.person.name %></div>
               <% end %>
             </td>
 
-            <td>
+            <td width="25%">
               <%= link_to order do %>
                 <div><%= convert_number_to_money order.total_value %></div>
               <% end %>
+            </td>
+
+            <td width="30%">
+              <%= link_to t('page.controllers.destroy'), order_path(order), method: :delete, class: "btn btn-xs btn-danger" %>
             </td>
           </tr>
         <% end %>

@@ -9,13 +9,16 @@
 <body>
   <%= nav_bar brand: 'Store', brand_link: root_path, fixed: :top, responsive: true do %>
     <%= menu_group do %>
-      <%= menu_item t('page.headers.people'), people_path %>
-      <%= menu_item t('page.headers.products'), products_path %>
+      <% if user_signed_in? %>
+        <%= menu_item t('page.headers.people'), people_path %>
+        <%= menu_item t('page.headers.products'), products_path %>
+        <%= menu_divider %>
+        <%= menu_item t('page.headers.orders'), orders_path %>
+      <% end %>
     <% end %>
 
     <%= menu_group pull: :right do %>
       <% if user_signed_in? %>
-        <%= menu_item t('page.headers.orders'), orders_path %>
         <%= menu_item t('page.controllers.log_out'), destroy_user_session_path, method: :delete %>
       <% else %>
         <%= menu_item t('page.controllers.sign_up'), new_registration_path(:user) %>
