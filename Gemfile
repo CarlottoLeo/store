@@ -20,7 +20,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 # less
 gem 'less-rails'
-# bootstrap 
+# bootstrap
 gem "twitter-bootstrap-rails"
 # less for stylesheets
 gem 'therubyracer'
@@ -42,9 +42,13 @@ gem "paranoia", "~> 2.0"
 gem "pundit"
 # postgresql
 gem "pg"
+# cpf validator
+gem 'validates_cpf_cnpj'
 
 #testing stuff
 group :development, :test do
+  # cpf generator
+  gem 'cpf_cnpj'
   gem 'byebug'
   gem 'rspec-rails'
   gem 'factory_girl_rails'

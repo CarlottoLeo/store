@@ -1,8 +1,0 @@
-<% button_group.each do |f| %>
-  <%= render partial: 'products/button', locals: {
-    name:          f[:name],
-    button_path:   f[:path],
-    icon_class:    f[:class],
-    method:        f[:method]
-  } %>
-<% end %>

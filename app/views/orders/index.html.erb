@@ -1,34 +1,49 @@
 <div class="col-md-offset-2 col-md-8">
+  <%= search_form_for @q do |f| -%>
+    <div class="form-group form-inline">
+      <%= f.search_field :person_name_or_person_cpf_cont, class: "form-control", placeholder: "Search by Client or CPF" -%>
+      <%= f.submit class: "btn btn-default" -%>
+    </div>
+  <% end %>
   <h1><%= t('page.headers.listing_orders') %></h1>
 
-  <table class="table table-striped table-hover">
+  <table class="table">
     <thead>
       <tr>
-        <th><%= t('table.headers.order_number') %></th>
+        <th width="20%"><%= t('table.headers.order_number') %></th>
+        <th width="40%"><%= t('table.headers.order_client') %></th>
         <th><%= t('table.headers.value') %></th>
       </tr>
     </thead>
-
-    <tbody>
-      <% @orders.each do |order| %>
-        <tr>
-          <td>
-            <%= link_to order do %>
-              <div><%= order.id %></div>
-            <% end %>
-          </td>
-
-          <td>
-            <%= link_to order do %>
-              <div><%= convert_number_to_money order.total_value %></div>
-            <% end %>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
   </table>
 
-  <hr>
+  <div style="overflow: auto; overflow-x: hidden; max-height: 200px; height: 200px;">
+    <table class="table">
+      <tbody>
+        <% @orders.each do |order| %>
+          <tr>
+            <td width="20%">
+              <%= link_to order do %>
+                <div><%= order.id %></div>
+              <% end %>
+            </td>
+
+            <td width="40%">
+              <%= link_to order do %>
+                <div><%= order.person.name %></div>
+              <% end %>
+            </td>
+
+            <td>
+              <%= link_to order do %>
+                <div><%= convert_number_to_money order.total_value %></div>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 
   <%= link_to t('page.controllers.add'), new_order_path, method: :get, class: "btn btn-primary" %>
 </div>

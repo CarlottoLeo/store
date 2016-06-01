@@ -37,10 +37,6 @@
   height: 175px;
 }
 
-#nested-field-div:hover {
-  /*background-color: #e6e6e6;*/
-}
-
 td > a {
   text-decoration: none !important;
 }

@@ -4,7 +4,8 @@ class OrdersController < ApplicationController
 
   # GET /orders
   def index
-    @orders = Order.filter_by_user(current_user.id)
+    @q = Order.ransack(params[:q])
+    @orders = @q.result.includes(:person).order(id: :asc)
   end
 
   # GET /orders/1
@@ -15,7 +16,6 @@ class OrdersController < ApplicationController
   # GET /orders/new
   def new
     @order = Order.new
-    @user  = current_user
   end
 
   # GET /orders/1/edit
@@ -24,7 +24,7 @@ class OrdersController < ApplicationController
 
   # POST /orders
   def create
-    @order = Order.new_with_products(current_user, order_params)
+    @order = Order.new_with_products(order_params)
 
     authorize @order
 
@@ -33,9 +33,8 @@ class OrdersController < ApplicationController
         format.html { redirect_to @order, notice: t('messages.notice.order_create_success') }
         format.js   { redirect_to @order, notice: t('messages.notice.order_create_success') }
       else
-        format.html { redirect_to new_order_path, alert: t('messages.error.order_create_empty_cart')}
-        format.js   { redirect_to new_order_path, alert: t('messages.error.order_create_empty_cart')}
-        format.json { render json: @order.errors, status: :unprocessable_entity}
+        format.html { redirect_to new_order_path, alert: t('messages.error.order_create_empty_cart') }
+        format.json { render json: @order.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -74,6 +73,6 @@ class OrdersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
-      params.require(:order).permit(:items_attributes => [:id, :name, :amount, :value, :total, :done, :_destroy])
+      params.require(:order).permit(:person, :name, :cpf, :items_attributes => [:id, :name, :amount, :value, :total, :done, :_destroy])
     end
 end

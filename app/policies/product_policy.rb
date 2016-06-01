@@ -1,9 +1,4 @@
-class OrderPolicy < ApplicationPolicy
-  def initialize(user, order)
-    @user  = user
-    @order = order
-  end
-
+class ProductPolicy < ApplicationPolicy
   def create?
     return true#user != nil && user.id != nil
   end
@@ -13,6 +8,10 @@ class OrderPolicy < ApplicationPolicy
   end
 
   def show?
+    return true#destroy?
+  end
+
+  def edit?
     return true#destroy?
   end
 end

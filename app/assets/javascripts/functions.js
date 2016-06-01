@@ -36,7 +36,7 @@ jQuery.fn.extend({
     $('select option').each(function(i, v) {
       var value = $(v).val();
 
-      if (value && value != "") {
+      if (value && value.match(/[{]/)) {
         var id = value.match(/id[:] [-+]?([0-9]*)/i)[1];
 
         $(v).val(id);

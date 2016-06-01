@@ -1,7 +1,40 @@
 <div class="col-md-offset-2 col-md-8">
   <h1><%= t('page.headers.listing_products') %></h1>
 
-  <%= render partial: 'list_products', locals: {products: @products} %>
+  <%= search_form_for @q do |f| -%>
+    <div class="form-group form-inline">
+      <%= f.search_field :name_cont, class: "form-control", placeholder: "Search Product" -%>
+      <%= f.submit class: "btn btn-default" -%>
+    </div>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th><%= t('table.headers.name') -%></th>
+          <th><%= t('table.headers.value') -%></th>
+          <th><%= t('table.headers.options') -%></th>
+        </tr>
+      </thead>
+    </table>
+
+    <div style="overflow: auto; overflow-x: hidden; max-height: 200px; height: 200px;">
+      <table class="table">
+        <tbody>
+          <% @products.each do |product| %>
+            <tr>
+              <td width="32%"><%= product.name %></td>
+              <td width="30%"><%= convert_number_to_money product.value %></td>
+              <td width="38%">
+                <%= link_to t('page.controllers.show'),    product_path(product),      class: "btn btn-xs btn-default" %>
+                <%= link_to t('page.controllers.edit'),    edit_product_path(product), class: "btn btn-xs btn-warning" %>
+                <%= link_to t('page.controllers.destroy'), product_path(product),      method: :delete, class: "btn btn-xs btn-danger" %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% end -%>
 
   <hr>
 

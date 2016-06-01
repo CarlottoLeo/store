@@ -1,10 +1,23 @@
 class Product < ActiveRecord::Base
-  validates_presence_of :name
-  validates_length_of   :name, minimum: 3, maximum: 30
-  validates_format_of   :name, with: /[\w]+([\s]?+[\w]+){1}+/
+  validates :name,
+    presence: true,
 
-  validates_presence_of :value
-  validates_numericality_of :value, greater_than: 0.01, allow_nil: false
+    length: {
+      minimum: 3,
+      maximum: 64
+    },
+
+    format: {
+      with: /[\w]+([\s]?+[\w]+){1}+/
+    }
+
+  validates :value,
+    presence: true,
+
+    numericality: {
+      greater_than_or_equal_to: 0.01,
+      allow_nil: false
+    }
 
   scope :get_all_by_name_asc, -> {order(name: :asc)}
 

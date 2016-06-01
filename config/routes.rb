@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   scope "(:locale)" , locale: LOCALES do
       resources  :orders, except: :edit
       resources  :items
+      resources  :people
 
       resources :products do
         collection do
@@ -14,7 +15,7 @@ Rails.application.routes.draw do
       devise_for :users
   end
 
-  get '/:locale' => 'products#index', locale: LOCALES
+  get '/:locale' => 'orders#index', locale: LOCALES
 
-  root "products#index"
+  root "orders#index"
 end

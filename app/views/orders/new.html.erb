@@ -12,6 +12,8 @@
     </div>
   <% end -%>
 
+  <%= f.select(:person, Person.get_collection_for_select_tag, required: true, include_blank: true, title: "Select Owner") %>
+
   <div id="nested-forms-box">
     <%= f.fields_for :items do |item| -%>
       <%= render 'item_fields', locals: {f: item} %>
@@ -21,7 +23,6 @@
   <%= link_to_add_association f, :items, id: "add-nested-field" do -%>
     <button class="btn btn-success" style="margin-top: 20px"><%= t('page.controllers.add') %></button>
   <% end -%>
-
   <hr>
   <div class="row">
     <div class="col-md-4">

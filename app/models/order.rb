@@ -1,21 +1,19 @@
 class Order < ActiveRecord::Base
   has_many :items
-  belongs_to :user
+  belongs_to :person
 
-  scope :filter_by_user, ->(id) {where('user_id = ?', id)}
+  scope :filter_by_person, ->(id) {where('person_id = ?', id)}
 
   audited
 
   acts_as_paranoid
   accepts_nested_attributes_for :items, reject_if: :all_blank, allow_destroy: true
 
-  def self.new_with_products(user, order_params)
+  def self.new_with_products(order_params)
     Order.create do |order|
-      order.user = user
+      order.person = Person.find_by_cpf(order_params[:person])
       order.name = "Order #{order.id}"
       order.total_value = 0
-
-      p order_params
 
       if order_params[:items_attributes]
         order_params[:items_attributes].each do |_, product|

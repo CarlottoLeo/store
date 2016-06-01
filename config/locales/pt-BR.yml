@@ -28,7 +28,6 @@ pt-BR:
       destroy: "Excluir"
       add: "Adicionar"
       index: "Principal"
-      my_orders: "Meus Pedidos"
       create: "Criar"
       log_in: "Logar"
       log_out: "Deslogar"
@@ -40,6 +39,9 @@ pt-BR:
       select_product: "Selecione um produto"
 
     headers:
+      order_client: "Cliente"
+      people: "Clientes"
+      products: "Produtos"
       new_product: "Novo Produto"
       listing_products: "Lista de Produtos"
       editing_product: "Editando Produto"
@@ -47,6 +49,7 @@ pt-BR:
       listing_orders: "Listando Pedidos"
       new_order: "Novo Pedido"
       order: "Pedido"
+      orders: "Pedidos"
       login: "Login"
       email: "Email"
       password: "Senha"
@@ -55,7 +58,8 @@ pt-BR:
       amount: "Quantidade"
       product: "Produto"
       product_changelog: "Histórico de Alterações"
-
+      edit_people: "Editar Cliente"
+      show_people: "Visualizar Cliente"
   table:
     headers:
       name: "Nome"
@@ -66,6 +70,7 @@ pt-BR:
       total: "Total"
       amount: "Quantidade"
       total_unit: "Valor Unitário"
+      order_client: "Cliente"
 
   messages:
     error:
@@ -90,3 +95,13 @@ pt-BR:
   cocoon:
     defaults:
       remove: "x"
+
+  helpers:
+    actions: "Opções"
+
+    links:
+      cancel: "Voltar"
+      new: "Adicionar"
+      back: "Voltar"
+      edit: "Editar"
+      destroy: "Excluir"

@@ -1,11 +1,14 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
+  before_filter :authenticate_user!
 
   # GET /products
   # GET /products.json
   def index
     @q = Product.ransack(params[:q])
-    @products = @q.result(distinct: true)
+    @products = @q.result(distinct: true).order(id: :asc)
+
+    #authorize @products
   end
 
   # GET /products/1
@@ -16,16 +19,21 @@ class ProductsController < ApplicationController
   # GET /products/new
   def new
     @product = Product.new
+
+    #authorize @product
   end
 
   # GET /products/1/edit
   def edit
+    #authorize @product
   end
 
   # POST /products
   # POST /products.json
   def create
     @product = Product.new(product_params)
+
+    #authorize @product
 
     respond_to do |format|
       if @product.save
@@ -41,6 +49,8 @@ class ProductsController < ApplicationController
   # PATCH/PUT /products/1
   # PATCH/PUT /products/1.json
   def update
+    #authorize @product
+
     respond_to do |format|
       if @product.update(product_params)
         format.html { redirect_to @product, notice: t('messages.notice.product_update_success') }
@@ -56,6 +66,8 @@ class ProductsController < ApplicationController
   # DELETE /products/1.json
   def destroy
     @product.destroy
+
+    #authorize @product
 
     respond_to do |format|
       format.html { redirect_to products_url, notice: t('messages.notice.product_remove_success') }
