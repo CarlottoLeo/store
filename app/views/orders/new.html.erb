@@ -1,18 +1,29 @@
+<% if @order.errors.any? -%>
+  <div class="alert alert-danger">
+    <h4><%= t('messages.error.header') %></h4>
+    <ul>
+    <% @order.errors.each do |model, msg| -%>
+      <li>
+        <%= Order.human_attribute_name(model) %> <%= msg %>
+      </li>
+    <% end -%>
+    </ul>
+  </div>
+<% end -%>
+
 <h1><%= t('page.headers.new_order') %></h1>
 
 <%= form_for @order, html: {class: "form-inline", id: "order-form"} do |f| -%>
-  <% if @order.errors.any? -%>
-    <div class="alert alert-danger">
-      <h2><%= t('messages.errors.header') -%></h2>
-      <% @order.errors.each do |msg| -%>
-        <li>
-          <%= msg %>
-        </li>
-      <% end -%>
+  <div class="row">
+    <div class="col-md-8">
+      <div class="form-group">
+        <label><%= t('messages.notice.person') %></label>
+        <%= f.select(:person, Person.get_collection_for_select_tag, {prompt: "Selecione Cliente"}) %>
+      </div>
     </div>
-  <% end -%>
+  </div>
 
-  <%= f.select(:person, Person.get_collection_for_select_tag, required: true, include_blank: true, title: "Select Owner") %>
+  <hr>
 
   <div id="nested-forms-box">
     <%= f.fields_for :items do |item| -%>
@@ -35,7 +46,7 @@
 
   <div class="row">
     <div class="col-md-4" style="margin-top: 10px">
-      <button class="btn btn-primary" onclick="$('#order-form').submit_order();"><%= t('page.controllers.create_order') %></button>
+      <%= f.submit nil, class: "btn btn-primary" %>
       <%= link_to t('page.controllers.back'), orders_path, class: "btn btn-default" %>
     </div>
   </div>

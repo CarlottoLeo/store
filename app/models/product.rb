@@ -37,7 +37,7 @@ class Product < ActiveRecord::Base
 
     unless prods.nil?
       prods.each do |product|
-        result += "<option value=\"{id: #{product.id}, value: #{product.value}}\">#{product.name}</option>\n"
+        result += "<option value='#{product.id}' item-value='#{product.value}'>#{product.name}</option>\n"
       end
     end
 

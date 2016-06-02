@@ -6,6 +6,8 @@ pt-BR:
 
   activerecord:
     attributes:
+      items:
+        model_name: "Lista de Produtos"
       product:
         model_name: "Produto"
         name: "Nome"
@@ -14,6 +16,9 @@ pt-BR:
         model_name: "Cliente"
         name: "Nome"
         cpf: "CPF"
+      order:
+        person: "Cliente"
+        items: "Lista de pedidos"
     models:
       product:
         one: "Produto"
@@ -45,7 +50,7 @@ pt-BR:
       new: "Novo"
       select_product: "Selecione um produto"
       create_order: "Criar Pedido"
-      
+
     headers:
       order_client: "Cliente"
       people: "Clientes"
@@ -87,9 +92,11 @@ pt-BR:
       order_dont_belong_to_user: "Você não tem permissão para ver este pedido."
       order_create_empty_cart: "O pedido não pode estar vazio."
       order_record_not_found: "O pedido não existe ou não pode ser encontrado."
+      items_attributes_empty: " está vazia."
 
     notice:
-      totals: "Total:"
+      person: "Cliente"
+      totals: "Total"
       total_unit: "Valor unitário:"
       min_chars: 'Mínimo de %{min} caracteres.'
       product_update_success: "O produto foi atualizado com sucesso."

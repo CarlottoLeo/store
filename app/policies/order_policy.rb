@@ -4,15 +4,27 @@ class OrderPolicy < ApplicationPolicy
     @order = order
   end
 
+  def index?
+    can_manage?
+  end
+
   def create?
-    return true#user != nil && user.id != nil
+    can_manage?
   end
 
   def destroy?
-    return true#(create? && user.id == @order.user_id)
+    can_manage?
   end
 
   def show?
-    return true#destroy?
+    can_manage?
+  end
+
+  def edit?
+    can_manage?
+  end
+
+  def can_manage?
+    user != nil && user.id != nil
   end
 end

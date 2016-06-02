@@ -18,7 +18,7 @@ class Person < ActiveRecord::Base
 
   audited
 
-  has_many :orders
+  has_many :orders, dependent: :destroy
 
   scope :get_all_by_name_asc, -> { order(name: :asc) }
 

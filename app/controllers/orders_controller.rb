@@ -29,11 +29,11 @@ class OrdersController < ApplicationController
     authorize @order
 
     respond_to do |format|
-      if @order && @order.save
+      if @order.save
         format.html { redirect_to @order, notice: t('messages.notice.order_create_success') }
-        format.js   { redirect_to @order, notice: t('messages.notice.order_create_success') }
+        format.json { render :show, status: :created, location: @product }
       else
-        format.html { redirect_to new_order_path, alert: t('messages.error.order_create_empty_cart') }
+        format.html { render :new }
         format.json { render json: @order.errors, status: :unprocessable_entity }
       end
     end

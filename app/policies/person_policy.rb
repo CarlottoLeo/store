@@ -1,7 +1,7 @@
-class ProductPolicy < ApplicationPolicy
-  def initialize(user, product)
-    @user    = user
-    @product = product
+class PersonPolicy < ApplicationPolicy
+  def initialize(user, person)
+    @user  = user
+    @person = person
   end
 
   def index?

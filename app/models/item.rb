@@ -1,4 +1,10 @@
 class Item < ActiveRecord::Base
+  validates :amount,
+    presence: true,
+    numericality: {
+      higher_than: 0
+    }
+
   belongs_to :order
   before_save :calcula_total
 

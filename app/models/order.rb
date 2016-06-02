@@ -1,10 +1,13 @@
 class Order < ActiveRecord::Base
-  has_many :items
+  has_many :items, dependent: :destroy
   belongs_to :person
 
   scope :filter_by_person, ->(id) {where('person_id = ?', id)}
 
   audited
+
+  validates :person, presence: true
+  validates :items,  presence: true
 
   acts_as_paranoid
   accepts_nested_attributes_for :items, reject_if: :all_blank, allow_destroy: true
@@ -15,7 +18,7 @@ class Order < ActiveRecord::Base
       order.name = "Order #{order.id}"
       order.total_value = 0
 
-      if order_params[:items_attributes]
+      if order_params[:items_attributes] && order_params[:items_attributes].size > 0
         order_params[:items_attributes].each do |_, product|
           prod = Product.find_by_id(product[:id].to_i)
 
@@ -26,20 +29,20 @@ class Order < ActiveRecord::Base
               value:  prod.value
             })
 
-            pos = order.items.find_index { |i| i.prodid == item.prodid }
+            if item.valid?
+              pos = order.items.find_index { |i| i.prodid == item.prodid }
 
-            if pos.nil?
-              order.items.push item
-            else
-              order.items[pos][:amount] += item.amount
-              order.items[pos][:total]  = order.items[pos][:amount] * item.value
+              if pos.nil?
+                order.items.push(item)
+              else
+                order.items[pos][:amount] += item.amount
+                order.items[pos][:total]  = order.items[pos][:amount] * item.value
+              end
+
+              order.total_value += item.total
             end
-
-            order.total_value += item.total
           end
         end
-      else
-        return nil
       end
 
       return order

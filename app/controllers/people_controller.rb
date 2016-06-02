@@ -6,17 +6,22 @@ class PeopleController < ApplicationController
   # GET /people.json
   def index
     @q = Person.ransack(params[:q])
-    @people = @q.result(distinct: true).order(id: :asc)
+    @people = @q.result(distinct: true).order(name: :asc)
+
+    authorize @people
   end
 
   # GET /people/1
   # GET /people/1.json
   def show
+    authorize @person
   end
 
   # GET /people/new
   def new
     @person = Person.new
+
+    authorize @person
   end
 
   # GET /people/1/edit
@@ -27,6 +32,8 @@ class PeopleController < ApplicationController
   # POST /people.json
   def create
     @person = Person.new(person_params)
+
+    authorize @person
 
     respond_to do |format|
       if @person.save
@@ -42,6 +49,8 @@ class PeopleController < ApplicationController
   # PATCH/PUT /people/1
   # PATCH/PUT /people/1.json
   def update
+    authorize @person
+
     respond_to do |format|
       if @person.update(person_params)
         format.html { redirect_to @person, notice: 'Person was successfully updated.' }
@@ -56,7 +65,10 @@ class PeopleController < ApplicationController
   # DELETE /people/1
   # DELETE /people/1.json
   def destroy
+    authorize @person
+
     @person.destroy
+
     respond_to do |format|
       format.html { redirect_to people_url, notice: 'Person was successfully destroyed.' }
       format.json { head :no_content }

@@ -6,9 +6,9 @@ class ProductsController < ApplicationController
   # GET /products.json
   def index
     @q = Product.ransack(params[:q])
-    @products = @q.result(distinct: true).order(id: :asc)
+    @products = @q.result(distinct: true).order(name: :asc)
 
-    #authorize @products
+    authorize @products
   end
 
   # GET /products/1
@@ -20,12 +20,12 @@ class ProductsController < ApplicationController
   def new
     @product = Product.new
 
-    #authorize @product
+    authorize @product
   end
 
   # GET /products/1/edit
   def edit
-    #authorize @product
+    authorize @product
   end
 
   # POST /products
@@ -33,7 +33,7 @@ class ProductsController < ApplicationController
   def create
     @product = Product.new(product_params)
 
-    #authorize @product
+    authorize @product
 
     respond_to do |format|
       if @product.save
@@ -49,7 +49,7 @@ class ProductsController < ApplicationController
   # PATCH/PUT /products/1
   # PATCH/PUT /products/1.json
   def update
-    #authorize @product
+    authorize @product
 
     respond_to do |format|
       if @product.update(product_params)

@@ -6,6 +6,7 @@
  *= require_self
  *= require_tree .
  *= require select2
+ *= require select2-bootstrap
 */
 
 /* hide input buttons to make space for animated buttons */
@@ -13,7 +14,7 @@
   display: none !important;
 }
 
-.select2-selection, .select2-selection--single, .select2-selection__rendered {
+/*.select2-selection, .select2-selection--single, .select2-selection__rendered {
   height: 35px !important;
 }
 
@@ -24,7 +25,7 @@
 
 .select2-selection__arrow  {
   height: 35px !important;
-}
+}*/
 
 #application-container {
   margin-top: 150px;
