@@ -107,6 +107,7 @@ pt-BR:
       order_remove_success: "Pedido removido com sucesso."
       audited_value_change: 'Alterado valor de %{from} para %{to}.'
       audited_name_change:  'Alterado nome de "%{from}" para "%{to}".'
+      audited_cpf_change: 'Alterado CPF de "%{from}" para "%{to}".'
     searchbox:
       search_people: "Procurar clientes..."
       search_products: "Procurar produtos..."

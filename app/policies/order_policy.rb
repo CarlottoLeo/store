@@ -24,7 +24,11 @@ class OrderPolicy < ApplicationPolicy
     can_manage?
   end
 
+  def update?
+    can_manage?
+  end
+
   def can_manage?
-    user != nil && user.id != nil
+    @user && @user.id
   end
 end

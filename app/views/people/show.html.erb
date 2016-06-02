@@ -6,7 +6,24 @@
 
   <%= render 'form' %>
 
+  <% if @person.audits.count > 1 -%>
+    <h5><i class="fa fa-pencil-square-o"></i> <%= t('page.headers.product_changelog') %></h5>
+
+    <% @person.audits.each do |v| %>
+      <% if v.action == 'update' %>
+        <% v.audited_changes.each do |key, val| %>
+          <% if key == 'name' && val[0] != val[1] %>
+            [<%= v.created_at.to_formatted_s(:short) %>]
+            <%= t('messages.notice.audited_'+ key +'_change', from: val[0], to: val[1]) %>
+          <% end %></br>
+        <% end %>
+      <% end %>
+    <% end %>
+
+    <hr>
+  <% end -%>
+
   <%= link_to t('.back', :default => t("helpers.links.back")), people_path, :class => 'btn btn-default' %>
-  <%= link_to t('.edit', :default => t("helpers.links.edit")), edit_person_path(@person), :class => 'btn btn-default' %>
+  <%= link_to t('.edit', :default => t("helpers.links.edit")), edit_person_path(@person), :class => 'btn btn-warning' %>
   <%= link_to t('.destroy', :default => t("helpers.links.destroy")), person_path(@person), :method => 'delete', :class => 'btn btn-danger' %>
 </div>

@@ -67,25 +67,12 @@ class ProductsController < ApplicationController
   def destroy
     @product.destroy
 
-    #authorize @product
+    authorize @product
 
     respond_to do |format|
       format.html { redirect_to products_url, notice: t('messages.notice.product_remove_success') }
       format.json { head :no_content }
     end
-  end
-
-  def get_collection_for_select_tag
-    prods = Product.get_all_by_name_asc
-    result = ""
-
-    unless prods.nil?
-      prods.each do |product|
-        result += "<option value=\"{id: #{product.id}, value: #{product.value}}\">#{product.name}</option>\n"
-      end
-    end
-
-    return result
   end
 
   def search

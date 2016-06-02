@@ -13,9 +13,11 @@ Rails.application.routes.draw do
       end
 
       devise_for :users
+
+      get '/:locale' => 'orders#index', locale: LOCALES
   end
 
-  get '/:locale' => 'orders#index', locale: LOCALES
+
 
   root "orders#index"
 end
