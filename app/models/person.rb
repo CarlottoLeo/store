@@ -30,6 +30,10 @@ class Person < ActiveRecord::Base
     return CPF.new(cpf).formatted
   end
 
+  def name_cpf_formatted_s
+    return "#{self.name} (CPF: #{cpf_formatted})"
+  end
+
   def self.get_collection_for_select_tag
     people = Person.get_all_by_name_asc
     result = ""
@@ -43,7 +47,7 @@ class Person < ActiveRecord::Base
     html = <<-HTML
     #{result}
     HTML
-
+    
     return html.html_safe
   end
 end

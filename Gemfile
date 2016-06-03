@@ -49,6 +49,7 @@ gem 'validates_cpf_cnpj'
 group :development, :test do
   # cpf generator
   gem 'cpf_cnpj'
+  gem 'faker'
   gem 'byebug'
   gem 'rspec-rails'
   gem 'factory_girl_rails'
@@ -65,7 +66,6 @@ end
 group :test do
   gem 'launchy'
   gem 'guard-rspec'
-  gem 'faker'
   gem 'capybara'
   gem 'poltergeist'
   gem 'database_cleaner'

@@ -18,7 +18,7 @@
     <div class="col-md-8">
       <div class="form-group">
         <label><%= t('messages.notice.person') %></label>
-        <%= f.select(:person, Person.get_collection_for_select_tag, {prompt: "Selecione Cliente"}) %>
+        <%= f.collection_select(:person_id, Person.order(:name), :id, :name_cpf_formatted_s, {include_blank: true}, {required: true}) %>
       </div>
     </div>
   </div>

@@ -28,14 +28,14 @@ $(document).on('page:change', function() {
   $("a[rel~=tooltip], .has-tooltip").tooltip();
 
   $(document).on('cocoon:after-insert', function() {
-    $('select[name*="order[items_attributes]"]').select2({theme: "bootstrap"});
+    $('select[name*="order[items_attributes]"]').select2({theme: "bootstrap", placeholder: ""});
 
     $('#nested-forms-box').animate({
       scrollTop: $('#nested-forms-box').prop("scrollHeight")
     }, 'slow');
   });
 
-  $('select[name*="order[items_attributes]"]').select2({theme: "bootstrap"});
+  $('select[name*="order[items_attributes]"]').select2({theme: "bootstrap", placeholder: ""});
 
   $('#nested-forms-box').animate({
     scrollTop: $('#nested-forms-box').prop("scrollHeight")
@@ -47,5 +47,5 @@ $(document).on('page:change', function() {
 
   $('#person_cpf').mask('999.999.999-99');
 
-  $('#order_person').select2({theme: "bootstrap", placeholder: $('#order_person').attr('data-placeholder')});
+  $('#order_person_id').select2({theme: "bootstrap", placeholder: ""});
 });

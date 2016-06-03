@@ -8,6 +8,7 @@
 
 require 'cpf_cnpj'
 
+
 User.create(
   [
     [email: 'user@user.com', password: '123456'],
@@ -15,35 +16,13 @@ User.create(
   ]
 )
 
-Product.create(
-  [
-    [name: "Produto 1",  value: rand(14.0) + 1.0],
-    [name: "Produto 2",  value: rand(14.0) + 1.0],
-    [name: "Produto 3",  value: rand(14.0) + 1.0],
-    [name: "Produto 4",  value: rand(14.0) + 1.0],
-    [name: "Produto 5",  value: rand(14.0) + 1.0],
-    [name: "Produto 6",  value: rand(14.0) + 1.0],
-    [name: "Produto 7",  value: rand(14.0) + 1.0],
-    [name: "Produto 8",  value: rand(14.0) + 1.0],
-    [name: "Produto 9",  value: rand(14.0) + 1.0],
-    [name: "Produto 10", value: rand(14.0) + 1.0],
-    [name: "Produto 11", value: rand(14.0) + 1.0],
-    [name: "Produto 12", value: rand(14.0) + 1.0],
-  ]
-)
+for i in 1..12 do
+  Product.create({name: Faker::Commerce.product_name, value: rand(14) + 1})
+end
 
-Person.create(
-  [
-    [name: "Cliente 1", cpf: CPF.generate],
-    [name: "Cliente 2", cpf: CPF.generate],
-    [name: "Cliente 3", cpf: CPF.generate],
-    [name: "Cliente 4", cpf: CPF.generate],
-    [name: "Cliente 5", cpf: CPF.generate],
-    [name: "Cliente 6", cpf: CPF.generate],
-    [name: "Cliente 7", cpf: CPF.generate],
-    [name: "Cliente 8", cpf: CPF.generate],
-  ]
-)
+for i in 1..8 do
+  Person.create({name: Faker::Name.name, cpf: CPF.generate})
+end
 
 for i in 1..10 do
   Order.create do |order|
@@ -51,7 +30,7 @@ for i in 1..10 do
     order.person = Person.find_by_id(rand(7) + 1)
     order.total_value = 0
 
-    for pid in 1..rand(14) + 1 do
+    for pid in 1..rand(11) + 1 do
       prod = Product.find_by_id(pid)
 
       unless (prod.nil?)

@@ -24,7 +24,12 @@ class OrdersController < ApplicationController
 
   # POST /orders
   def create
-    @order = Order.new_with_products(order_params)
+    @order = Order.new
+    @order.person = Person.find(order_params[:person_id])
+
+    order_params[:items_attributes].each do |k, v|
+      @order.items.new(v)
+    end
 
     authorize @order
 
@@ -73,6 +78,6 @@ class OrdersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
-      params.require(:order).permit(:person, :name, :cpf, :items_attributes => [:id, :name, :amount, :value, :total, :done, :_destroy])
+      params.require(:order).permit(:person_id, :items_attributes => [:prodid, :amount, :value, :total, :_destroy])
     end
 end
