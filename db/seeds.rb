@@ -8,51 +8,33 @@
 
 require 'cpf_cnpj'
 
-
 User.create(
   [
-    [email: 'user@user.com', password: '123456'],
+    [email: 'user@user.com',    password: '123456'],
     [email: 'pedidos@user.com', password: '123456'],
   ]
 )
 
-for i in 1..12 do
+for i in 1..500 do
   Product.create({name: Faker::Commerce.product_name, value: rand(14) + 1})
 end
 
-for i in 1..8 do
+for i in 1..100 do
   Person.create({name: Faker::Name.name, cpf: CPF.generate})
 end
 
 for i in 1..10 do
-  Order.create do |order|
-    order.name = "Order ##{order.id}"
-    order.person = Person.find_by_id(rand(7) + 1)
-    order.total_value = 0
+  order = Order.new
+  order.person = Person.find(rand(99) + 1)
 
-    for pid in 1..rand(11) + 1 do
-      prod = Product.find_by_id(pid)
+  for j in 1..10 do
+    id = rand(499) + 1
 
-      unless (prod.nil?)
-        item = Item.create({
-          prodid: prod.id,
-          amount: rand(499) + 1,
-          value:  prod.value
-        })
+    prod = Product.find(id)
+    item = Item.new({prodid: prod.id, value: prod.value, amount: 100, total: 100 * prod.value})
 
-        pos = order.items.find_index { |index| index.prodid == item.prodid }
-
-        if pos.nil?
-          order.items.push item
-        else
-          order.items[pos][:amount] += item.amount
-          order.items[pos][:total]   = order.items[pos][:amount] * item.value
-        end
-
-        order.total_value += item.total
-      end
-    end
-
-    order.save
+    order.items.push item
   end
+
+  order.save
 end

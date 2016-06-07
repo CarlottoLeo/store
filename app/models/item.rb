@@ -8,4 +8,10 @@ class Item < ActiveRecord::Base
     }
 
   belongs_to :order
+
+  before_save :calculate_total
+
+  def calculate_total
+    self.total = self.amount * self.value
+  end
 end

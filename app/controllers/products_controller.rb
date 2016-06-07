@@ -5,7 +5,7 @@ class ProductsController < ApplicationController
   # GET /products
   # GET /products.json
   def index
-    @q = Product.ransack(params[:q])
+    @q = Product.ransack({name_cont: params[:q]})
     @products = @q.result(distinct: true).order(name: :asc)
 
     authorize @products

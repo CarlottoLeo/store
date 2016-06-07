@@ -28,24 +28,27 @@ $(document).on('page:change', function() {
   $("a[rel~=tooltip], .has-tooltip").tooltip();
 
   $(document).on('cocoon:after-insert', function() {
-    $('select[name*="order[items_attributes]"]').select2({theme: "bootstrap", placeholder: ""});
+    $('select[name*="order[items_attributes]"]').ajax_search_select2("Selecione um Produto", "bootstrap", "/products");
 
     $('#nested-forms-box').animate({
       scrollTop: $('#nested-forms-box').prop("scrollHeight")
     }, 'slow');
   });
 
-  $('select[name*="order[items_attributes]"]').select2({theme: "bootstrap", placeholder: ""});
+  $('select[name*="order[items_attributes]"]').ajax_search_select2("Selecione um Produto", "bootstrap", "/products");
 
   $('#nested-forms-box').animate({
     scrollTop: $('#nested-forms-box').prop("scrollHeight")
   }, 'slow');
 
-  $(document).on('change', function() {
-    $(this).find('div[role=\'nested-items-row\']').update_forms_values();
+  // update the items cart values automatically when selecting or adding more
+  $(document).change(function() {
+    $('div[role="nested-items-row"]').each(function() {
+      $(this).update_forms_values();
+    });
   });
 
   $('#person_cpf').mask('999.999.999-99');
 
-  $('#order_person_id').select2({theme: "bootstrap", placeholder: ""});
+  $('#order_person_id').ajax_search_select2("Selecione um Cliente", "bootstrap", "/people");
 });

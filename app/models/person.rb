@@ -1,6 +1,8 @@
 require 'cpf_cnpj'
 
 class Person < ActiveRecord::Base
+  validates :id, uniqueness: true
+  
   validates :name,
     presence:   true, # must not be empty
     length: {         # length must be within 3..64 characters long
@@ -47,7 +49,7 @@ class Person < ActiveRecord::Base
     html = <<-HTML
     #{result}
     HTML
-    
+
     return html.html_safe
   end
 end

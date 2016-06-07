@@ -5,7 +5,7 @@ Rails.application.routes.draw do
       resources  :orders, except: :edit
       resources  :items
       resources  :people
-
+      
       resources :products do
         collection do
           match 'search' => "products#search" , via: [:get, :post], as: :search
@@ -16,8 +16,6 @@ Rails.application.routes.draw do
 
       get '/:locale' => 'orders#index', locale: LOCALES
   end
-
-
 
   root "orders#index"
 end
