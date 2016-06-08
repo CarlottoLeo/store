@@ -44,6 +44,8 @@ gem "pundit"
 gem "pg"
 # cpf validator
 gem 'validates_cpf_cnpj'
+# paginator
+gem 'will_paginate', '~> 3.1.0'
 
 #testing stuff
 group :development, :test do

@@ -28,6 +28,10 @@ class PersonPolicy < ApplicationPolicy
     can_manage?
   end
 
+  def search?
+    can_manage?
+  end
+
   def can_manage?
     @user && @user.id
   end

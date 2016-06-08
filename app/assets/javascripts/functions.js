@@ -69,7 +69,7 @@ jQuery.fn.extend({
           return {
             q: params.term,
             page: params.page,
-            per: 5
+            per_page: 5
           }
         },
 
@@ -79,7 +79,7 @@ jQuery.fn.extend({
           return {
             results: data,
             pagination: {
-              more: params.page * params.per < data.length
+              more: params.page * 25 < data.length
             }
           }
         }

@@ -5,8 +5,11 @@ class ProductsController < ApplicationController
   # GET /products
   # GET /products.json
   def index
+    @page = (params[:page] || 1).to_i
     @q = Product.ransack({name_cont: params[:q]})
     @products = @q.result(distinct: true).order(name: :asc)
+    @per_page = 10
+    @products.paginate(page: @page, per_page: 5)
 
     authorize @products
   end

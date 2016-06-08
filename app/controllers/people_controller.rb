@@ -5,6 +5,8 @@ class PeopleController < ApplicationController
   def index
     @q = Person.ransack({name_or_cpf_cont: params[:q]})
     @people = @q.result(distinct: true).order(name: :asc)
+    @people.paginate(page: params[:page], per_page: 10)
+
     authorize @people
   end
 
