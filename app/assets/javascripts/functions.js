@@ -54,8 +54,9 @@ jQuery.fn.extend({
     $("#cart_total").val(total_cart.toFixed(2));
   },
 
-  ajax_search_select2: function(placeholder, theme, urlpath) {
+  ajax_search_select2: function(placeholder, theme, urlpath, per_page, search_method) {
     $(this).select2({
+      width: '100%',
       placeholder: placeholder,
       theme: theme,
       minimumInputLength: 1,
@@ -67,19 +68,23 @@ jQuery.fn.extend({
 
         data: function (params) {
           return {
-            q: params.term,
+            q: {
+              [search_method]: params.term
+            },
             page: params.page,
-            per_page: 5
+            per_page: per_page
           }
         },
 
         processResults: function (data, params) {
-          params.page = params.page || 1;
+          params.page     = params.page || 1;
+          params.per_page = params.per_page || 5;
 
           return {
+            params: params,
             results: data,
             pagination: {
-              more: params.page * 25 < data.length
+              more: data.length == per_page
             }
           }
         }

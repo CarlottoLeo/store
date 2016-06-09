@@ -2,37 +2,28 @@ class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
   before_filter :authenticate_user!
 
-  # GET /products
-  # GET /products.json
   def index
-    @page = (params[:page] || 1).to_i
-    @q = Product.ransack({name_cont: params[:q]})
+    @q = Product.ransack(params[:q])
     @products = @q.result(distinct: true).order(name: :asc)
-    @per_page = 10
-    @products.paginate(page: @page, per_page: 5)
+    @products = @products.paginate(page: params[:page], per_page: params[:per_page])
 
     authorize @products
   end
 
-  # GET /products/1
-  # GET /products/1.json
   def show
+    authorize @product
   end
 
-  # GET /products/new
   def new
     @product = Product.new
 
     authorize @product
   end
 
-  # GET /products/1/edit
   def edit
     authorize @product
   end
 
-  # POST /products
-  # POST /products.json
   def create
     @product = Product.new(product_params)
 
@@ -49,8 +40,6 @@ class ProductsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /products/1
-  # PATCH/PUT /products/1.json
   def update
     authorize @product
 
@@ -65,8 +54,6 @@ class ProductsController < ApplicationController
     end
   end
 
-  # DELETE /products/1
-  # DELETE /products/1.json
   def destroy
     @product.destroy
 

@@ -28,14 +28,14 @@ $(document).on('page:change', function() {
   $("a[rel~=tooltip], .has-tooltip").tooltip();
 
   $(document).on('cocoon:after-insert', function() {
-    $('select[name*="order[items_attributes]"]').ajax_search_select2("Selecione um Produto", "bootstrap", "/products");
+    $('select[name*="order[items_attributes]"]').ajax_search_select2("Selecione um Produto", "bootstrap", "/products", 5, 'name_cont');
 
     $('#nested-forms-box').animate({
       scrollTop: $('#nested-forms-box').prop("scrollHeight")
     }, 'slow');
   });
 
-  $('select[name*="order[items_attributes]"]').ajax_search_select2("Selecione um Produto", "bootstrap", "/products");
+  $('select[name*="order[items_attributes]"]').ajax_search_select2("Selecione um Produto", "bootstrap", "/products", 5, 'name_cont');
 
   $('#nested-forms-box').animate({
     scrollTop: $('#nested-forms-box').prop("scrollHeight")
@@ -50,5 +50,5 @@ $(document).on('page:change', function() {
 
   $('#person_cpf').mask('999.999.999-99');
 
-  $('#order_person_id').ajax_search_select2("Selecione um Cliente", "bootstrap", "/people");
+  $('#order_person_id').ajax_search_select2("Selecione um Cliente", "bootstrap", "/people", 7, 'name_or_cpf_cont');
 });

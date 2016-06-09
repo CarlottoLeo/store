@@ -3,7 +3,7 @@
     <label><%= t('page.headers.product') %></label>
 
     <div class="form-group">
-      <%= f.select(:prodid, Product.get_collection_for_select_tag, {include_blank: true}, {required: true}) %>
+      <%= f.select(:prodid, [], {include_blank: true}, {required: true}) %>
     </div>
 
     <div class="form-group">

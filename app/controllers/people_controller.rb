@@ -3,9 +3,9 @@ class PeopleController < ApplicationController
   before_filter :authenticate_user!
 
   def index
-    @q = Person.ransack({name_or_cpf_cont: params[:q]})
+    @q = Person.ransack(params[:q])
     @people = @q.result(distinct: true).order(name: :asc)
-    @people.paginate(page: params[:page], per_page: 10)
+    @people = @people.paginate(page: params[:page], per_page: params[:per_page])
 
     authorize @people
   end
@@ -21,6 +21,7 @@ class PeopleController < ApplicationController
   end
 
   def edit
+    authorize @person
   end
 
   def create
