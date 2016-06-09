@@ -1,4 +1,39 @@
 jQuery.fn.extend({
+  ajax_search_ransack: function(url_path, query_method, query, replacer_id) {
+    $.ajax({
+      url: url_path,
+      dataType: "HTML",
+      data: {
+        q: {
+          [query_method]: query
+        }
+      },
+
+      success: function(data) {
+        $('#parent_search_form_div').removeClass('has-error');
+        var table_content = $('#' + replacer_id, data).html();
+
+        $('#' + replacer_id).replaceWith(function() {
+          return '<table class="table" id="'+ replacer_id +'">' +
+            table_content +
+          '</table>';
+        });
+
+        console.info(table_content);
+
+        if (table_content.search('</td>') >= 0) {
+          $('#parent_search_form_div').removeClass('has-error');
+        } else {
+          $('#parent_search_form_div').addClass('has-error');
+        }
+      },
+
+      error: function(data) {
+        $('#parent_search_form_div').addClass('has-error');
+      }
+    });
+  },
+
   update_forms_values: function() {
     callback = function (scope) {
       var name = $('.select2-selection__rendered', scope).text();

@@ -51,4 +51,16 @@ $(document).on('page:change', function() {
   $('#person_cpf').mask('999.999.999-99');
 
   $('#order_person_id').ajax_search_select2("Selecione um Cliente", "bootstrap", "/people", 7, 'name_or_cpf_cont');
+
+  $("#q_person_name_or_person_cpf_cont").keyup(function() {
+    $(this).ajax_search_ransack('/orders', 'person_name_or_person_cpf_cont', $(this).val(), 'orders_list');
+  });
+
+  $("#q_name_cont").keyup(function() {
+    $(this).ajax_search_ransack('/products', 'name_cont', $(this).val(), 'products_list');
+  });
+
+  $("#q_name_or_cpf_cont").keyup(function() {
+    $(this).ajax_search_ransack('/people', 'name_or_cpf_cont', $(this).val(), 'people_list');
+  });
 });
