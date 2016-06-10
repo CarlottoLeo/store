@@ -11,10 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160531145438) do
+ActiveRecord::Schema.define(version: 20160609185633) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "addresses", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "number"
+    t.string   "district"
+    t.string   "country"
+    t.string   "country_short"
+    t.string   "cep"
+    t.integer  "person_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
 
   create_table "audits", force: :cascade do |t|
     t.integer  "auditable_id"
@@ -64,8 +76,13 @@ ActiveRecord::Schema.define(version: 20160531145438) do
   create_table "people", force: :cascade do |t|
     t.string   "name"
     t.string   "cpf"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.datetime "birth_date"
+    t.string   "email"
+    t.string   "profession"
+    t.integer  "gender"
+    t.string   "marital_status"
   end
 
   create_table "products", force: :cascade do |t|

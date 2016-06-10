@@ -1,0 +1,43 @@
+<div class="col-md-12 col-xs-12 col-lg-12">
+  <% orders = Order.filter_by_person(@person.id) %>
+  <% if orders && orders.size > 0 %>
+    <table class="table">
+      <thead>
+        <tr>
+          <th width="20%"><%= t('table.headers.order_number') %></th>
+          <th width="25%"><%= t('table.headers.value') %></th>
+          <th width="30%"><%= t('table.headers.options') %></th>
+        </tr>
+      </thead>
+    </table>
+    <div style="overflow: auto; overflow-x: hidden; max-height: 200px; height: 200px;">
+      <table class="table" id="orders_list">
+        <tbody>
+          <% orders.each do |order| %>
+            <tr>
+              <td width="20%">
+                <%= link_to order do %>
+                  <div><%= order.id %></div>
+                <% end %>
+              </td>
+
+              <td width="25%">
+                <%= link_to order do %>
+                  <div><%= convert_number_to_money order.total_value %></div>
+                <% end %>
+              </td>
+
+              <td width="30%">
+                <%= link_to t('page.controllers.destroy'), order_path(order), method: :delete, class: "btn btn-xs btn-danger" %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+  <% else %>
+    <p> Nenhum pedido encontrado para <%= @person.name %>.</p>
+  <% end %>
+  
+  <%= link_to t('page.controllers.add'), new_order_path, method: :get, class: "btn btn-primary" %>
+  </div>
+</div>

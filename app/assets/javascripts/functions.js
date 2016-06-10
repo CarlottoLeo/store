@@ -1,15 +1,23 @@
 jQuery.fn.extend({
+  load_more_results: function(data) {
+
+  },
+
   ajax_search_ransack: function(url_path, query_method, query, replacer_id) {
     $.ajax({
+      delay: 250,
       url: url_path,
       dataType: "HTML",
+
       data: {
         q: {
           [query_method]: query
         }
       },
 
-      success: function(data) {
+      success: function(data, state, params) {
+        console.info(params);
+
         $('#parent_search_form_div').removeClass('has-error');
         var table_content = $('#' + replacer_id, data).html();
 
@@ -18,8 +26,6 @@ jQuery.fn.extend({
             table_content +
           '</table>';
         });
-
-        console.info(table_content);
 
         if (table_content.search('</td>') >= 0) {
           $('#parent_search_form_div').removeClass('has-error');
@@ -53,27 +59,26 @@ jQuery.fn.extend({
           var item_value;
 
           $.ajax({
-            async: false,
             url: '/products/' + item_id,
             dataType: 'JSON',
             success: function(data) {
               item_value = data.value;
+
+              if (item_value) {
+                $('input[name*="value"]', scope).attr('value', item_value);
+
+                if (item_amount) {
+                  total = (item_value * item_amount);
+
+                  $('input[name*="total"]', scope).attr('value', total.toFixed(2));
+                }
+              }
             },
 
             error: function(data) {
               item_value = 0;
             }
           });
-
-          if (item_value) {
-            $('input[name*="value"]', scope).attr('value', item_value);
-
-            if (item_amount) {
-              total = (item_value * item_amount);
-
-              $('input[name*="total"]', scope).attr('value', total.toFixed(2));
-            }
-          }
         }
       });
 

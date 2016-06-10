@@ -1,18 +1,23 @@
 class Order < ActiveRecord::Base
-  has_many :items, dependent: :destroy
-  belongs_to :person
-
-  scope :filter_by_person, ->(id) {where('person_id = ?', id)}
-
-  audited
-
+  # active record validations
   validates :person_id, presence: true
   validates :items,  presence: true
 
+  # active record actions
+  before_save :merge_duplicates, :calculate_totals
+
+  # associations
+  has_many :items, dependent: :destroy
+  belongs_to :person
+
+  # scoping
+  scope :filter_by_person, ->(id) {where('person_id = ?', id)}
+
+  # optional attributes
+  audited
   acts_as_paranoid
   accepts_nested_attributes_for :items, reject_if: :all_blank, allow_destroy: true
 
-  before_save :merge_duplicates, :calculate_totals
 
   def merge_duplicates
     items = []

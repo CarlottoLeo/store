@@ -46,6 +46,8 @@ gem "pg"
 gem 'validates_cpf_cnpj'
 # paginator
 gem 'will_paginate', '~> 3.1.0'
+# chartjs
+gem 'chartjs-ror'
 
 #testing stuff
 group :development, :test do

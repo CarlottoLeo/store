@@ -3,7 +3,7 @@ class PeopleController < ApplicationController
   before_filter :authenticate_user!
 
   def index
-    @q = Person.ransack(params[:q])
+    @q      = Person.ransack(params[:q])
     @people = @q.result(distinct: true).order(name: :asc)
     @people = @people.paginate(page: params[:page], per_page: params[:per_page])
 
@@ -15,7 +15,7 @@ class PeopleController < ApplicationController
   end
 
   def new
-    @person = Person.new
+    @person  = Person.new
 
     authorize @person
   end
@@ -25,7 +25,8 @@ class PeopleController < ApplicationController
   end
 
   def create
-    @person = Person.new(person_params)
+    @person         = Person.new(person_params)
+    @person.address = Address.new(person_params[:address])
 
     authorize @person
 
@@ -73,6 +74,11 @@ class PeopleController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def person_params
-      params.require(:person).permit(:name, :cpf)
+      params.require(:person).permit(
+        :name, :cpf, :email, :profession,
+        :address => [
+          :name, :number, :district, :country, :cep
+        ]
+      )
     end
 end

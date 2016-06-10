@@ -5,7 +5,7 @@ Rails.application.routes.draw do
       resources  :orders, except: :edit
       resources  :items
       resources  :people
-      resources :products
+      resources  :products
 
       devise_for :users
 
