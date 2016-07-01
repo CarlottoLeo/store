@@ -1,14 +1,40 @@
-<h1><%= t('page.headers.listing_products') %></h1>
+<div class="col-md-offset-2 col-md-8">
+  <h1><%= t('page.headers.listing_products') %></h1>
 
-<%= render partial: 'list_products', locals: {products: @products} %>
+  <%= search_form_for @q do |f| -%>
+    <div class="form-group form-inline" id="parent_search_form_div">
+      <%= f.search_field :name_cont, class: "form-control", placeholder: t('messages.searchbox.search_products') -%>
+    </div>
 
-<hr>
+    <table class="table">
+      <thead>
+        <tr>
+          <th><%= t('table.headers.name') -%></th>
+          <th><%= t('table.headers.value') -%></th>
+          <th><%= t('table.headers.options') -%></th>
+        </tr>
+      </thead>
+    </table>
 
-<%= render partial: 'button',
-    locals:  {
-      name: t('page.controllers.new'),
-      button_path: new_product_path,
-      icon_class: "inverted white plus icon",
-      method: :get
-    }
-%>
+    <div style="overflow: auto; overflow-x: hidden; max-height: 200px; height: 200px;">
+      <table class="table" id="products_list">
+        <tbody>
+          <% @products.each do |product| %>
+            <tr>
+              <td width="32%"><%= link_to product.name, product_path(product) %></td>
+              <td width="30%"><%= link_to convert_number_to_money(product.value), product_path(product) %></td>
+              <td width="38%">
+                <%= link_to t('page.controllers.edit'),    edit_product_path(product), class: "btn btn-xs btn-warning" %>
+                <%= link_to t('page.controllers.destroy'), product_path(product),      method: :delete, class: "btn btn-xs btn-danger" %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% end -%>
+
+  <hr>
+
+  <%= link_to t('page.controllers.add'), new_product_path, class: "btn btn-primary" %>
+</div>

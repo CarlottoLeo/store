@@ -1,0 +1,38 @@
+<div class="col-md-offset-2 col-md-8">
+  <h1><%= t 'page.headers.people' %></h1>
+
+  <%= search_form_for @q do |f| -%>
+    <div class="form-group form-inline" id="parent_search_form_div">
+      <%= f.search_field :name_or_cpf_cont, class: "form-control", placeholder: t('messages.searchbox.search_people') -%>
+    </div>
+  <% end %>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th width="32%"><%= Person.human_attribute_name(:name) %></th>
+        <th width="30%">CPF</th>
+        <th><%=t '.actions', :default => t("helpers.actions") %></th>
+      </tr>
+    </thead>
+  </table>
+  <div style="overflow: auto; overflow-x: hidden; max-height: 200px; height: 200px;">
+    <table class="table" id="people_list">
+      <tbody>
+        <% @people.each do |person| %>
+          <tr>
+            <td width="32%"><%= link_to person.name, person_path(person) %></td>
+            <td width="30%"><%= link_to person.cpf_formatted, person_path(person) %></td>
+            <td>
+              <%= link_to t('.edit', :default => t("helpers.links.edit")), edit_person_path(person), :class => 'btn btn-warning btn-xs' %>
+              <%= link_to t('.destroy', :default => t("helpers.links.destroy")), person_path(person), :method => :delete, :class => 'btn btn-xs btn-danger' %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <hr>
+  <%= link_to t('.new', :default => t("helpers.links.new")), new_person_path, :class => 'btn btn-primary' %>
+</div>

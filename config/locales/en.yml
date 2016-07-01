@@ -1,6 +1,23 @@
 # encoding: UTF-8
 
 en:
+  ransack:
+    search: "Pesquisar"
+
+  activerecord:
+    attributes:
+      product:
+        model_name: "Product"
+        name: "Name"
+        value: "Value"
+    models:
+      product:
+        one: "Product"
+        other: "Products"
+      order:
+        one: "Order"
+        other: "Orders"
+
   currency:
     unit: "$ "
 
@@ -23,8 +40,10 @@ en:
       select_product: "Select a product"
 
     headers:
+      new_product: "New Product"
       listing_products: "Products List"
       editing_product: "Edit Product"
+      showing_product: "Showing Product"
       listing_orders: "Orders List"
       new_order: "New Order"
       order: "Order"
@@ -35,6 +54,7 @@ en:
       remember_me: "Remain Logged"
       amount: "Amount"
       product: "Product"
+      product_changelog: "Changes History"
 
   table:
     headers:
@@ -56,6 +76,7 @@ en:
 
     notice:
       totals: "Total:"
+      total_unit: "Unit Value:"
       min_chars: 'Minimum of %{min} characters.'
       product_update_success: "The product has been successfully updated."
       product_remove_success: "The product has been successfully deleted."
@@ -63,3 +84,9 @@ en:
       order_create_success: "The order has been successfully created."
       order_update_success: "The order has been successfully updated."
       order_remove_success: "The order has been successfully removed."
+      audited_value_change: 'Value changed from %{from} to %{to}.'
+      audited_name_change:  'Name changed from "%{from}" to "%{to}".'
+
+  cocoon:
+    defaults:
+      remove: "x"

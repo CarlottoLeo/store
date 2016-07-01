@@ -1,0 +1,30 @@
+<div role="nested-items-row" class="row nested-fields" style="margin-top: 10px">
+  <div class="col-md-12" id="nested-field-div">
+    <label><%= t('page.headers.product') %></label>
+
+    <div class="form-group">
+      <%= f.select(:prodid, [], {include_blank: true}, {required: true}) %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label t('page.headers.amount') %>
+      <%= f.number_field :amount, required: true, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label t('table.headers.total_unit') %>
+      <%= f.text_field :value, required: true, readonly: true, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label t('messages.notice.totals') %>
+      <%= f.text_field :total, required: true, readonly: true, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= link_to_remove_association f do %>
+        <button class="btn btn-danger">x</button>
+      <% end %>
+    </div>
+  </div>
+</div>

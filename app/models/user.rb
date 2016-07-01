@@ -4,4 +4,8 @@ class User < ActiveRecord::Base
 
   has_many :orders
   has_many :items
+
+  audited
+
+  acts_as_paranoid
 end

@@ -1,7 +1,8 @@
-<% if current_user == @order.user %>
-  <h2 class="ui header"><%= t('page.headers.order') %> #<%= @order.id %></h2>
+<div class="col-md-offset-2 col-md-8">
+  <h2><%= t('page.headers.order') %> #<%= @order.id %></h2>
+  <h4><%= t('page.headers.order_client') %>: <%= link_to @order.person.name, person_path(@order.person) %></h4>
 
-  <table class="ui table selectable inverted">
+  <table class="table table-striped table-hover">
     <thead>
       <tr>
         <th><%= t('table.headers.product') %></th>
@@ -15,7 +16,7 @@
       <% @order.items.each do |v| %>
         <% prod = Product.find(v.prodid) %>
         <tr>
-          <td><%= prod.name %></td>
+          <td><%= link_to prod.name, product_path(prod) %></td>
           <td><%= convert_number_to_money prod.value %></td>
           <td><%= number_with_delimiter v.amount, :delimiter => "," %></td>
           <td><%= convert_number_to_money prod.value * v.amount %></td>
@@ -28,30 +29,6 @@
 
   <hr>
 
-  <%= render partial: 'layouts/animated_button', locals: {
-    name:          t('page.controllers.back'),
-    icon_class:    "reply icon",
-    clickCallback: "window.location.href = '#{orders_path}'"
-  } %>
-
-  <%= render partial: 'layouts/animated_button', locals: {
-    name:          t('page.controllers.destroy'),
-    icon_class:    "delete icon",
-    clickCallback: "$.ajax({
-      type: 'DELETE',
-      url: window.location.href,
-      success: function() {
-        window.location.href = '#{orders_path}';
-      },
-      error: function() {
-        window.location.href = '#{orders_path}';
-      }
-    })"
-  } %>
-<% else %>
-  <div class="ui red negative message">
-    <h2><%= t('messages.error.header') %></h2>
-    <ul>
-      <li><%= t('messages.error.order_dont_belong_to_user') %></li>
-    </ul>
-<% end %>
+  <%= link_to t('page.controllers.back'), orders_path, class: "btn btn-default" %>
+  <%= link_to t('page.controllers.destroy'), order_path(@order), method: :delete, class: "btn btn-danger" %>
+</div>

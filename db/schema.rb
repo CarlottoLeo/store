@@ -11,7 +11,45 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160506180402) do
+ActiveRecord::Schema.define(version: 20160609185633) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "addresses", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "number"
+    t.string   "district"
+    t.string   "country"
+    t.string   "country_short"
+    t.string   "cep"
+    t.integer  "person_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  create_table "audits", force: :cascade do |t|
+    t.integer  "auditable_id"
+    t.string   "auditable_type"
+    t.integer  "associated_id"
+    t.string   "associated_type"
+    t.integer  "user_id"
+    t.string   "user_type"
+    t.string   "username"
+    t.string   "action"
+    t.text     "audited_changes"
+    t.integer  "version",         default: 0
+    t.string   "comment"
+    t.string   "remote_address"
+    t.string   "request_uuid"
+    t.datetime "created_at"
+  end
+
+  add_index "audits", ["associated_id", "associated_type"], name: "associated_index", using: :btree
+  add_index "audits", ["auditable_id", "auditable_type"], name: "auditable_index", using: :btree
+  add_index "audits", ["created_at"], name: "index_audits_on_created_at", using: :btree
+  add_index "audits", ["request_uuid"], name: "index_audits_on_request_uuid", using: :btree
+  add_index "audits", ["user_id", "user_type"], name: "user_index", using: :btree
 
   create_table "items", force: :cascade do |t|
     t.integer  "prodid"
@@ -19,6 +57,8 @@ ActiveRecord::Schema.define(version: 20160506180402) do
     t.integer  "amount"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.decimal  "value"
+    t.decimal  "total"
   end
 
   create_table "orders", force: :cascade do |t|
@@ -27,6 +67,22 @@ ActiveRecord::Schema.define(version: 20160506180402) do
     t.integer  "user_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.datetime "deleted_at"
+    t.integer  "person_id"
+  end
+
+  add_index "orders", ["deleted_at"], name: "index_orders_on_deleted_at", using: :btree
+
+  create_table "people", force: :cascade do |t|
+    t.string   "name"
+    t.string   "cpf"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.datetime "birth_date"
+    t.string   "email"
+    t.string   "profession"
+    t.integer  "gender"
+    t.string   "marital_status"
   end
 
   create_table "products", force: :cascade do |t|
@@ -34,7 +90,10 @@ ActiveRecord::Schema.define(version: 20160506180402) do
     t.decimal  "value"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
   end
+
+  add_index "products", ["deleted_at"], name: "index_products_on_deleted_at", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -53,9 +112,11 @@ ActiveRecord::Schema.define(version: 20160506180402) do
     t.string   "unconfirmed_email"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.datetime "deleted_at"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["deleted_at"], name: "index_users_on_deleted_at", using: :btree
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 end

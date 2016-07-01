@@ -1,10 +1,17 @@
 class Item < ActiveRecord::Base
-  def new(params)
-    Item.create do |item|
-      item.prodid = params[:prodid]
-      item.amount = params[:amount]
-      
-      item.save
-    end
+  attr_writer :_destroy
+
+  validates :amount,
+    presence: true,
+    numericality: {
+      higher_than: 0
+    }
+
+  belongs_to :order
+
+  before_save :calculate_total
+
+  def calculate_total
+    self.total = self.amount * self.value
   end
 end

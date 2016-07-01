@@ -12,6 +12,55 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require twitter/bootstrap
 //= require turbolinks
 //= require_tree .
-//= require semantic_ui/semantic_ui
+//= require select2
+//= require cocoon
+
+$(function() {
+  $("a.add_fields").data("association-insertion-method", 'append').data("association-insertion-node", '#nested-forms-box');
+  $('#add-nested-field').trigger('click');
+});
+
+$(document).on('page:change', function() {
+  $("a[rel~=popover], .has-popover").popover();
+  $("a[rel~=tooltip], .has-tooltip").tooltip();
+
+  $(document).on('cocoon:after-insert', function() {
+    $('select[name*="order[items_attributes]"]').ajax_search_select2("Selecione um Produto", "bootstrap", "/products", 5, 'name_cont');
+
+    $('#nested-forms-box').animate({
+      scrollTop: $('#nested-forms-box').prop("scrollHeight")
+    }, 'slow');
+  });
+
+  $('select[name*="order[items_attributes]"]').ajax_search_select2("Selecione um Produto", "bootstrap", "/products", 5, 'name_cont');
+
+  $('#nested-forms-box').animate({
+    scrollTop: $('#nested-forms-box').prop("scrollHeight")
+  }, 'slow');
+
+  // update the items cart values automatically when selecting or adding more
+  $(document).change(function() {
+    $('div[role="nested-items-row"]').each(function() {
+      $(this).update_forms_values();
+    });
+  });
+
+  $('#person_cpf').mask('999.999.999-99');
+
+  $('#order_person_id').ajax_search_select2("Selecione um Cliente", "bootstrap", "/people", 7, 'name_or_cpf_cont');
+
+  $("#q_person_name_or_person_cpf_cont").keyup(function() {
+    $(this).ajax_search_ransack('/orders', 'person_name_or_person_cpf_cont', $(this).val(), 'orders_list');
+  });
+
+  $("#q_name_cont").keyup(function() {
+    $(this).ajax_search_ransack('/products', 'name_cont', $(this).val(), 'products_list');
+  });
+
+  $("#q_name_or_cpf_cont").keyup(function() {
+    $(this).ajax_search_ransack('/people', 'name_or_cpf_cont', $(this).val(), 'people_list');
+  });
+});

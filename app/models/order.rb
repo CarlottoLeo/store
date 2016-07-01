@@ -1,31 +1,48 @@
 class Order < ActiveRecord::Base
-  has_many :items
-  belongs_to :user
+  # active record validations
+  validates :person_id, presence: true
+  validates :items,  presence: true
 
-  scope :filter_by_user, ->(id) {where('user_id == ?', id)}
+  # active record actions
+  before_save :merge_duplicates, :calculate_totals
 
-  def self.new_with_products(user, order_params)
-    Order.create do |order|
-      order.user = user
-      order.name = "Order #{order.id}"
-      order.total_value = 0
+  # associations
+  has_many :items, dependent: :destroy
+  belongs_to :person
 
-      if order_params && order_params[:items]
-        order_params[:items].each do |_, product|
-          prod = Product.find_by_name(product['name'])
+  # scoping
+  scope :filter_by_person, ->(id) {where('person_id = ?', id)}
 
-          unless (prod.nil?)
-            item = Item.new({prodid: prod.id, amount: product['amount'].to_i})
+  # optional attributes
+  audited
+  acts_as_paranoid
+  accepts_nested_attributes_for :items, reject_if: :all_blank, allow_destroy: true
 
-            order.items.push(item)
-            order.total_value += prod.value * item.amount
-          end
-        end
+
+  def merge_duplicates
+    items = []
+
+    self.items.each do |item|
+      pos = items.find_index { |i| i.prodid == item.prodid }
+
+      if pos
+        items[pos][:amount] += item.amount
+        items[pos][:total]   = items[pos][:amount] * items[pos][:value]
       else
-        return nil
+        items.push item
       end
+    end
 
-      return order
+    self.items = items
+  end
+
+  def calculate_totals
+    self.total_value = 0
+
+    self.items.each do |item|
+      unless item.nil?
+        self.total_value += item.total
+      end
     end
   end
 end

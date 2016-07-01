@@ -1,26 +1,42 @@
-<div class="container segments">
-  <div class="container segment">
-  <h2 class='ui header'>
-    <%= t('table.headers.name') %>: <%= @product.name %>
-  </h2>
-  <h2 class='ui header'>
-    <%= t('table.headers.value') %>: <%= convert_number_to_money @product.value %>
-  </h2>
-  </div>
+<div class="col-md-offset-4 col-md-4">
+  <h1><%= t('page.headers.showing_product') %></h2>
+
+  <form>
+    <div class="form-field">
+      <label><%= t('table.headers.name') %></label>
+      <input value="<%= @product.name %>" disabled class="form-control">
+    </div>
+
+    <div class="form-field">
+      <label><%= t('table.headers.value') %></label>
+      <input value="<%= convert_number_to_money @product.value %>" disabled class="form-control">
+    </div>
+  </form>
 
   <hr>
 
-  <div class="container segment">
-    <%= render partial: 'layouts/animated_button', locals: {
-      name:          t('page.controllers.edit'),
-      icon_class:    "write icon",
-      clickCallback: "window.location.href = '/products/#{@product.id}/edit'"
-    } %>
+  <% if @product.audits.count > 1 -%>
+    <h5><i class="fa fa-pencil-square-o"></i> <%= t('page.headers.product_changelog') %></h5>
 
-    <%= render partial: 'layouts/animated_button', locals: {
-      name:          t('page.controllers.back'),
-      icon_class:    "reply icon",
-      clickCallback: "window.location.href = '/'"
-    } %>
+    <% @product.audits.each do |v| %>
+      <% if v.action == 'update' %>
+        <% v.audited_changes.each do |key, val| %>
+          [<%= v.created_at.to_formatted_s(:short) %>]
+
+          <% if key == 'value' %>
+            <%= t('messages.notice.audited_value_change', from: convert_number_to_money(val[0]), to: convert_number_to_money(val[1])) %>
+          <% elsif key == 'name' %>
+            <%= t('messages.notice.audited_name_change', from: val[0], to: val[1]) %>
+          <% end %></br>
+        <% end %>
+      <% end %>
+    <% end %>
+
+    <hr>
+  <% end -%>
+
+  <div class="form-field">
+    <%= link_to t('page.controllers.back'), products_path, class: "btn btn-default" %>
+    <%= link_to t('page.controllers.edit'), edit_product_path(@product), class: "btn btn-warning" %>
   </div>
 </div>

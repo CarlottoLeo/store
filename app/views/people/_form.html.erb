@@ -1,0 +1,114 @@
+<!-- NAV TABS -->
+<div class="col-md-12">
+  <ul class="nav nav-tabs">
+    <li role="presentation" class="active" data-tab-name="#person-records"><a href="#"><i class="fa fa-user"></i> Cadastro</a></li>
+    <li role="presentation" class="<%= if params[:action] != 'show';'disabled';end %>" data-tab-name="#person-orders"><a href="#"><i class="fa fa-check"></i> Pedidos</a></li>
+    <li role="presentation" class="<%= if params[:action] != 'show';'disabled';end %>" data-tab-name="#person-stats"><a href="#"><i class="fa fa-bar-chart"></i> Estatísticas</a></li>
+    <li role="presentation" class="<%= if params[:action] != 'show';'disabled';end %>" data-tab-name="#person-audits"><a href="#"><i class="fa fa-pencil-square-o"></i> Histórico</a></li>
+  </ul>
+</div>
+
+<div class="hidden" id="person-orders">
+  <%= render 'orders' %>
+</div>
+
+<div id="person-records">
+  <%= form_for @person do |f| %>
+    <div class="form-group">
+      <div class="col-md-8">
+        <%= f.label       :name, :class => 'control-label' %>
+        <%= f.text_field  :name, :class => 'form-control', disabled: params[:action] == 'show' %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-md-4">
+        <%= f.label       :cpf, :class => 'control-label' %>
+        <%= f.text_field  :cpf, :class => 'form-control', disabled: params[:action] == 'show' %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-md-6">
+        <%= f.label       :email, :class => 'control-label' %>
+        <%= f.email_field :email, :class => 'form-control', disabled: params[:action] == 'show' %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-md-6">
+        <%= f.label       :profession, :class => 'control-label' %>
+        <%= f.text_field  :profession, :class => 'form-control', disabled: params[:action] == 'show' %>
+      </div>
+    </div>
+
+    <%= f.fields_for :address do |g| %>
+      <div class="form-group">
+        <div class="col-md-10">
+          <%= g.label        :name, :class => 'control-label' %>
+          <%= g.text_field   :name, :class => 'form-control', disabled: params[:action] == 'show' %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-md-2">
+          <%= g.label        :number, :class => 'control-label' %>
+          <%= g.number_field :number, :class => 'form-control', disabled: params[:action] == 'show' %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-md-4">
+          <%= g.label        :district, :class => 'control-label' %>
+          <%= g.text_field   :district, :class => 'form-control', disabled: params[:action] == 'show' %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-md-4">
+          <%= g.label        :country, :class => 'control-label' %>
+          <%= g.text_field   :country, :class => 'form-control', disabled: params[:action] == 'show' %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-md-4">
+          <%= g.label        :cep, :class => 'control-label' %>
+          <%= g.text_field   :cep, :class => 'form-control', disabled: params[:action] == 'show' %>
+        </div>
+      </div>
+    <% end %>
+
+    <% if params[:action] != 'show' %>
+      <div class="form-group">
+        <div class="col-md-12" style="margin-top: 10px">
+          <%= f.submit nil, :class => 'btn btn-primary' %>
+          <%= link_to t('.cancel', :default => t("helpers.links.cancel")), people_path, :class => 'btn btn-default' %>
+        </div>
+      </div>
+    <% else %>
+      <div class="col-md-12" style="margin-top: 10px">
+        <%= link_to t('.back',    :default => t("helpers.links.back")), people_path, :class => 'btn btn-default' %>
+        <%= link_to t('.edit',    :default => t("helpers.links.edit")), edit_person_path(@person), :class => 'btn btn-warning' %>
+        <%= link_to t('.destroy', :default => t("helpers.links.destroy")), person_path(@person), :method => 'delete', :class => 'btn btn-danger' %>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+
+<div class="hidden" id="person-audits">
+  <div class="col-md-10">
+    <% if @person.audits.count > 1 -%>
+      <h5> <%= t('page.headers.product_changelog') %></h5>
+
+      <pre style="overflow: auto, max-height: 200px">
+        <% @person.audits.each do |v| %>
+          <% v.audited_changes.each do |key, val| %>
+            <p><%= p v, key, val -%></p>
+          <% end %>
+        <% end %>
+      </pre>
+      <hr>
+    <% end -%>
+  </div>
+</div>

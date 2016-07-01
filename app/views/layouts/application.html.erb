@@ -7,59 +7,44 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <div class="ui menu">
-    <%= link_to root_path, class: :item do %>
-      <i class="home icon big inverted black"></i><%= t('page.controllers.index') %>
-    <% end %>
-    <div class="right menu">
+  <%= nav_bar brand: 'Store', brand_link: root_path, fixed: :top, responsive: true do %>
+    <%= menu_group do %>
       <% if user_signed_in? %>
-        <div class="item">
-          <p><strong><%= current_user.email %></strong></p>
-        </div>
-
-        <div class="item">
-          <%= link_to orders_path do %>
-            <div class="ui inverted blue button"><i class="add to cart icon"></i><%= t('page.controllers.my_orders') %></div>
-          <% end %>
-        </div>
-
-        <div class="item">
-          <%= link_to destroy_user_session_path, method: :delete do %>
-            <div class="ui button"><%= t('page.controllers.log_out') %></div>
-          <% end %>
-        </div>
-      <% else %>
-        <div class="item">
-          <%= link_to new_registration_path(:user) do %>
-            <div class="ui primary button"><%= t('page.controllers.sign_up') %></div>
-          <% end %>
-        </div>
-
-        <div class="item">
-          <%= link_to user_session_path do %>
-            <div class="ui button"><%= t('page.controllers.log_in') %></div>
-          <% end %>
-        </div>
+        <%= menu_item t('page.headers.people'), people_path %>
+        <%= menu_item t('page.headers.products'), products_path %>
+        <%= menu_divider %>
+        <%= menu_item t('page.headers.orders'), orders_path %>
       <% end %>
-    </div>
-  </div>
-  <div class="ui container">
-    <% if flash[:notice] %>
-      <div class="ui blue info message">
-        <%= notice %>
-      </div>
     <% end %>
 
-    <% if flash[:alert] %>
-      <div class="ui red negative message">
-        <%= alert %>
-      </div>
+    <%= menu_group pull: :right do %>
+      <% if user_signed_in? %>
+        <%= menu_item t('page.controllers.log_out'), destroy_user_session_path, method: :delete %>
+      <% else %>
+        <%= menu_item t('page.controllers.sign_up'), new_registration_path(:user) %>
+        <%= menu_item t('page.controllers.log_in'), user_session_path %>
+      <% end %>
     <% end %>
+  <% end %>
 
-    <div class="ui container segments">
-      <div class="ui container segment">
-        <%= yield %>
+  <div class="container" id="application-container">
+    <!--div class="row">
+      <div class="col-lg-offset-2 col-md-8 col-xs-4 col-lg-10">
+        <% if flash[:notice] %>
+          <div class="alert alert-success" role="alert">
+            <%= notice %>
+          </div>
+        <% end %>
+
+        <% if flash[:alert] %>
+          <div class="alert alert-warning" role="alert">
+            <%= alert %>
+          </div>
+        <% end %>
       </div>
+    </div-->
+    <div class="row">
+      <%= yield %>
     </div>
   </div>
 </body>

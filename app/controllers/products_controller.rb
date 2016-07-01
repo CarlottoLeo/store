@@ -1,31 +1,33 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
-  around_action :catch_not_found
+  before_filter :authenticate_user!
 
-  # GET /products
-  # GET /products.json
   def index
-    @products = Product.get_all_by_name_asc
+    @q = Product.ransack(params[:q])
+    @products = @q.result(distinct: true).order(name: :asc)
+    @products = @products.paginate(page: params[:page], per_page: params[:per_page])
+
+    authorize @products
   end
 
-  # GET /products/1
-  # GET /products/1.json
   def show
+    authorize @product
   end
 
-  # GET /products/new
   def new
     @product = Product.new
+
+    authorize @product
   end
 
-  # GET /products/1/edit
   def edit
+    authorize @product
   end
 
-  # POST /products
-  # POST /products.json
   def create
     @product = Product.new(product_params)
+
+    authorize @product
 
     respond_to do |format|
       if @product.save
@@ -38,9 +40,9 @@ class ProductsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /products/1
-  # PATCH/PUT /products/1.json
   def update
+    authorize @product
+
     respond_to do |format|
       if @product.update(product_params)
         format.html { redirect_to @product, notice: t('messages.notice.product_update_success') }
@@ -52,10 +54,10 @@ class ProductsController < ApplicationController
     end
   end
 
-  # DELETE /products/1
-  # DELETE /products/1.json
   def destroy
     @product.destroy
+
+    authorize @product
 
     respond_to do |format|
       format.html { redirect_to products_url, notice: t('messages.notice.product_remove_success') }
@@ -63,33 +65,19 @@ class ProductsController < ApplicationController
     end
   end
 
-  def get_collection_for_select_tag
-    prods = Product.get_all_by_name_asc
-    result = ""
-
-    unless prods.nil?
-      prods.each do |product|
-        result += "<option value=\"{id: #{product.id}, value: #{product.value}}\">#{product.name}</option>\n"
-      end
-    end
-
-    return result
+  def search
+    index
+    render :index
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_product
-      @product = Product.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_product
+    @product = Product.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def product_params
-      params.require(:product).permit(:name, :value)
-    end
-
-    def catch_not_found
-      yield
-    rescue ActiveRecord::RecordNotFound
-      redirect_to root, :flash => { :error => t('messages.error.order_record_not_found') }
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def product_params
+    params.require(:product).permit(:id, :name, :value)
+  end
 end

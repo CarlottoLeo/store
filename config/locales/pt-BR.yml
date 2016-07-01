@@ -1,6 +1,35 @@
 # encoding: UTF-8
 
 pt-BR:
+  ransack:
+    search: "Pesquisar"
+
+  activerecord:
+    attributes:
+      items:
+        model_name: "Lista de Produtos"
+      product:
+        model_name: "Produto"
+        name: "Nome"
+        value: "Valor"
+      person:
+        model_name: "Cliente"
+        name: "Nome"
+        cpf: "CPF"
+      order:
+        person: "Cliente"
+        items: "Lista de pedidos"
+    models:
+      product:
+        one: "Produto"
+        other: "Produtos"
+      order:
+        one: "Pedido"
+        other: "Pedidos"
+      person:
+        one: "Cliente"
+        other: "Clientes"
+
   currency:
     unit: "R$ "
 
@@ -11,7 +40,6 @@ pt-BR:
       destroy: "Excluir"
       add: "Adicionar"
       index: "Principal"
-      my_orders: "Meus Pedidos"
       create: "Criar"
       log_in: "Logar"
       log_out: "Deslogar"
@@ -21,13 +49,20 @@ pt-BR:
       submit: "Enviar"
       new: "Novo"
       select_product: "Selecione um produto"
+      create_order: "Criar Pedido"
 
     headers:
+      order_client: "Cliente"
+      people: "Clientes"
+      products: "Produtos"
+      new_product: "Novo Produto"
       listing_products: "Lista de Produtos"
       editing_product: "Editando Produto"
+      showing_product: "Mostrando Produto"
       listing_orders: "Listando Pedidos"
       new_order: "Novo Pedido"
       order: "Pedido"
+      orders: "Pedidos"
       login: "Login"
       email: "Email"
       password: "Senha"
@@ -35,7 +70,10 @@ pt-BR:
       remember_me: "Permanecer Logado"
       amount: "Quantidade"
       product: "Produto"
-
+      product_changelog: "Histórico de Alterações"
+      new_people: "Novo Cliente"
+      edit_people: "Editar Cliente"
+      show_people: "Visualizar Cliente"
   table:
     headers:
       name: "Nome"
@@ -46,16 +84,19 @@ pt-BR:
       total: "Total"
       amount: "Quantidade"
       total_unit: "Valor Unitário"
+      order_client: "Cliente"
 
   messages:
     error:
-      header: "Oops, parece que houve um problema na requisição:"
+      header: "Oops, parece que houve algum problema."
       order_dont_belong_to_user: "Você não tem permissão para ver este pedido."
       order_create_empty_cart: "O pedido não pode estar vazio."
       order_record_not_found: "O pedido não existe ou não pode ser encontrado."
+      items_attributes_empty: " está vazia."
 
     notice:
-      totals: "Total:"
+      person: "Cliente"
+      totals: "Total"
       total_unit: "Valor unitário:"
       min_chars: 'Mínimo de %{min} caracteres.'
       product_update_success: "O produto foi atualizado com sucesso."
@@ -64,3 +105,24 @@ pt-BR:
       order_create_success: "Pedido criado com sucesso."
       order_update_success: "Pedido atualizado com sucesso."
       order_remove_success: "Pedido removido com sucesso."
+      audited_value_change: 'Alterado valor de %{from} para %{to}.'
+      audited_name_change:  'Alterado nome de "%{from}" para "%{to}".'
+      audited_cpf_change: 'Alterado CPF de "%{from}" para "%{to}".'
+    searchbox:
+      search_people: "Procurar clientes..."
+      search_products: "Procurar produtos..."
+      search_orders: "Procurar pedidos..."
+
+  cocoon:
+    defaults:
+      remove: "x"
+
+  helpers:
+    actions: "Opções"
+
+    links:
+      cancel: "Voltar"
+      new: "Adicionar"
+      back: "Voltar"
+      edit: "Editar"
+      destroy: "Excluir"
