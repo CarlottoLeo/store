@@ -7,6 +7,7 @@
  *= require_tree .
  *= require select2
  *= require select2-bootstrap
+ *= require font-awesome
 */
 
 /* hide input buttons to make space for animated buttons */
