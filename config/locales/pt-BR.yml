@@ -30,6 +30,7 @@ pt-BR:
         one: "Cliente"
         other: "Clientes"
 
+
   currency:
     unit: "R$ "
 
@@ -126,3 +127,4 @@ pt-BR:
       back: "Voltar"
       edit: "Editar"
       destroy: "Excluir"
+      Generate_report: "Gerar Relatório"

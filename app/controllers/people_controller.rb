@@ -6,7 +6,11 @@ class PeopleController < ApplicationController
     @q      = Person.ransack(params[:q])
     @people = @q.result(distinct: true).order(name: :asc)
     @people = @people.paginate(page: params[:page], per_page: params[:per_page])
-
+    respond_to do |format|
+      format.html
+      format.json
+      format.pdf { render template: 'people/report', pdf: 'report' }
+    end
     authorize @people
   end
 
@@ -15,7 +19,7 @@ class PeopleController < ApplicationController
   end
 
   def new
-    @person  = Person.new
+    @person = Person.new
 
     authorize @person
   end
@@ -67,18 +71,19 @@ class PeopleController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_person
-      @person = Person.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def person_params
-      params.require(:person).permit(
-        :name, :cpf, :email, :profession,
-        :address => [
-          :name, :number, :district, :country, :cep
-        ]
-      )
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_person
+    @person = Person.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def person_params
+    params.require(:person).permit(
+      :name, :cpf, :email, :profession,
+      address: [
+        :name, :number, :district, :country, :cep
+      ]
+    )
+  end
 end

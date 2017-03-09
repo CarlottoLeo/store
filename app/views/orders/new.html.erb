@@ -2,35 +2,30 @@
   <div class="alert alert-danger">
     <h4><%= t('messages.error.header') %></h4>
     <ul>
-    <% @order.errors.each do |model, msg| -%>
-      <li>
-        <%= Order.human_attribute_name(model) %> <%= msg %>
-      </li>
-    <% end -%>
+      <% @order.errors.each do |model, msg| -%>
+        <li>
+          <%= Order.human_attribute_name(model) %> <%= msg %>
+        </li>
+      <% end -%>
     </ul>
   </div>
 <% end -%>
-
 <h1><%= t('page.headers.new_order') %></h1>
-
 <%= form_for @order, html: {class: "form-inline", id: "order-form"} do |f| -%>
   <div class="row">
     <div class="col-md-8">
       <div class="form-group">
         <label><%= t('messages.notice.person') %></label>
-        <%= f.select(:person_id, [], {include_blank: true}, {required: true}) %>
+        <%= f.select(:person_id, %w{order.person.name}, include_blank: true, required: true) %>
       </div>
     </div>
   </div>
-
   <hr>
-
   <div id="nested-forms-box">
     <%= f.fields_for :items do |item| -%>
       <%= render 'item_fields', locals: {f: item} %>
     <% end -%>
   </div>
-
   <%= link_to_add_association f, :items, id: "add-nested-field" do -%>
     <button class="btn btn-success" style="margin-top: 20px"><%= t('page.controllers.add') %></button>
   <% end -%>
@@ -43,7 +38,6 @@
       </div>
     </div>
   </div>
-
   <div class="row">
     <div class="col-md-4">
       <%= f.submit nil, class: "btn btn-primary" %>

@@ -1,12 +1,10 @@
-<div class="col-md-offset-2 col-md-8">
+<div class="span12">
   <h1><%= t 'page.headers.people' %></h1>
-
   <%= search_form_for @q do |f| -%>
     <div class="form-group form-inline" id="parent_search_form_div">
       <%= f.search_field :name_or_cpf_cont, class: "form-control", placeholder: t('messages.searchbox.search_people') -%>
     </div>
   <% end %>
-
   <table class="table">
     <thead>
       <tr>
@@ -32,7 +30,7 @@
       </tbody>
     </table>
   </div>
-
   <hr>
   <%= link_to t('.new', :default => t("helpers.links.new")), new_person_path, :class => 'btn btn-primary' %>
+  <%= link_to t('.Generate_report', :default => t("helpers.links.Generate_report")), href="/people.pdf", :class => 'btn btn-default' %>
 </div>

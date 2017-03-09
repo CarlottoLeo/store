@@ -1,34 +1,32 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Store</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-  <%= nav_bar brand: 'Store', brand_link: root_path, fixed: :top, responsive: true do %>
-    <%= menu_group do %>
-      <% if user_signed_in? %>
-        <%= menu_item t('page.headers.people'), people_path %>
-        <%= menu_item t('page.headers.products'), products_path %>
-        <%= menu_divider %>
-        <%= menu_item t('page.headers.orders'), orders_path %>
+  <head>
+    <title>Parts Store</title>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <%= nav_bar brand: 'Parts Store', brand_link: root_path, fixed: :top, responsive: true do %>
+      <%= menu_group do %>
+        <% if user_signed_in? %>
+          <%= menu_item t('page.headers.people'), people_path %>
+          <%= menu_item t('page.headers.products'), products_path %>
+          <%= menu_divider %>
+          <%= menu_item t('page.headers.orders'), orders_path %>
+        <% end %>
+      <% end %>
+      <%= menu_group pull: :right do %>
+        <% if user_signed_in? %>
+          <%= menu_item t('page.controllers.log_out'), destroy_user_session_path, method: :delete %>
+        <% else %>
+          <%= menu_item t('page.controllers.sign_up'), new_registration_path(:user) %>
+          <%= menu_item t('page.controllers.log_in'), user_session_path %>
+        <% end %>
       <% end %>
     <% end %>
-
-    <%= menu_group pull: :right do %>
-      <% if user_signed_in? %>
-        <%= menu_item t('page.controllers.log_out'), destroy_user_session_path, method: :delete %>
-      <% else %>
-        <%= menu_item t('page.controllers.sign_up'), new_registration_path(:user) %>
-        <%= menu_item t('page.controllers.log_in'), user_session_path %>
-      <% end %>
-    <% end %>
-  <% end %>
-
-  <div class="container" id="application-container">
-    <!--div class="row">
+    <div class="container" id="application-container">
+      <!--div class="row">
       <div class="col-lg-offset-2 col-md-8 col-xs-4 col-lg-10">
         <% if flash[:notice] %>
           <div class="alert alert-success" role="alert">
@@ -43,9 +41,9 @@
         <% end %>
       </div>
     </div-->
-    <div class="row">
-      <%= yield %>
+      <div class="row">
+        <%= yield %>
+      </div>
     </div>
-  </div>
-</body>
+  </body>
 </html>

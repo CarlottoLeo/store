@@ -1,12 +1,10 @@
-<div class="col-md-offset-2 col-md-8">
+<div class="span12">
   <h1><%= t('page.headers.listing_orders') %></h1>
-
   <%= search_form_for @q do |f| -%>
     <div class="form-group form-inline" id="parent_search_form_div">
       <%= f.search_field :person_name_or_person_cpf_cont, {class: "form-control", placeholder: t('messages.searchbox.search_orders')} -%>
     </div>
   <% end %>
-
   <table class="table">
     <thead>
       <tr>
@@ -17,7 +15,6 @@
       </tr>
     </thead>
   </table>
-
   <div style="overflow: auto; overflow-x: hidden; max-height: 200px; height: 200px;">
     <table class="table" id="orders_list">
       <tbody>
@@ -28,19 +25,16 @@
                 <div><%= order.id %></div>
               <% end %>
             </td>
-
             <td width="25%">
               <%= link_to order do %>
                 <div><%= order.person.name %></div>
               <% end %>
             </td>
-
             <td width="25%">
               <%= link_to order do %>
                 <div><%= convert_number_to_money order.total_value %></div>
               <% end %>
             </td>
-
             <td width="30%">
               <%= link_to t('page.controllers.destroy'), order_path(order), method: :delete, class: "btn btn-xs btn-danger" %>
             </td>
@@ -49,6 +43,6 @@
       </tbody>
     </table>
   </div>
-
+  <hr>
   <%= link_to t('page.controllers.add'), new_order_path, method: :get, class: "btn btn-primary" %>
 </div>

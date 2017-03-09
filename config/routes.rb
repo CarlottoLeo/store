@@ -1,16 +1,17 @@
 Rails.application.routes.draw do
   LOCALES = /en|pt\-BR/
 
-  scope "(:locale)" , locale: LOCALES do
-      resources  :orders, except: :edit
-      resources  :items
-      resources  :people
-      resources  :products
+  scope '(:locale)', locale: LOCALES do
+    resources :orders, except: :edit
+    resources  :items
+    resources  :people
+    resources  :products
+    resources  :report
 
-      devise_for :users
+    devise_for :users
 
-      get '/:locale' => 'orders#index', locale: LOCALES
+    get '/:locale' => 'orders#index', locale: LOCALES
   end
 
-  root "orders#index"
+  root 'orders#index'
 end
