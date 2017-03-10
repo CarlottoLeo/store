@@ -32,4 +32,5 @@
   <% end -%>
   <hr>
   <%= link_to t('page.controllers.add'), new_product_path, class: "btn btn-primary" %>
+  <%= link_to t('.Generate_report', :default => t("helpers.links.Generate_report")), href="/products.pdf", :class => 'btn btn-default' %>
 </div>

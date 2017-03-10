@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -43,13 +42,12 @@ ActiveRecord::Schema.define(version: 20160609185633) do
     t.string   "remote_address"
     t.string   "request_uuid"
     t.datetime "created_at"
+    t.index ["associated_id", "associated_type"], name: "associated_index", using: :btree
+    t.index ["auditable_id", "auditable_type"], name: "auditable_index", using: :btree
+    t.index ["created_at"], name: "index_audits_on_created_at", using: :btree
+    t.index ["request_uuid"], name: "index_audits_on_request_uuid", using: :btree
+    t.index ["user_id", "user_type"], name: "user_index", using: :btree
   end
-
-  add_index "audits", ["associated_id", "associated_type"], name: "associated_index", using: :btree
-  add_index "audits", ["auditable_id", "auditable_type"], name: "auditable_index", using: :btree
-  add_index "audits", ["created_at"], name: "index_audits_on_created_at", using: :btree
-  add_index "audits", ["request_uuid"], name: "index_audits_on_request_uuid", using: :btree
-  add_index "audits", ["user_id", "user_type"], name: "user_index", using: :btree
 
   create_table "items", force: :cascade do |t|
     t.integer  "prodid"
@@ -69,9 +67,8 @@ ActiveRecord::Schema.define(version: 20160609185633) do
     t.datetime "updated_at",  null: false
     t.datetime "deleted_at"
     t.integer  "person_id"
+    t.index ["deleted_at"], name: "index_orders_on_deleted_at", using: :btree
   end
-
-  add_index "orders", ["deleted_at"], name: "index_orders_on_deleted_at", using: :btree
 
   create_table "people", force: :cascade do |t|
     t.string   "name"
@@ -91,9 +88,8 @@ ActiveRecord::Schema.define(version: 20160609185633) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_products_on_deleted_at", using: :btree
   end
-
-  add_index "products", ["deleted_at"], name: "index_products_on_deleted_at", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -113,10 +109,9 @@ ActiveRecord::Schema.define(version: 20160609185633) do
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_users_on_deleted_at", using: :btree
+    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
-
-  add_index "users", ["deleted_at"], name: "index_users_on_deleted_at", using: :btree
-  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 end

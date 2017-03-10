@@ -6,7 +6,11 @@ class ProductsController < ApplicationController
     @q = Product.ransack(params[:q])
     @products = @q.result(distinct: true).order(name: :asc)
     @products = @products.paginate(page: params[:page], per_page: params[:per_page])
-
+    respond_to do |format|
+      format.html
+      format.json
+      format.pdf { render template: 'products/report_products', pdf: 'report' }
+    end
     authorize @products
   end
 
@@ -71,6 +75,7 @@ class ProductsController < ApplicationController
   end
 
   private
+
   # Use callbacks to share common setup or constraints between actions.
   def set_product
     @product = Product.find(params[:id])

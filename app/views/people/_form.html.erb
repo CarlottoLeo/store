@@ -7,11 +7,9 @@
     <li role="presentation" class="<%= if params[:action] != 'show';'disabled';end %>" data-tab-name="#person-audits"><a href="#"><i class="fa fa-pencil-square-o"></i> Histórico</a></li>
   </ul>
 </div>
-
 <div class="hidden" id="person-orders">
   <%= render 'orders' %>
 </div>
-
 <div id="person-records">
   <%= form_for @person do |f| %>
     <div class="form-group">
@@ -20,28 +18,24 @@
         <%= f.text_field  :name, :class => 'form-control', disabled: params[:action] == 'show' %>
       </div>
     </div>
-
     <div class="form-group">
       <div class="col-md-4">
         <%= f.label       :cpf, :class => 'control-label' %>
         <%= f.text_field  :cpf, :class => 'form-control', disabled: params[:action] == 'show' %>
       </div>
     </div>
-
     <div class="form-group">
       <div class="col-md-6">
         <%= f.label       :email, :class => 'control-label' %>
         <%= f.email_field :email, :class => 'form-control', disabled: params[:action] == 'show' %>
       </div>
     </div>
-
     <div class="form-group">
       <div class="col-md-6">
         <%= f.label       :profession, :class => 'control-label' %>
         <%= f.text_field  :profession, :class => 'form-control', disabled: params[:action] == 'show' %>
       </div>
     </div>
-
     <%= f.fields_for :address do |g| %>
       <div class="form-group">
         <div class="col-md-10">
@@ -49,28 +43,24 @@
           <%= g.text_field   :name, :class => 'form-control', disabled: params[:action] == 'show' %>
         </div>
       </div>
-
       <div class="form-group">
         <div class="col-md-2">
           <%= g.label        :number, :class => 'control-label' %>
           <%= g.number_field :number, :class => 'form-control', disabled: params[:action] == 'show' %>
         </div>
       </div>
-
       <div class="form-group">
         <div class="col-md-4">
           <%= g.label        :district, :class => 'control-label' %>
           <%= g.text_field   :district, :class => 'form-control', disabled: params[:action] == 'show' %>
         </div>
       </div>
-
       <div class="form-group">
         <div class="col-md-4">
           <%= g.label        :country, :class => 'control-label' %>
           <%= g.text_field   :country, :class => 'form-control', disabled: params[:action] == 'show' %>
         </div>
       </div>
-
       <div class="form-group">
         <div class="col-md-4">
           <%= g.label        :cep, :class => 'control-label' %>
@@ -78,7 +68,6 @@
         </div>
       </div>
     <% end %>
-
     <% if params[:action] != 'show' %>
       <div class="form-group">
         <div class="col-md-12" style="margin-top: 10px">
@@ -95,12 +84,10 @@
     <% end %>
   <% end %>
 </div>
-
 <div class="hidden" id="person-audits">
   <div class="col-md-10">
     <% if @person.audits.count > 1 -%>
       <h5> <%= t('page.headers.product_changelog') %></h5>
-
       <pre style="overflow: auto, max-height: 200px">
         <% @person.audits.each do |v| %>
           <% v.audited_changes.each do |key, val| %>
