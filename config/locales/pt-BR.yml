@@ -53,7 +53,7 @@ pt-BR:
       create_order: "Criar Pedido"
 
     headers:
-      list_orders: 'Lista de Pedidos'
+      list_orders: 'Lista de Produtos'
       new_user: "Novo Cliente"
       order_client: "Cliente"
       people: "Clientes"
