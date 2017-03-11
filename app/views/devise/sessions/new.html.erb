@@ -1,5 +1,5 @@
 <div class="col-md-4 col-md-offset-4">
-  <h2><%= t('page.headers.login') %></h2>
+  <h2><%=fa_icon 'sign-in', text: t('page.headers.login') %></h2>
   <%= form_for(resource, :html => {:id => "signin-form"}, as: resource_name, url: session_path(resource_name)) do |f| %>
     <div class="form-group">
       <%= f.label          :email, t('page.headers.email') %>

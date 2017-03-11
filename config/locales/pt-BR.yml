@@ -53,6 +53,8 @@ pt-BR:
       create_order: "Criar Pedido"
 
     headers:
+      list_orders: 'Lista de Pedidos'
+      new_user: "Novo Cliente"
       order_client: "Cliente"
       people: "Clientes"
       products: "Produtos"
@@ -116,6 +118,7 @@ pt-BR:
 
   cocoon:
     defaults:
+      add: "+"
       remove: "x"
 
   helpers:

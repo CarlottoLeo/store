@@ -1,5 +1,5 @@
 <div class="span12">
-  <h1><%= t('page.headers.listing_orders') %></h1>
+  <h1><%= fa_icon 'list-alt', text: t('page.headers.list_orders') %></h1>
   <%= search_form_for @q do |f| -%>
     <div class="form-group form-inline" id="parent_search_form_div">
       <%= f.search_field :person_name_or_person_cpf_cont, {class: "form-control", placeholder: t('messages.searchbox.search_orders')} -%>
