@@ -14,12 +14,12 @@
   <h1><%= fa_icon 'shopping-cart', text: t('page.headers.new_order') %></h1>
   <%= form_for @order, html: {class: "form-inline", id: "order-form"} do |f| -%>
     <div class="row">
-      <div class="col-md-8">
+      <div class="col-md-8 width100">
         <div class="form-group">
           <label><%= t('messages.notice.person') %></label>
           <%=select("post", "person_id", Person.all.collect {|p| [ p.name] }, { include_blank: true }, {class:"form-control"})%>
           <%= link_to_add_association f, :items, id: 'add-nested-field' do %>
-            <button class="btn btn-success" ><%= fa_icon 'plus' %></button>
+            <button class="btn btn-success" id="button-inline"><%= fa_icon 'plus'%></button>
           <% end %>
         </div>
       </div>
