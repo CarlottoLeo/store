@@ -1,9 +1,11 @@
 <div class="col-md-offset-4 col-md-4">
   <h1><%= t('page.headers.showing_product') %></h2>
+  <hr>
   <dl class="dl-horizontal m">
-    <dt class="text-left"><%= t('table.headers.name') %></dt>
+    <dt class="text-left"><%= t('table.headers.name') %>:</dt>
     <dd><%= @product.name %></dd>
-    <dt class="text-left"><%= t('table.headers.value') %></dt>
+    <br>
+    <dt class="text-left"><%= t('table.headers.value') %>:</dt>
     <dd><%= convert_number_to_money @product.value %></dd>
   </dl>
   <hr>

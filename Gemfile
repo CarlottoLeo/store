@@ -7,6 +7,7 @@ end
 
 ruby '2.3.3'
 
+gem 'googlecharts'
 gem 'wkhtmltopdf-binary'
 gem 'wicked_pdf'
 gem 'prawn-rails'

@@ -2,9 +2,8 @@
 <div class="col-md-12">
   <ul class="nav nav-tabs">
     <li role="presentation" class="active" data-tab-name="#person-records"><a href="#"><i class="fa fa-user"></i> Cadastro</a></li>
-    <li role="presentation" class="<%= if params[:action] != 'show';'disabled';end %>" data-tab-name="#person-orders"><a href="#"><i class="fa fa-check"></i> Pedidos</a></li>
-    <li role="presentation" class="<%= if params[:action] != 'show';'disabled';end %>" data-tab-name="#person-stats"><a href="#"><i class="fa fa-bar-chart"></i> Estatísticas</a></li>
-    <li role="presentation" class="<%= if params[:action] != 'show';'disabled';end %>" data-tab-name="#person-audits"><a href="#"><i class="fa fa-pencil-square-o"></i> Histórico</a></li>
+    <li role="presentation" class="<%= if params[:action] != 'show';end %>" data-tab-name="#person-orders"><a href="#"><i class="fa fa-check"></i> Pedidos</a></li>
+    <li role="presentation" class="<%= if params[:action] != 'show';end %>" data-tab-name="#person-stats"><a href="#"><i class="fa fa-bar-chart"></i> Estatísticas</a></li>
   </ul>
 </div>
 <div class="hidden" id="person-orders">
