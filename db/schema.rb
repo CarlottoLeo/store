@@ -15,18 +15,6 @@ ActiveRecord::Schema.define(version: 20160609185633) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "addresses", force: :cascade do |t|
-    t.string   "name"
-    t.integer  "number"
-    t.string   "district"
-    t.string   "country"
-    t.string   "country_short"
-    t.string   "cep"
-    t.integer  "person_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-  end
-
   create_table "audits", force: :cascade do |t|
     t.integer  "auditable_id"
     t.string   "auditable_type"
@@ -80,6 +68,13 @@ ActiveRecord::Schema.define(version: 20160609185633) do
     t.string   "profession"
     t.integer  "gender"
     t.string   "marital_status"
+    t.string   "address"
+    t.integer  "number"
+    t.string   "district"
+    t.string   "country"
+    t.string   "city"
+    t.string   "cep"
+    t.string   "state"
   end
 
   create_table "products", force: :cascade do |t|

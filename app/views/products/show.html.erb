@@ -1,23 +1,14 @@
 <div class="col-md-offset-4 col-md-4">
   <h1><%= t('page.headers.showing_product') %></h2>
-
-  <form>
-    <div class="form-field">
-      <label><%= t('table.headers.name') %></label>
-      <input value="<%= @product.name %>" disabled class="form-control">
-    </div>
-
-    <div class="form-field">
-      <label><%= t('table.headers.value') %></label>
-      <input value="<%= convert_number_to_money @product.value %>" disabled class="form-control">
-    </div>
-  </form>
-
+  <dl class="dl-horizontal m">
+    <dt class="text-left"><%= t('table.headers.name') %></dt>
+    <dd><%= @product.name %></dd>
+    <dt class="text-left"><%= t('table.headers.value') %></dt>
+    <dd><%= convert_number_to_money @product.value %></dd>
+  </dl>
   <hr>
-
   <% if @product.audits.count > 1 -%>
     <h5><i class="fa fa-pencil-square-o"></i> <%= t('page.headers.product_changelog') %></h5>
-
     <% @product.audits.each do |v| %>
       <% if v.action == 'update' %>
         <% v.audited_changes.each do |key, val| %>
@@ -28,15 +19,13 @@
           <% elsif key == 'name' %>
             <%= t('messages.notice.audited_name_change', from: val[0], to: val[1]) %>
           <% end %></br>
-        <% end %>
       <% end %>
     <% end %>
-
-    <hr>
-  <% end -%>
-
-  <div class="form-field">
-    <%= link_to t('page.controllers.back'), products_path, class: "btn btn-default" %>
-    <%= link_to t('page.controllers.edit'), edit_product_path(@product), class: "btn btn-warning" %>
-  </div>
+  <% end %>
+  <hr>
+<% end -%>
+<div class="form-field">
+  <%= link_to t('page.controllers.back'), products_path, class: "btn btn-default" %>
+  <%= link_to t('page.controllers.edit'), edit_product_path(@product), class: "btn btn-warning" %>
+</div>
 </div>
