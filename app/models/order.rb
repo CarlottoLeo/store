@@ -1,7 +1,7 @@
 class Order < ActiveRecord::Base
   # active record validations
   validates :person_id, presence: true
-  validates :items,  presence: true
+  validates :items, presence: true
 
   # active record actions
   before_save :merge_duplicates, :calculate_totals
@@ -11,13 +11,14 @@ class Order < ActiveRecord::Base
   belongs_to :person
 
   # scoping
-  scope :filter_by_person, ->(id) {where('person_id = ?', id)}
+  scope :filter_by_person, ->(id) { where('person_id = ?', id) }
 
   # optional attributes
   audited
   acts_as_paranoid
   accepts_nested_attributes_for :items, reject_if: :all_blank, allow_destroy: true
 
+  private
 
   def merge_duplicates
     items = []
@@ -39,10 +40,8 @@ class Order < ActiveRecord::Base
   def calculate_totals
     self.total_value = 0
 
-    self.items.each do |item|
-      unless item.nil?
-        self.total_value += item.total
-      end
+    items.each do |item|
+      self.total_value += item.total unless item.nil?
     end
   end
 end
