@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :salesmen
   get 'aplicacion/graphic'
 
   LOCALES = /en|pt\-BR/
@@ -10,6 +11,7 @@ Rails.application.routes.draw do
     resources  :products
     resources  :report
     resources  :aplication
+    resources  :salesmen
 
     devise_for :users
 

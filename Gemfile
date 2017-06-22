@@ -38,6 +38,7 @@ gem 'will_paginate', '~> 3.1.0'
 gem 'chartjs-ror'
 gem 'coffee-rails'
 gem 'less-rails'
+gem 'nfe-io'
 
 # testing stuff
 group :development, :test do

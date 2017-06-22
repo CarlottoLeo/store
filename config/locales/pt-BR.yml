@@ -36,6 +36,7 @@ pt-BR:
 
   page:
     controllers:
+      NFE: "Gerar Nota Fiscal"
       show: "Ver"
       edit: "Editar"
       destroy: "Excluir"
@@ -43,7 +44,7 @@ pt-BR:
       index: "Principal"
       create: "Criar"
       log_in: "Logar"
-      log_out: "Deslogar"
+      log_out: "Sair"
       sign_up: "Cadastrar-se"
       sign_in: "Logar"
       back: "Voltar"
@@ -53,6 +54,9 @@ pt-BR:
       create_order: "Criar Pedido"
 
     headers:
+      info: "Informações"
+      showing_salesmen: "Funcionários"
+      salesmen: "Funcionários"
       graphic: "Graficos"
       list_orders: "Lista de Pedidos"
       new_user: "Novo Cliente"
@@ -62,7 +66,7 @@ pt-BR:
       new_product: "Novo Produto"
       listing_products: "Lista de Produtos"
       editing_product: "Editando Produto"
-      showing_product: "Mostrando Produto"
+      showing_product: "Produto"
       listing_orders: "Listando Pedidos"
       new_order: "Novo Pedido"
       order: "Pedido"
@@ -78,8 +82,14 @@ pt-BR:
       new_people: "Novo Cliente"
       edit_people: "Editar Cliente"
       show_people: "Visualizar Cliente"
+      new_salesman: "Novo Funcionário"
+
   table:
     headers:
+      telefone: "Telefone"
+      cargo: "Cargo"
+      crypted_password: "Senha"
+      email: "Email"
       name: "Nome"
       value: "Valor"
       options: "Opções"
@@ -89,6 +99,8 @@ pt-BR:
       amount: "Quantidade"
       total_unit: "Valor Unitário"
       order_client: "Cliente"
+      Profession: "Profissão"
+      new_salesmen: "Novo Funcionário"
 
   messages:
     error:

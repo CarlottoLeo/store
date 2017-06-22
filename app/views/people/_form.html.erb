@@ -1,10 +1,5 @@
 <!-- NAV TABS -->
 <div class="col-md-12">
-  <ul class="nav nav-tabs">
-    <li role="presentation" class="active" data-tab-name="#person-records"><a href="#"><i class="fa fa-user"></i> Cadastro</a></li>
-    <li role="presentation" class="<%= if params[:action] != 'show';end %>" data-tab-name="#person-orders"><a href="#"><i class="fa fa-check"></i> Pedidos</a></li>
-    <li role="presentation" class="<%= if params[:action] != 'show';end %>" data-tab-name="#person-stats"><a href="#"><i class="fa fa-bar-chart"></i> Estatísticas</a></li>
-  </ul>
 </div>
 <div class="hidden" id="person-orders">
   <%= render 'orders' %>
@@ -31,37 +26,37 @@
     </div>
     <div class="form-group">
       <div class="col-md-6">
-        <%= f.label       :profession, :class => 'control-label' %>
+        <%= f.label       "Profissão", :class => 'control-label' %>
         <%= f.text_field  :profession, :class => 'form-control', disabled: params[:action] == 'show' %>
       </div>
     </div>
     <div class="form-group">
       <div class="col-md-10">
-        <%= f.label        :address, :class => 'control-label' %>
+        <%= f.label        "Endereço", :class => 'control-label' %>
         <%= f.text_field   :address, :class => 'form-control', disabled: params[:action] == 'show' %>
       </div>
     </div>
     <div class="form-group">
       <div class="col-md-2">
-        <%= f.label        :number, :class => 'control-label' %>
+        <%= f.label        "Número", :class => 'control-label' %>
         <%= f.number_field :number, :class => 'form-control', disabled: params[:action] == 'show' %>
       </div>
     </div>
     <div class="form-group">
       <div class="col-md-4">
-        <%= f.label        :district, :class => 'control-label' %>
+        <%= f.label        "Cidade", :class => 'control-label' %>
         <%= f.text_field   :district, :class => 'form-control', disabled: params[:action] == 'show' %>
       </div>
     </div>
     <div class="form-group">
       <div class="col-md-4">
-        <%= f.label        :country, :class => 'control-label' %>
+        <%= f.label        "Estado", :class => 'control-label' %>
         <%= f.text_field   :country, :class => 'form-control', disabled: params[:action] == 'show' %>
       </div>
     </div>
     <div class="form-group">
       <div class="col-md-4">
-        <%= f.label        :cep, :class => 'control-label' %>
+        <%= f.label        "CEP", :class => 'control-label' %>
         <%= f.text_field   :cep, :class => 'form-control', readonly: params[:action] == 'show' %>
       </div>
     </div>
@@ -76,7 +71,7 @@
       <div class="col-md-12" style="margin-top: 10px">
         <%= link_to t('.back',    :default => t("helpers.links.back")), people_path, :class => 'btn btn-default' %>
         <%= link_to t('.edit',    :default => t("helpers.links.edit")), edit_person_path(@person), :class => 'btn btn-warning' %>
-        <%= link_to t('.destroy', :default => t("helpers.links.destroy")), person_path(@person), :method => 'delete', :class => 'btn btn-danger' %>
+        <%= link_to t('.destroy', :default => t("helpers.links.destroy")), person_path(@person), data: { confirm: 'Deseja Excluir o Cliente?'}, :method => 'delete', :class => 'btn btn-danger' %>
       </div>
     <% end %>
   <% end %>

@@ -1,26 +1,23 @@
-<div role="nested-items-row" class="row nested-fields" style="margin-top: 10px">
-  <div class="col-md-12 nested-parent" id="nested-field-div">
-    <label><%= t('page.headers.product') %></label>
-    <div class="form-group">
-      <%=select("post", "product_id", Product.all.order(name: :asc).collect {|p| [ p.name, p.value ]},
-      { include_blank: true }, {class:"form-control produto"} )%>
-    </div>
-    <div class="form-group">
-      <%= f.label t('page.headers.amount') %>
-      <%= f.number_field :amount, required: true, class: "form-control product_amount" %>
-    </div>
-    <div class="form-group">
-      <%= f.label t('table.headers.total_unit') %>
-      <%= f.text_field :value, required: true, readonly: true, class: "form-control product_value" %>
-    </div>
-    <div class="form-group">
-      <%= f.label t('messages.notice.totals') %>
-      <%= f.text_field :total, required: true, readonly: true, class: "form-control product_total" %>
-    </div>
-    <div class="form-group  width100" >
+<div class="nested-fields">
+<div class="col-md-12 nested-parent" id="nested-field-div">
+    <div class="form-group" style="height: 65px; DISPLAY: flex;">
+      <%#= t('page.headers.product')%>
+      <%= f.select("prodid", Product.all.order(name: :asc).collect {|p| [ p.name, p.value ]},
+      { include_blank: "Selecione o Produto" }, {class:"form-control produto" } )%>
+      <%#= f.label t('page.headers.amount') %>
+      &nbsp;
+      <%= f.number_field :amount, required: true, class: "form-control product_amount", placeholder: "Quantidade" %>
+      <%#= f.label t('table.headers.total_unit') %>
+      &nbsp;
+      <%= f.text_field :value, required: true, readonly: true, class: "form-control product_value", placeholder: 'Valor' %>
+      <%#= f.label t('messages.notice.totals') %>
+      &nbsp;
+      <%= f.text_field :total, required: true, readonly: true, class: "form-control product_total", placeholder: 'Total' %>
       <%= link_to_remove_association f do %>
         <button class="btn btn-danger" id= "button-inline"><%= fa_icon 'times' %></button>
+        <%#= render :partial => 'item_fields', :locals => {:f => f} %>
       <% end %>
+    </div>
     </div>
   </div>
 </div>

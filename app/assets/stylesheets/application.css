@@ -34,10 +34,14 @@ td>a {
 
 #button-inline {
   position: absolute;
-  right: 15px;
+  right: 0px;
   top: 0;
 }
 
 .width100 {
   width: 100% !important;
+}
+
+.corLetra{
+  color: red;
 }

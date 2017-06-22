@@ -36,7 +36,7 @@
               <% end %>
             </td>
             <td width="30%">
-              <%= link_to t('page.controllers.destroy'), order_path(order), method: :delete, class: "btn btn-xs btn-danger" %>
+              <%= link_to t('page.controllers.destroy'), order_path(order), data: { confirm: 'Deseja Excluir o Pedido?'}, method: :delete, class: "btn btn-xs btn-danger" %>
             </td>
           </tr>
         <% end %>
@@ -45,4 +45,5 @@
   </div>
   <hr>
   <%= link_to t('page.controllers.add'), new_order_path, method: :get, class: "btn btn-primary" %>
+  <hr>
 </div>

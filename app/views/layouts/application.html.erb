@@ -7,22 +7,22 @@
     <%= csrf_meta_tags %>
   </head>
   <body>
-    <%= nav_bar brand: 'Parts Store', brand_link: root_path, fixed: :top, responsive: true do %>
+    <%= nav_bar brand: 'Parts Store', fixed: :top, responsive: true do %>
       <%= menu_group do %>
         <% if user_signed_in? %>
           <%= menu_item fa_icon('user-o', text: t('page.headers.people')), people_path %>
           <%= menu_item fa_icon('cubes', text: t('page.headers.products')), products_path %>
           <%= menu_divider %>
           <%= menu_item fa_icon('list-alt', text: t('page.headers.orders')), orders_path %>
-          <%= menu_item fa_icon('bar-chart', text: t('page.headers.graphic')), aplicacion_graphic_path %>
+          <%= menu_item fa_icon('users', text: t('page.headers.salesmen')), salesmen_path %>
+          <%= menu_item fa_icon('bar-chart', text: t('page.headers.info')), aplicacion_graphic_path %>
         <% end %>
       <% end %>
       <%= menu_group pull: :right do %>
         <% if user_signed_in? %>
           <%= menu_item fa_icon('sign-out', text: t('page.controllers.log_out')), destroy_user_session_path, method: :delete %>
         <% else %>
-          <%= menu_item t('page.controllers.sign_up'), new_registration_path(:user) %>
-          <%= menu_item t('page.controllers.log_in'), user_session_path %>
+          <%= menu_item "Ajuda", new_registration_path(:user) %>
         <% end %>
       <% end %>
     <% end %>

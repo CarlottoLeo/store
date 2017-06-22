@@ -1,0 +1,40 @@
+<div class="span12">
+  <h1><%= fa_icon 'users', text: t('page.headers.salesmen') %></h1>
+<p id="notice"><%= notice %></p>
+<table class="table">
+  <div style="overflow: auto; overflow-x: hidden; max-height: 10px; height: 200px;">
+    <table class="table">
+      <tbody>
+        <% @salesmen.each do |salesman| %>
+          <tr>
+            <td width="20%"><%= link_to salesman.nome, salesman_path(salesman) %></td>
+            <td width="20%"><%= link_to salesman.telefone, salesman_path(salesman) %></td>
+            <td width="20%"><%= link_to salesman.email, salesman_path(salesman) %></td>
+            <td width="20%"><%= link_to salesman.cargo, salesman_path(salesman) %></td>
+            <td>
+              <%= link_to t('.edit', :default => t("helpers.links.edit")), edit_salesman_path(salesman), :class => 'btn btn-warning btn-xs' %>
+              </td>
+          </tr>
+        <% end %>
+      </tbody>
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Telefone</th>
+      <th>Email</th>
+      <th>Cargo</th>
+      <th>Opções</th>
+      <th colspan="5"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @salesmen.each do |salesman| %>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<hr>
+<%= link_to t('.new', :default => "Adicionar"), new_salesman_path, :class => 'btn btn-primary' %>
+<hr>
+</div>

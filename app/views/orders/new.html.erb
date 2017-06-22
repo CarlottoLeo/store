@@ -14,10 +14,10 @@
   <h1><%= fa_icon 'shopping-cart', text: t('page.headers.new_order') %></h1>
   <%= form_for @order, html: {class: "form-inline", id: "order-form"} do |f| -%>
     <div class="row">
-      <div class="col-md-8 width100">
+      <div class="col-md-12" style="width:99%">
         <div class="form-group">
           <label><%= t('messages.notice.person') %></label>
-          <%=select("post", "person_id", Person.all.collect {|p| [ p.name]}, { include_blank: true }, {class:"form-control"})%>
+          <%=select("order", "person_id", Person.all.collect {|p| [p.name, p.id]}, { include_blank: true }, {class:"form-control"})%>
           <%= link_to_add_association f, :items, id: 'add-nested-field' do %>
             <button class="btn btn-success" id="button-inline"><%= fa_icon 'plus'%></button>
           <% end %>
@@ -27,21 +27,18 @@
     <hr>
     <div id="nested-forms-box">
       <%= f.fields_for :items do |item| -%>
-        <%= render 'item_fields', locals: {f: item} %>
+        <%= render :partial => 'item_fields', :locals => {:f => item} %>
       <% end -%>
     </div>
     <hr>
     <div class="row">
       <div class="col-md-4">
-        <div class="form-group" >
           <label><%= t('messages.notice.totals') %></label>
           <input type='text' id="cart_total" disabled value="0.00", class="form-control">
           <br>
           <hr>
-          <button class="btn btn-success"><%= t('page.controllers.add') %></button>
-          <%= f.submit nil, class: "btn btn-primary" %>
+          <%= f.submit nil, :class => 'btn btn-primary' %>
           <%= link_to t('page.controllers.back'), orders_path, class: "btn btn-default" %>
-        </div>
       </div>
     </div>
     <hr>

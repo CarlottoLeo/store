@@ -1,0 +1,21 @@
+<div class="col-md-offset-4 col-md-4">
+  <h1><%= t('page.headers.showing_salesmen') %></h2>
+  <hr>
+<dl class="dl-horizontal m">
+  <dt class="text-left"><%= t('table.headers.name') %>:</dt>
+  <dd><%= @salesman.nome %></dd>
+  <br>
+  <dt class="text-left"><%= t('table.headers.telefone') %>:</dt>
+  <dd><%= @salesman.telefone %></dd>
+<br>
+  <dt class="text-left"><%= t('table.headers.email') %>:</dt>
+  <dd><%= @salesman.email %></dd>
+<br>
+  <dt class="text-left"><%= t('table.headers.cargo') %>:</dt>
+  <dd><%= @salesman.cargo %></dd>
+</dl>
+
+<%= link_to t('page.controllers.back'), salesmen_path, class: "btn btn-default" %>
+<%= link_to t('page.controllers.edit'), edit_salesman_path, class: "btn btn-warning"%>
+<%= link_to t('page.controllers.destroy'), salesman_path, data: { confirm: 'Deseja Excluir o Funcionário?'}, method: :delete, class: "btn btn-danger" %>
+</div>

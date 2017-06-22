@@ -1,11 +1,18 @@
 <div class="span8">
-  <h1><%= fa_icon 'bar-chart', text: t('page.headers.graphic') %></h1>
+  <h1><%= fa_icon 'bar-chart', text: t('page.headers.info') %></h1>
+  <hr>
+  <h4>Apresentação de todas as informações do sistema</h4>
+  <element onclick="myScript"> '*Está página ainda está em construção.'</element>
+  <%= link_to "Voltar para a tela inicial.", held="/" %>
   <hr>
   <table>
     <tr>
       <td>
+        <br>
         <%= image_tag @barv%>
+<hr>
         <%= image_tag @bar%>
+<hr>
         <%= image_tag @barc%>
       </td>
     </tr>

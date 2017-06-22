@@ -30,7 +30,7 @@ class PeopleController < ApplicationController
 
   def create
     @person         = Person.new(person_params)
-    @person.address = Address.new(person_params[:address])
+    #@person.address = Address.new(person_params[:address])
 
     authorize @person
 

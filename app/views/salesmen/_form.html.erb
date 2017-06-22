@@ -1,0 +1,61 @@
+<%= form_for(salesman) do |f| %>
+  <% if salesman.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(salesman.errors.count, "error") %> prohibited this salesman from being saved:</h2>
+
+      <ul>
+      <% salesman.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="form-group">
+    <div class="col-md-8">
+
+  <div class="form-group">
+    <div class="col-md-8">
+      <%= f.label       :nome, class:'control-label' %>
+      <%= f.text_field  :nome, :class => 'form-control', disabled: params[:action] == 'show' %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-md-8">
+      <%= f.label       :telefone, class:'control-label' %>
+      <%= f.text_field  :telefone, :class => 'form-control', disabled: params[:action] == 'show' %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-md-8">
+      <%= f.label       :email, class:'control-label' %>
+      <%= f.text_field  :email, :class => 'form-control', disabled: params[:action] == 'show' %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-md-8">
+      <%= f.label       :cargo, class:'control-label' %>
+      <%= f.text_field  :cargo, :class => 'form-control', disabled: params[:action] == 'show' %>
+    </div>
+  </div>
+
+
+  <div class="form-group">
+    <div class="col-md-8">
+      <%= f.label       :crypted_password, t('table.headers.crypted_password') %>
+      <%= f.password_field  :crypted_password, :class => 'form-control', disabled: params[:action] == 'show'%>
+    </div>
+  </div>
+</div>
+</div>
+  <div class="form-group">
+    <div class="col-md-12" style="margin-top: 10px">
+      <hr>
+      <%= f.submit "Novo Funcionário", :class => 'btn btn-primary' %>
+      <%= link_to t('page.controllers.back'), salesmen_path, class: "btn btn-default" %>
+      <hr>
+    </div>
+  </div>
+<% end %>

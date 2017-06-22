@@ -23,7 +23,7 @@
             <td width="30%"><%= link_to person.cpf_formatted, person_path(person) %></td>
             <td>
               <%= link_to t('.edit', :default => t("helpers.links.edit")), edit_person_path(person), :class => 'btn btn-warning btn-xs' %>
-              <%= link_to t('.destroy', :default => t("helpers.links.destroy")), person_path(person), :method => :delete, :class => 'btn btn-xs btn-danger' %>
+              <%= link_to t('.destroy', :default => t("helpers.links.destroy")), person_path(person), data: { confirm: 'Deseja Excluir o Cliente?'}, :method => :delete, :class => 'btn btn-xs btn-danger' %>
             </td>
           </tr>
         <% end %>
@@ -31,6 +31,7 @@
     </table>
   </div>
   <hr>
-  <%= link_to t('.new', :default => t("helpers.links.new")), new_person_path, :class => 'btn btn-primary' %>
+  <%= link_to t('.new', :default => t("helpers.links.new")), new_person_path, :class => 'btn btn-primary'%>
   <%= link_to t('.Generate_report', :default => t("helpers.links.Generate_report")), href="/people.pdf", :class => 'btn btn-default' %>
+<hr>
 </div>

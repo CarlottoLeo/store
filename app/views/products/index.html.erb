@@ -22,7 +22,7 @@
               <td width="30%"><%= link_to convert_number_to_money(product.value), product_path(product) %></td>
               <td width="38%">
                 <%= link_to t('page.controllers.edit'),    edit_product_path(product), class: "btn btn-xs btn-warning" %>
-                <%= link_to t('page.controllers.destroy'), product_path(product),      method: :delete, class: "btn btn-xs btn-danger" %>
+                <%= link_to t('page.controllers.destroy'), product_path(product), data: { confirm: 'Deseja Excluir o Produto?'}, method: :delete, class: "btn btn-xs btn-danger" %>
               </td>
             </tr>
           <% end %>
@@ -33,4 +33,5 @@
   <hr>
   <%= link_to t('page.controllers.add'), new_product_path, class: "btn btn-primary" %>
   <%= link_to t('.Generate_report', :default => t("helpers.links.Generate_report")), href="/products.pdf", :class => 'btn btn-default' %>
+  <hr>
 </div>

@@ -7,8 +7,14 @@ class OrdersController < ApplicationController
     @q = Order.ransack(params[:q])
     @orders = @q.result.includes(:person).order(id: :asc)
     @orders = @orders.paginate(page: params[:page], per_page: params[:per_page])
+    respond_to do |format|
+      format.html
+      #format.REXML::Document.new(File.read("orders/nfe.xml"))
+      format.json
+      format.pdf { render template: 'orders/reporte', pdf: 'report' }
+    end
+    authorize @orders
   end
-
   # GET /orders/1
   def show
     authorize @order
@@ -25,8 +31,8 @@ class OrdersController < ApplicationController
 
   # POST /orders
   def create
-    @order = Order.new
-    @order.person = Person.find(order_params[:person_id])
+
+    @order = Order.new(order_params)
 
     order_params[:items_attributes].each do |k, v|
       @order.items.new(v)
@@ -78,7 +84,13 @@ class OrdersController < ApplicationController
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
+    #params.require(:order).permit(:person_id, :items_attributes => [:prodid, :amount, :value, :total, :_destroy])
+
     def order_params
       params.require(:order).permit(:person_id, :items_attributes => [:prodid, :amount, :value, :total, :_destroy])
     end
-end
+
+    def session_params
+      {person_id: current_user.id}
+    end
+  end

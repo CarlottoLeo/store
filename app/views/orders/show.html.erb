@@ -1,6 +1,12 @@
 <div class="col-md-offset-2 col-md-8">
-  <h2><%= t('page.headers.order') %> #<%= @order.id %></h2>
-  <h4><%= t('page.headers.order_client') %>: <%= link_to @order.person.name, person_path(@order.person) %></h4>
+  <h2><%= t('page.headers.order') %> #<%= @order.id %>
+    <%= menu_group pull: :right do %>
+      <%= link_to t('.Generate_report', :default => t("page.controllers.NFE")), href="/orders.pdf", :class => 'btn btn-default' %>
+      <% end %>
+  </h2>
+  <hr>
+  <h4><%= t('page.headers.order_client') %>: <%= link_to @order.person.name, person_path(@order.person) %>
+  </h4>
   <table class="table table-striped table-hover">
     <thead>
       <tr>
@@ -25,5 +31,6 @@
   <h2 class="ui header"><%= t('messages.notice.totals') %> <%= convert_number_to_money @order.total_value %></h2>
   <hr>
   <%= link_to t('page.controllers.back'), orders_path, class: "btn btn-default" %>
-  <%= link_to t('page.controllers.destroy'), order_path(@order), method: :delete, class: "btn btn-danger" %>
+  <%= link_to t('page.controllers.destroy'), order_path(@order), data: { confirm: 'Deseja Excluir o Pedido?'}, method: :delete, class: "btn btn-danger" %>
+<hr>
 </div>
